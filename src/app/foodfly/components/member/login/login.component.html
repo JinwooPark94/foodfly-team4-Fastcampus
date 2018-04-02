@@ -1,0 +1,38 @@
+
+<div class="container">
+  <div class="login-wrap col-md-4">
+    <h2 class="login-title">로그인</h2>
+    <div class="alert alert-danger" role="alert" *ngIf="loginGetData?.length === 0">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{ message }}
+    </div>
+    <div class="alert alert-success" role="alert" *ngIf="loginGetData?.length > 0">
+      <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+      <span class="sr-only">Success:</span>
+      {{ message }}
+    </div>
+    <form #userForm="ngForm" (ngSubmit)="login(userid.value, userpw.value)">
+      <fieldset>
+      <div class="form-group">
+        <label for="idInput">
+          <input type="text" name="userid" class="form-control form-size" id="idInput" placeholder="아이디(이메일)" #userid>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">
+          <input type="password" name="userpw" class="form-control form-size" id="passwordInput" placeholder="비밀번호" (keyup.enter)="login(userid, userpw)" #userpw>
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> 로그인 저장
+        </label>
+      </div>
+      <button type="submit" class="btn btn-default btn-lg btn-block login-button">로그인</button>
+      <button type="submit" class="btn btn-default btn-lg btn-block signup-button">회원가입</button>
+      </fieldset>
+    </form>
+    <pre *ngIf="loginGetData?.length > 0"> {{ loginGetData | json }}</pre>
+  </div>
+</div>

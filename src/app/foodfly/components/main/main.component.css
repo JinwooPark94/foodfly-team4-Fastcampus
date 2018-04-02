@@ -1,0 +1,55 @@
+:host >>> .main-search[_ngcontent-c2] {
+  height:auto;
+  padding:25px 0;
+}
+
+:host >>> .head-text .sub-text[_ngcontent-c2] {
+  margin-top:30px;
+}
+
+.main-section {
+  padding:40px;
+}
+
+.main-section > .row > div > img{
+  width:100%;
+}
+
+.honbab-section, .dandok-section {
+  padding:40px;
+}
+
+.honbab-section {
+  background:#eee;
+}
+
+.container > h2{
+  font-size:34px;
+  margin-bottom:40px;
+  margin-top:10px;
+}
+
+.container > h5{
+  color:#999;
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.restaurant-name {
+  margin-top: 20px;
+  color:#25c1f1;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.restaurant-info > p{
+  margin-bottom:5px;
+  font-size:13px;
+  color: #000;
+}
+
+.restaurant-img{
+  width:80%;
+  margin:0 auto;
+  border-radius: 150px;
+}

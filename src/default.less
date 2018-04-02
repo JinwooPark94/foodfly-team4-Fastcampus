@@ -1,0 +1,122 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE
+ */
+
+@static : "../node_modules/bootstrap/less";
+
+// Core variables and mixins
+@import "@{static}/variables.less";
+@import "@{static}/mixins.less";
+
+// // Reset and dependencies
+@import "@{static}/normalize.less";
+@import "@{static}/print.less";
+@import "@{static}/glyphicons.less";
+
+// Core CSS
+@import "@{static}/scaffolding.less";
+@import "@{static}/type.less";
+//@import "@{static}/code.less";
+@import "@{static}/grid.less";
+// @import "@{static}/tables.less";
+@import "@{static}/forms.less";
+@import "@{static}/buttons.less";
+
+// Components
+@import "@{static}/component-animations.less";
+@import "@{static}/dropdowns.less";
+@import "@{static}/button-groups.less";
+@import "@{static}/input-groups.less";
+@import "@{static}/navs.less";
+@import "@{static}/navbar.less";
+@import "@{static}/breadcrumbs.less";
+// @import "@{static}/pagination.less";
+// @import "@{static}/pager.less";
+@import "@{static}/labels.less";
+// @import "@{static}/badges.less";
+// @import "@{static}/jumbotron.less";
+// @import "@{static}/thumbnails.less";
+// @import "@{static}/alerts.less";
+// @import "@{static}/progress-bars.less";
+// @import "@{static}/media.less";
+@import "@{static}/list-group.less";
+// @import "@{static}/panels.less";
+// @import "@{static}/responsive-embed.less";
+// @import "@{static}/wells.less";
+// @import "@{static}/close.less";
+
+//Components w/ JavaScript
+// @import "@{static}/modals.less";
+// @import "@{static}/tooltip.less";
+// @import "@{static}/popovers.less";
+// @import "@{static}/carousel.less";
+
+//Utility classes
+@import "@{static}/utilities.less";
+// @import "@{static}/responsive-utilities.less";
+
+// Custom
+
+@text-color: #423b3c;
+
+@font-family-sans-serif: "Noto Sans Korean","Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+@brand-primary:         darken(#423b3c, 6.5%);
+
+@link-hover-color:      #0ea6d5;
+@component-active-bg:       transparent;
+
+@border-radius-base:        4px;
+@border-radius-large:       6px;
+@border-radius-small:       3px;
+
+@btn-default-color:              #423b3c;
+@btn-default-bg:                 #0ea6d5;
+@btn-default-border:             #fff;
+
+@btn-link-disabled-color:        #423b3c;
+
+@input-bg:                       #fff;
+@input-bg-disabled:              #fff;
+
+//** Text color for `<input>`s
+@input-color:                    #423b3c;
+
+//** Border color for inputs on focus
+@input-border-focus:             #0ea6d5;
+
+//** Placeholder text color
+@input-color-placeholder:        #fff;
+
+//** Background color for textual input addons
+@input-group-addon-bg:           #0ea6d5;
+//** Border color for textual input addons
+@input-group-addon-border-color: #fff;
+
+@component-active-bg: transparent;
+
+@navbar-default-color:             #423b3c;
+@navbar-default-bg:                #fff;
+@navbar-default-border:            0;
+
+// Navbar links
+@navbar-default-link-color:                transparent;
+@navbar-default-link-hover-color:          transparent;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         transparent;
+@navbar-default-link-active-bg:            transparent;
+@navbar-default-link-disabled-color:       transparent;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         transparent;
+@navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           #423b3c;
+@navbar-default-toggle-icon-bar-bg:        #423b3c;
+@navbar-default-toggle-border-color:       #423b3c;

@@ -1,0 +1,42 @@
+/*
+  로그인
+*/
+
+.login-wrap{
+  float:none;
+  margin:50px auto;
+}
+
+.login-wrap > form > .form-group {
+  margin-bottom:0px;
+}
+
+.login-title{
+  font-weight: bold;
+  text-align: center;
+}
+
+.login-button, .signup-button{
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.login-button{
+  color:#fff;
+  background:#25c1f1;
+  border: 1px solid #25c1f1;
+}
+
+.signup-button{
+  background:#fff;
+  border:1px solid #e0e0e0;
+}
+
+.login-button:hover{
+  background:#25c1f1;
+  color:#fff;
+}
+
+.form-size{
+  height: 50px;
+}

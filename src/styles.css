@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
+/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
+/* You can add global styles to this file, and also import other style files */
+a {
+  cursor: pointer;
+}
+
+.nav {
+  float: left;
+}
+
+.navbar-nav > li > a:hover {
+  background-color:transparent;
+}
+
+/*
+  lnb 메뉴
+*/
+
+.lnb-wrap {
+  border-bottom:1px solid #e0e0e0;
+  height:40px;
+}
+
+.lnb-list {
+  margin:0;
+  float:right;
+}
+
+.lnb-list > li {
+  float:left;
+}
+
+.lnb-list > li > a, .footer-list > li > a{
+  font-size:12px;
+  background: url('/assets/images/common/util_bar.gif') no-repeat 0 12px
+}
+
+.lnb-list > li > a{
+  padding:10px 10px 9px 10px;
+}
+
+.lnb-list > li:first-child > a, .footer-list > li:first-child > a {
+  background:none;
+}
+
+/*
+  메인 메뉴
+*/
+.navbar-brand{
+  margin-top: 10px;
+}
+
+.main-menu > li > a {
+  font-weight:bold;
+  padding:30px 20px;
+  font-size:18px;
+}
+
+/*
+  메뉴 네비
+*/
+
+.navi-wrap{
+  background:#423b3c
+}
+.navi-nav > ul > li{
+  float: left;
+}
+
+.navi-nav > ul > li > a {
+  color:#fff;
+  padding:15px 37px;
+  font-weight:bold;
+}
+
+.navi-nav > ul > li > a:hover {
+  color:#25c1f1;
+}
+
+/*
+  Footer
+*/
+
+.footer-wrap{
+  border-top:1px solid #e0e0e0;
+  padding:20px;
+}
+
+.footer-list{
+  margin-bottom:10px;
+}
+
+
+.footer-list > li > a{
+  padding:10px 15px 9px 15px;
+}
+
+.footer-list > li > a:first-child{
+  padding-left:0;
+}
+
+.footer-info{
+  position:relative;
+  clear:both;
+}
+
+.footer-info > p {
+  font-size:12px;
+  color:#888;
+}
+

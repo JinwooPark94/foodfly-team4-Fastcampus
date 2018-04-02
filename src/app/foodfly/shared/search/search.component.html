@@ -1,0 +1,32 @@
+<main class="main-wrap">
+  <div class="container">
+    <div class="main-search col-md-10">
+      <p class="main-text head-text">레스토랑에 날개를 달다</p>
+      <p class="main-text middle-text">지금 맛집을 푸드 플라이에서 온라인 주문하세요.</p>
+      <p class="main-text sub-text">배달이나 테이크아웃을 원하시는 주소지를 입력해주세요.</p>
+      <div class="input-group">
+        <span class="input-group-btn loc">
+          <button class="btn btn-default ico-loc" type="button">&nbsp;</button>
+        </span>
+        <form class="form-search">
+          <input type="search" class="form-control" placeholder="예) 양재동, 반포동"  (blur)="clickStatus=false"
+            (focus)="clickStatus=true">
+          <ul class="dropdown-menu search-list" tabindex="-1" *ngIf="clickStatus">
+            <li>
+              <a class="status-loc" tabindex="-1">현재 위치로 설정</a>
+            </li>
+            <li *ngFor="let Address of listAddress">
+              <a tabindex="-1">{{ Address.siNm }} {{ Address.sggNm }} {{ Address.emdNm }}</a>
+            </li>
+          </ul>
+          <span class="input-group-btn">
+            <button class="cancel-button btn btn-default">
+              <i class="cancel-button-ico">&nbsp;</i>
+            </button>
+            <button class="btn btn-default btn-search" type="button">검색</button>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
