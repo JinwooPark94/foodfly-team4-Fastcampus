@@ -11,9 +11,8 @@
   margin-bottom:0px;
 }
 
-.login-title{
-  font-weight: bold;
-  text-align: center;
+.form-group > label {
+  display: block;
 }
 
 .login-button, .signup-button{
@@ -39,4 +38,60 @@
 
 .form-size{
   height: 50px;
+}
+
+.i-checks {
+  width: 133px;
+  padding-left: 20px;
+  font-weight: normal;
+  user-select: none;
+  cursor: pointer;
+}
+
+.i-checks > input[type=checkbox] {
+  display: none;
+}
+
+.i-checks > i {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-top: -2px;
+  margin-right: 10px;
+  margin-left: -20px;
+  background-color: #fff;
+  border: 1px solid #cfdadd;
+  vertical-align: middle;
+}
+
+.i-checks > i:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  transition: all .1s;
+}
+
+.i-checks input:checked + i:before {
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #23b7e5;
+}
+
+.checkbox > a{
+  float: right;
+  text-decoration-line: none;
+}
+
+.login-wrap > img {
+  margin-bottom: 40px;
+  text-align: center;
+  margin: 0 auto 40px auto;
+  display: inherit;
 }
