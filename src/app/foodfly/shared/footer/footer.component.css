@@ -29,3 +29,14 @@
   font-size:12px;
   color:#888;
 }
+
+.social-link {
+  float: right;
+  list-style: none;
+  margin-top:5px
+}
+
+.social-link > li {
+  float:left;
+  margin-left:5px;
+}
