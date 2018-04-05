@@ -1,0 +1,44 @@
+/* 공용 */
+.chk-title {
+  margin-top: 30px;
+}
+
+.remove-space {
+  margin: 0;
+}
+
+.sub-title {
+  background-color: #423b3c;
+  color: #fff;
+}
+
+.subsidiary-title {
+  background-color: #e6e6e6
+}
+
+/* 주소 & 휴대전화 */
+.chk-address {
+  margin: 20px 0;
+}
+
+.chk-agree {
+  display: block;
+}
+
+/* 요청사항 */
+.chk-ask {
+  font-size: 11px;
+}
+
+/* 결제수단 선택 */
+.chk-pay-btn {
+  border: 1px solid #eeeeee;
+  padding: 5px 40px;
+}
+
+.chk-pay-final {
+  margin-top: 20px;
+  background-color: #f0ad4e;
+  color: white;
+}
+
