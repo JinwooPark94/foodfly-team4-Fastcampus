@@ -1,0 +1,42 @@
+.container {
+  margin-top: 20px;
+}
+
+.nav-pills .active {
+  background: #52c3f1;
+}
+
+.restaurant-item {
+  margin-bottom: 20px;
+}
+
+.restaurant-item img {
+  width: 100%;
+}
+
+.item-body {
+  /* border: 1px solid silver;    */
+  border: 1px solid #ededf0;
+  border-bottom: 1px solid #dcdce0;
+}
+
+.item-body:hover {
+  border: 1px solid #52c3f1;
+  box-shadow: 1px 1px 10px silver;
+  /* box-shadow: 1px 1px 10px #52c3f1; */
+}
+
+.item-text {
+  margin: 0 10px;
+  font-size: 13px;
+}
+
+.item-text p {
+  margin-bottom: 5px;
+}
+
+.item-text .name {
+  font-size: 20px;
+  color: #25C6F5;
+  margin: 8px 0;
+}

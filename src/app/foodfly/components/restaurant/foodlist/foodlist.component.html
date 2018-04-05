@@ -1,3 +1,37 @@
-<p>
-  foodlist works!
-</p>
+
+<section class="container">
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active">
+      <a [routerLink]="['/restaurant/foodlist']">거리순</a>
+    </li>
+    <li role="presentation">
+      <a [routerLink]="['/restaurant/foodlist']">인기순</a>
+    </li>
+    <li role="presentation">
+      <a [routerLink]="['/restaurant/foodlist']">배달 팁 순</a>
+    </li>
+    <li role="presentation">
+      <a [routerLink]="['/restaurant/foodlist']">최소 주문금액 순</a>
+    </li>
+  </ul>
+</section>
+<section class="container">
+  <div class="row">
+    <div *ngFor="let item of items" class="restaurant-item col-md-3">
+      <div class="item-body">
+        <img src="{{item.images[0]}}" alt="...">
+        <div class="item-text">
+          <h3 class="name">{{item.name}}</h3>
+          <p class="category">{{item.category[0]}} {{item.category[1]}} {{item.category[2]}}</p>
+          <p class="tip">배달팁
+            <span>{{item.flyTip}}</span>원</p>
+          <p class="min-price">최소 주문 {{item.minPrice}}원</p>
+          <p class="distance">
+            <span class="glyphicon glyphicon-map-marker"></span>
+            {{item.distance}} km
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
