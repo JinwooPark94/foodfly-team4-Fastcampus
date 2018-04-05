@@ -1,28 +1,34 @@
 
 <div class="container">
   <div class="login-wrap col-md-4">
-    <img src="../../../../../assets/images/common/logo.png" alt="foodfly 로고">
-    <div class="alert alert-danger" role="alert" *ngIf="loginGetData?.length === 0">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      {{ message }}
-    </div>
-    <div class="alert alert-success" role="alert" *ngIf="loginGetData?.length > 0">
-      <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-      <span class="sr-only">Success:</span>
-      {{ message }}
-    </div>
-    <form #userForm="ngForm" (ngSubmit)="login(userid.value, userpw.value)">
+    <h2 class="login-title">로그인</h2>
+    <form [formGroup]="form" (ngSubmit)="signin()">
       <fieldset>
       <div class="form-group">
         <label for="idInput">
-          <input type="text" name="userid" class="form-control form-size" id="idInput" #userid placeholder="이메일을 입력하세요">
+          <input type="text" formControlName="username" class="form-control form-size" id="idInput" placeholder="이메일을 입력하세요">
         </label>
+        <div class="alert-box">
+          <em *ngIf="username.errors?.required && username.touched" class="error-message">
+            이메일을 입력하세요.</em>
+          <em *ngIf="username.errors?.pattern && username.touched" class="error-message">
+            이메일 형식에 맞게 입력하세요.</em>
+        </div>
       </div>
       <div class="form-group">
         <label for="passwordInput">
-          <input type="password" name="userpw" class="form-control form-size" id="passwordInput" placeholder="비밀번호" (keydown.enter)="login(userid, userpw)" #userpw>
+          <input type="password" formControlName="password" class="form-control form-size" id="passwordInput" placeholder="비밀번호">
         </label>
+        <div class="alert-box">
+          <em *ngIf="password.errors?.required && password.touched" class="error-message">
+            비밀번호를 입력하세요.</em>
+          <em *ngIf="password.errors?.pattern && password.touched" class="error-message">
+            비밀번호는 영문 또는 숫자로 입력하세요.</em>
+          <em *ngIf="password.errors?.minlength && password.touched" class="error-message">
+            비밀번호는 4자리 이상으로 입력하세요.</em>
+          <em *ngIf="password.errors?.maxlength && password.touched" class="error-message">
+            비밀번호는 16자리 이하로 입력하세요.</em>
+        </div>
       </div>
       <div class="checkbox">
         <label class="i-checks">
@@ -32,10 +38,18 @@
         </label>
         <a routerLink="/member/findmemberinfo">아이디/ 비밀번호 찾기</a>
       </div>
-      <button type="submit" class="btn btn-default btn-lg btn-block login-button">로그인</button>
-      <button type="button" class="btn btn-default btn-lg btn-block signup-button">회원가입</button>
+      <button [disabled]="form.invalid" type="submit" class="btn btn-default btn-lg btn-block login-button">로그인</button>
+      <a type="button" class="btn btn-default btn-lg btn-block signup-button" routerLink="/member/signup">회원가입</a>
+      <button class="btn btn-default btn-lg btn-block btn-facebook" type="button" (click)="socialSignin('facebook')">
+        <i class="fa fa-facebook fa-2x"></i>facebook
+      </button>
+      <button class="btn btn-default btn-lg btn-block btn-google" type="button" (click)="socialSignin('google')">
+        <i class="fa fa-google fa-2x"></i>google
+      </button>
+      <button class="btn btn-default btn-lg btn-block btn-kakao" type="button" (click)="socialSignin('kakao')">
+        <i class="icon-kakaotalk"></i>kakao
+      </button>
       </fieldset>
     </form>
-    <pre *ngIf="loginGetData?.length > 0"> {{ loginGetData | json }}</pre>
   </div>
 </div>
