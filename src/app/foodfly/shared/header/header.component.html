@@ -1,28 +1,4 @@
 <header class="header-wrap">
-  <div class="lnb-wrap">
-    <div class="container">
-      <ul class="lnb-list nav navbar-nav row">
-        <li>
-          <a routerLink="/member/login">로그인</a>
-        </li>
-        <li>
-          <a routerLink="/member/signup">회원가입</a>
-        </li>
-        <li>
-          <a href="/">고객센터</a>
-        </li>
-        <li>
-          <a href="/">제휴문의</a>
-        </li>
-        <li>
-          <a href="/">프로모션코드</a>
-        </li>
-        <li>
-          <a href="/">라이더 지원</a>
-        </li>
-      </ul>
-    </div>
-  </div>
   <div class="main-menu-wrap">
     <div class="container">
       <div class="navbar-header">
@@ -37,21 +13,18 @@
           <img src="../../assets/images/common/logo.png">
         </a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="main-top collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
         <ul class="main-menu nav navbar-nav">
           <li>
-            <a>전체 맛집</a>
+            <a routerLink="/member/login">로그인</a>
           </li>
           <li>
-            <a>테마 맛집</a>
+            <a routerLink="/member/signup">회원가입</a>
           </li>
           <li>
-            <a>CHEFLY</a>
+            <button class="btn btn-warning order-table">주문표(0)</button>
           </li>
-          <li>
-            <a>단골 맛집</a>
         </ul>
       </div>
     </div>

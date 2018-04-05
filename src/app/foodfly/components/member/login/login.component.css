@@ -31,9 +31,13 @@
   border:1px solid #e0e0e0;
 }
 
-.login-button:hover{
+.login-button:hover, .login-button:active, .login-button:link {
   background:#25c1f1;
   color:#fff;
+}
+
+.signup-button:hover, .signup-button:active, .signup-button:link {
+  background:#fff;
 }
 
 .form-size{

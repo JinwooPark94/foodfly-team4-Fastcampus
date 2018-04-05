@@ -1,0 +1,580 @@
+diff --git a/foodfly-component.png b/foodfly-component.png
+new file mode 100644
+index 0000000..4641e57
+Binary files /dev/null and b/foodfly-component.png differ
+diff --git a/src/app/foodfly/components/member/login/login.component.css b/src/app/foodfly/components/member/login/login.component.css
+index c05275c..7c47ec4 100644
+--- a/src/app/foodfly/components/member/login/login.component.css
++++ b/src/app/foodfly/components/member/login/login.component.css
+@@ -31,11 +31,15 @@
+   border:1px solid #e0e0e0;
+ }
+ 
+-.login-button:hover{
++.login-button:hover, .login-button:active, .login-button:link {
+   background:#25c1f1;
+   color:#fff;
+ }
+ 
++.signup-button:hover, .signup-button:active, .signup-button:link {
++  background:#fff;
++}
++
+ .form-size{
+   height: 50px;
+ }
+diff --git a/src/app/foodfly/components/member/login/login.component.ts b/src/app/foodfly/components/member/login/login.component.ts
+index 133cd43..655846a 100644
+--- a/src/app/foodfly/components/member/login/login.component.ts
++++ b/src/app/foodfly/components/member/login/login.component.ts
+@@ -9,8 +9,8 @@ import { LoginData } from '../../../core/interface/login.interface';
+ export class LoginComponent implements OnInit {
+ 
+   loginData: LoginData[] = [
+-    { id: '123', password: '123' },
+-    { id: 'admin', password: '123' }
++    { email: 'wlsdntus2@naver.com', password: '123' },
++    { email: 'jinwoo@ancle.kr', password: '123' }
+   ];
+   loginGetData: LoginData[];
+   message: string;
+@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
+ 
+   login(userid: string, userpw: string) {
+     this.loginGetData = this.loginData.filter(logindata => {
+-      return (userid === logindata.id && userpw === logindata.password);
++      return (userid === logindata.email && userpw === logindata.password);
+     });
+     (this.loginGetData.length) ? this.message = '로그인에 성공하였습니다.' : this.message = '아이디/비밀번호가 잘못되었습니다.';
+   }
+diff --git a/src/app/foodfly/components/member/signup/signup.component.css b/src/app/foodfly/components/member/signup/signup.component.css
+index e69de29..ee8221d 100644
+--- a/src/app/foodfly/components/member/signup/signup.component.css
++++ b/src/app/foodfly/components/member/signup/signup.component.css
+@@ -0,0 +1,97 @@
++@font-face {
++  font-family: 'fontello';
++  src: url('../../../../../assets/fonts/fonttello/fontello.eot?75311212');
++  src: url('../../../../../assets/fonts/fonttello/fontello.eot?75311212#iefix') format('embedded-opentype'),
++       url('../../../../../assets/fonts/fonttello/fontello.woff2?75311212') format('woff2'),
++       url('../../../../../assets/fonts/fonttello/fontello.woff?75311212') format('woff'),
++       url('../../../../../assets/fonts/fonttello/fontello.ttf?75311212') format('truetype'),
++       url('../../../../../assets/fonts/fonttello/fontello.svg?75311212#fontello') format('svg');
++  font-weight: normal;
++  font-style: normal;
++}
++
++.icon-ok
++{
++  position: absolute;
++  right:10px;
++  top:15px;
++  font-family: "fontello";
++  font-style: normal;
++  color:#5eb95e;
++  font-weight: normal;
++  speak: none;
++
++  display: inline-block;
++  text-decoration: inherit;
++  width: 1em;
++  margin-right: .2em;
++  text-align: center;
++
++  font-variant: normal;
++  text-transform: none;
++
++  line-height: 1em;
++
++  margin-left: .2em;
++
++  -webkit-font-smoothing: antialiased;
++  -moz-osx-font-smoothing: grayscale;
++}
++
++.icon-ok:before { content: '\e801'; }
++
++.signup-wrap{
++  float:none;
++  margin:50px auto;
++}
++
++.signup-wrap > form > .form-group {
++  margin-bottom:0px;
++}
++
++.form-size{
++  height: 50px;
++}
++
++.signup-title{
++  text-align: center;
++  margin-bottom: 40px;
++  font-size: 32px;
++}
++
++.form-group > label {
++  display: block;
++  position: relative;
++  margin:0;
++}
++
++.signup-button, .before-button{
++  margin-top:10px;
++  font-weight:bold;
++}
++
++.signup-button{
++  color:#fff;
++  background:#25c1f1;
++  border: 1px solid #25c1f1;
++}
++
++.before-button{
++  background:#fff;
++  border:1px solid #e0e0e0;
++}
++
++.signup-button:hover, .signup-button:active, .signup-button:link {
++  background:#25c1f1;
++  color:#fff;
++}
++
++.before-button:hover, .before-button:active, .before-button:link {
++  background:#fff;
++}
++
++.error-message{
++  font-style: normal;
++  font-size: 12px;
++  color: #dd514c;
++}
+diff --git a/src/app/foodfly/components/member/signup/signup.component.html b/src/app/foodfly/components/member/signup/signup.component.html
+index 011ada7..d04a0b1 100644
+--- a/src/app/foodfly/components/member/signup/signup.component.html
++++ b/src/app/foodfly/components/member/signup/signup.component.html
+@@ -1,3 +1,38 @@
+-<p>
+-  signup works!
+-</p>
++<div class="container">
++  <div class="signup-wrap col-md-4">
++    <h2 class="signup-title">회원가입</h2>
++    <form #userForm="ngForm">
++      <fieldset>
++        <div class="form-group">
++          <label for="emailInput">
++            <i class="icon-ok"></i>
++            <input type="text" name="useremail" class="form-control form-size" id="emailInput" placeholder="(필수)이메일" #useremail>
++          </label>
++          <em class="error-message">이메일을 입력해주세요</em>
++        </div>
++        <div class="form-group">
++          <label for="passwordInput">
++            <input type="password" name="userpw" class="form-control form-size" id="passwordInput" placeholder="(필수)비밀번호" #userpw>
++          </label>
++        </div>
++        <div class="form-group">
++          <label for="passwordCheckInput">
++            <input type="password" name="userpwcheck" class="form-control form-size" id="passwordCheckInput" placeholder="(필수)비밀번호 확인" #userpw>
++          </label>
++        </div>
++        <div class="form-group">
++          <label for="nameInput">
++            <input type="text" name="username" class="form-control form-size" id="nameInput" placeholder="이름" #userpw>
++          </label>
++        </div>
++        <div class="form-group">
++          <label for="phonenumberInput">
++            <input type="text" name="useremail" class="form-control form-size" id="phonenumberInput" placeholder="(필수)휴대폰 전화번호 입력(-제외)" #userpw>
++          </label>
++        </div>
++        <button type="submit" class="btn btn-default btn-lg btn-block signup-button">회원가입</button>
++        <a class="btn btn-default btn-lg btn-block before-button" routerLink="/member/login">뒤로가기</a>
++      </fieldset>
++    </form>
++  </div>
++</div>
+\ No newline at end of file
+diff --git a/src/app/foodfly/core/interface/login.interface.ts b/src/app/foodfly/core/interface/login.interface.ts
+index 1267cf7..f4ec0b8 100644
+--- a/src/app/foodfly/core/interface/login.interface.ts
++++ b/src/app/foodfly/core/interface/login.interface.ts
+@@ -1,4 +1,4 @@
+ export interface LoginData {
+-  id: string;
++  email: string;
+   password: string;
+ }
+diff --git a/src/app/foodfly/shared/footer/footer.component.css b/src/app/foodfly/shared/footer/footer.component.css
+index 170d697..b925791 100644
+--- a/src/app/foodfly/shared/footer/footer.component.css
++++ b/src/app/foodfly/shared/footer/footer.component.css
+@@ -14,6 +14,7 @@
+ 
+ .footer-list > li > a{
+   padding:10px 15px 9px 15px;
++  font-size:13px;
+ }
+ 
+ .footer-list > li > a:first-child{
+@@ -28,4 +29,15 @@
+ .footer-info > p {
+   font-size:12px;
+   color:#888;
++}
++
++.social-link {
++  float: right;
++  list-style: none;
++  margin-top:5px
++}
++
++.social-link > li {
++  float:left;
++  margin-left:5px;
+ }
+\ No newline at end of file
+diff --git a/src/app/foodfly/shared/footer/footer.component.html b/src/app/foodfly/shared/footer/footer.component.html
+index 886d085..6883d38 100644
+--- a/src/app/foodfly/shared/footer/footer.component.html
++++ b/src/app/foodfly/shared/footer/footer.component.html
+@@ -1,5 +1,22 @@
+ <footer class="footer-wrap">
+   <div class="container">
++    <ul class="social-link">
++      <li>
++        <a href="http://www.facebook.com/#!/pages/FoodFly/226247320737641" alt="foodfly 페이스북 사이트 이동" target="_black">
++          <img src="../../../../assets/images/common/facebook.png">
++        </a>
++      </li>
++      <li>
++        <a href="http://twitter.com/food_fly" alt="foodfly 트위터 사이트 이동" target="_black">
++          <img src="../../../../assets/images/common/twitter.png">
++        </a>
++      </li>
++      <li>
++        <a href="http://blog.foodfly.co.kr" alt="foodfly 블로그 사이트 이동" target="_black">
++          <img src="../../../../assets/images/common/blog.png">
++        </a>
++      </li>
++    </ul>
+     <ul class="footer-list nav navbar-nav navbar-left">
+       <li>
+         <a href="/">회사소개</a>
+diff --git a/src/app/foodfly/shared/header/header.component.css b/src/app/foodfly/shared/header/header.component.css
+index e69de29..7957ac8 100644
+--- a/src/app/foodfly/shared/header/header.component.css
++++ b/src/app/foodfly/shared/header/header.component.css
+@@ -0,0 +1,30 @@
++
++/*
++  메인 메뉴
++*/
++.navbar-brand{
++  margin-top: 10px;
++}
++
++.main-menu > li {
++  margin:15px 0;
++}
++
++.main-menu > li > a {
++  font-weight:bold;
++  padding:11px 10px;
++  font-size:15px;
++}
++
++.main-menu > li > a:active, .main-menu > li > a:after, .main-menu > li > a:hover, .main-menu > li > a:link{
++  background:transparent;
++}
++
++.main-menu > li:last-child > a {
++  border-left:0px;
++}
++
++.order-table {
++  padding:10px 15px;
++  margin-left:15px;
++}
+diff --git a/src/app/foodfly/shared/header/header.component.html b/src/app/foodfly/shared/header/header.component.html
+index bddebfa..251bb4d 100644
+--- a/src/app/foodfly/shared/header/header.component.html
++++ b/src/app/foodfly/shared/header/header.component.html
+@@ -1,28 +1,4 @@
+ <header class="header-wrap">
+-  <div class="lnb-wrap">
+-    <div class="container">
+-      <ul class="lnb-list nav navbar-nav row">
+-        <li>
+-          <a routerLink="/member/login">로그인</a>
+-        </li>
+-        <li>
+-          <a routerLink="/member/signup">회원가입</a>
+-        </li>
+-        <li>
+-          <a href="/">고객센터</a>
+-        </li>
+-        <li>
+-          <a href="/">제휴문의</a>
+-        </li>
+-        <li>
+-          <a href="/">프로모션코드</a>
+-        </li>
+-        <li>
+-          <a href="/">라이더 지원</a>
+-        </li>
+-      </ul>
+-    </div>
+-  </div>
+   <div class="main-menu-wrap">
+     <div class="container">
+       <div class="navbar-header">
+@@ -37,21 +13,18 @@
+           <img src="../../assets/images/common/logo.png">
+         </a>
+       </div>
+-
+       <!-- Collect the nav links, forms, and other content for toggling -->
+       <div class="main-top collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+         <ul class="main-menu nav navbar-nav">
+           <li>
+-            <a>전체 맛집</a>
++            <a routerLink="/member/login">로그인</a>
+           </li>
+           <li>
+-            <a>테마 맛집</a>
++            <a routerLink="/member/signup">회원가입</a>
+           </li>
+           <li>
+-            <a>CHEFLY</a>
++            <button class="btn btn-warning order-table">주문표(0)</button>
+           </li>
+-          <li>
+-            <a>단골 맛집</a>
+         </ul>
+       </div>
+     </div>
+diff --git a/src/app/foodfly/shared/navmenu/navmenu.component.css b/src/app/foodfly/shared/navmenu/navmenu.component.css
+index e69de29..a993122 100644
+--- a/src/app/foodfly/shared/navmenu/navmenu.component.css
++++ b/src/app/foodfly/shared/navmenu/navmenu.component.css
+@@ -0,0 +1,21 @@
++
++/*
++  메뉴 네비
++*/
++
++.navi-wrap{
++  background:#423b3c
++}
++.navi-nav > ul > li{
++  float: left;
++}
++
++.navi-nav > ul > li > a {
++  color:#fff;
++  padding:15px 32px;
++  font-weight:bold;
++}
++
++.navi-nav > ul > li > a:hover {
++  color:#25c1f1;
++}
+\ No newline at end of file
+diff --git a/src/assets/fonts/fonttello/fontello.eot b/src/assets/fonts/fonttello/fontello.eot
+new file mode 100644
+index 0000000..6f56372
+Binary files /dev/null and b/src/assets/fonts/fonttello/fontello.eot differ
+diff --git a/src/assets/fonts/fonttello/fontello.svg b/src/assets/fonts/fonttello/fontello.svg
+new file mode 100644
+index 0000000..7b49aea
+--- /dev/null
++++ b/src/assets/fonts/fonttello/fontello.svg
+@@ -0,0 +1,12 @@
++<?xml version="1.0" standalone="no"?>
++<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
++<svg xmlns="http://www.w3.org/2000/svg">
++<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
++<defs>
++<font id="fontello" horiz-adv-x="1000" >
++<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
++<missing-glyph horiz-adv-x="1000" />
++<glyph glyph-name="ok" unicode="&#xe801;" d="M933 534q0-22-16-38l-404-404-76-76q-16-15-38-15t-38 15l-76 76-202 202q-15 16-15 38t15 38l76 76q16 16 38 16t38-16l164-165 366 367q16 16 38 16t38-16l76-76q16-15 16-38z" horiz-adv-x="1000" />
++</font>
++</defs>
++</svg>
+\ No newline at end of file
+diff --git a/src/assets/fonts/fonttello/fontello.ttf b/src/assets/fonts/fonttello/fontello.ttf
+new file mode 100644
+index 0000000..213ac2a
+Binary files /dev/null and b/src/assets/fonts/fonttello/fontello.ttf differ
+diff --git a/src/assets/fonts/fonttello/fontello.woff b/src/assets/fonts/fonttello/fontello.woff
+new file mode 100644
+index 0000000..7256afe
+Binary files /dev/null and b/src/assets/fonts/fonttello/fontello.woff differ
+diff --git a/src/assets/fonts/fonttello/fontello.woff2 b/src/assets/fonts/fonttello/fontello.woff2
+new file mode 100644
+index 0000000..2fb008a
+Binary files /dev/null and b/src/assets/fonts/fonttello/fontello.woff2 differ
+diff --git a/src/assets/images/common/blog.png b/src/assets/images/common/blog.png
+new file mode 100644
+index 0000000..4145472
+Binary files /dev/null and b/src/assets/images/common/blog.png differ
+diff --git a/src/assets/images/common/facebook.png b/src/assets/images/common/facebook.png
+new file mode 100644
+index 0000000..24f2d27
+Binary files /dev/null and b/src/assets/images/common/facebook.png differ
+diff --git a/src/assets/images/common/twitter.png b/src/assets/images/common/twitter.png
+new file mode 100644
+index 0000000..f91935a
+Binary files /dev/null and b/src/assets/images/common/twitter.png differ
+diff --git a/src/default.less b/src/default.less
+index fa82e8e..084b871 100644
+--- a/src/default.less
++++ b/src/default.less
+@@ -88,9 +88,6 @@
+ //** Border color for inputs on focus
+ @input-border-focus:             #0ea6d5;
+ 
+-//** Placeholder text color
+-@input-color-placeholder:        #fff;
+-
+ //** Background color for textual input addons
+ @input-group-addon-bg:           #0ea6d5;
+ //** Border color for textual input addons
+@@ -119,4 +116,8 @@
+ // Navbar toggle
+ @navbar-default-toggle-hover-bg:           #423b3c;
+ @navbar-default-toggle-icon-bar-bg:        #423b3c;
+-@navbar-default-toggle-border-color:       #423b3c;
+\ No newline at end of file
++@navbar-default-toggle-border-color:       #423b3c;
++
++// Large screen / wide desktop
++// 1140px -> 1020px로 수정
++@container-large-desktop:      (1020px + @grid-gutter-width);
+\ No newline at end of file
+diff --git a/src/styles.css b/src/styles.css
+new file mode 100644
+index 0000000..691b204
+--- /dev/null
++++ b/src/styles.css
+@@ -0,0 +1,117 @@
++/* You can add global styles to this file, and also import other style files */
++@import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
++/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
++/* You can add global styles to this file, and also import other style files */
++a {
++  cursor: pointer;
++}
++
++.nav {
++  float: left;
++}
++
++.navbar-nav > li > a:hover {
++  background-color:transparent;
++}
++
++/*
++  lnb 메뉴
++*/
++
++.lnb-wrap {
++  border-bottom:1px solid #e0e0e0;
++  height:40px;
++}
++
++.lnb-list {
++  margin:0;
++  float:right;
++}
++
++.lnb-list > li {
++  float:left;
++}
++
++.lnb-list > li > a, .footer-list > li > a{
++  font-size:12px;
++  background: url('/assets/images/common/util_bar.gif') no-repeat 0 12px
++}
++
++.lnb-list > li > a{
++  padding:10px 10px 9px 10px;
++}
++
++.lnb-list > li:first-child > a, .footer-list > li:first-child > a {
++  background:none;
++}
++
++/*
++  메인 메뉴
++*/
++.navbar-brand{
++  margin-top: 10px;
++}
++
++.main-menu > li > a {
++  font-weight:bold;
++  padding:30px 20px;
++  font-size:18px;
++}
++
++/*
++  메뉴 네비
++*/
++
++.navi-wrap{
++  background:#423b3c
++}
++.navi-nav > ul > li{
++  float: left;
++}
++
++.navi-nav > ul > li > a {
++  color:#fff;
++  padding:15px 37px;
++  font-weight:bold;
++}
++
++.navi-nav > ul > li > a:hover {
++  color:#25c1f1;
++}
++
++/*
++  Footer
++*/
++
++.footer-wrap{
++  border-top:1px solid #e0e0e0;
++  padding:20px;
++
++  position: absolute;
++  bottom: 0;
++  
++}
++
++.footer-list{
++  margin-bottom:10px;
++}
++
++
++.footer-list > li > a{
++  padding:10px 15px 9px 15px;
++}
++
++.footer-list > li > a:first-child{
++  padding-left:0;
++}
++
++.footer-info{
++  position:relative;
++  clear:both;
++}
++
++.footer-info > p {
++  font-size:12px;
++  color:#888;
++}
++

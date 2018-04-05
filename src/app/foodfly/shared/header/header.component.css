@@ -1,0 +1,30 @@
+
+/*
+  메인 메뉴
+*/
+.navbar-brand{
+  margin-top: 10px;
+}
+
+.main-menu > li {
+  margin:15px 0;
+}
+
+.main-menu > li > a {
+  font-weight:bold;
+  padding:11px 10px;
+  font-size:15px;
+}
+
+.main-menu > li > a:active, .main-menu > li > a:after, .main-menu > li > a:hover, .main-menu > li > a:link{
+  background:transparent;
+}
+
+.main-menu > li:last-child > a {
+  border-left:0px;
+}
+
+.order-table {
+  padding:10px 15px;
+  margin-left:15px;
+}
