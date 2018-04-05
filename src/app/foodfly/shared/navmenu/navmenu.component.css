@@ -1,0 +1,21 @@
+
+/*
+  메뉴 네비
+*/
+
+.navi-wrap{
+  background:#423b3c
+}
+.navi-nav > ul > li{
+  float: left;
+}
+
+.navi-nav > ul > li > a {
+  color:#fff;
+  padding:15px 32px;
+  font-weight:bold;
+}
+
+.navi-nav > ul > li > a:hover {
+  color:#25c1f1;
+}

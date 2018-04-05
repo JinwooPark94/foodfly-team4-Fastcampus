@@ -14,6 +14,7 @@
 
 .footer-list > li > a{
   padding:10px 15px 9px 15px;
+  font-size:13px;
 }
 
 .footer-list > li > a:first-child{
