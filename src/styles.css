@@ -2,6 +2,16 @@
 @import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
 /*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
 /* You can add global styles to this file, and also import other style files */
+
+ html {
+  position: relative;
+    min-height: 100%;
+}
+
+body {
+  margin-bottom: 200px;
+}
+
 a {
   cursor: pointer;
 }
@@ -87,6 +97,7 @@ a {
   border-top:1px solid #e0e0e0;
   padding:20px;
 
+  width: 100%;
   position: absolute;
   bottom: 0;
   
