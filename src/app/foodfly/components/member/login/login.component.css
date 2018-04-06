@@ -15,6 +15,12 @@
   display: block;
 }
 
+.login-title{
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 32px;
+}
+
 .login-button, .signup-button{
   margin-top:10px;
   font-weight:bold;
@@ -98,4 +104,23 @@
   text-align: center;
   margin: 0 auto 40px auto;
   display: inherit;
+}
+
+.error-message{
+  font-style: normal;
+  font-size: 12px;
+  color: #dd514c;
+}
+
+
+.btn-facebook {
+  background-color: #3b5998;
+}
+
+.btn-google {
+  background-color: #DD4B39;
+}
+
+.btn-kakao {
+  background-color: #FFEC42;
 }

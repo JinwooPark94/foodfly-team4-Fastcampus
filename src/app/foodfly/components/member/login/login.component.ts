@@ -1,29 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginData } from '../../../core/interface/login.interface';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService, SocialAuthService } from './../../../core';
 
 @Component({
   selector: 'foodfly-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
-  loginData: LoginData[] = [
-    { email: 'wlsdntus2@naver.com', password: '123' },
-    { email: 'jinwoo@ancle.kr', password: '123' }
-  ];
-  loginGetData: LoginData[];
   message: string;
+  form: FormGroup;
+
+  constructor(
+    private formBilder: FormBuilder,
+    private router: Router,
+    private auth: AuthService,
+    private socialAuth: SocialAuthService
+  ) { }
 
   ngOnInit() {
-
+    this.form = this.formBilder.group({
+      username: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/[a-zA-Z0-9]/),
+        Validators.minLength(4),
+        Validators.maxLength(16)
+      ]]
+    });
   }
 
-  login(userid: string, userpw: string) {
-    this.loginGetData = this.loginData.filter(logindata => {
-      return (userid === logindata.email && userpw === logindata.password);
-    });
-    (this.loginGetData.length) ? this.message = '로그인에 성공하였습니다.' : this.message = '아이디/비밀번호가 잘못되었습니다.';
+  signin() {
+    this.auth.signin(this.form.value)
+      .subscribe(
+        () => this.router.navigate(['main']),
+        ({ error }) => this.message = error.message
+      );
+  }
+
+  socialSignin(provider: string) {
+    this.auth.socialSignin(provider)
+      .subscribe(
+        () => this.router.navigate(['main']),
+        ({ error }) => this.message = error.message
+      );
+  }
+
+  get username() {
+    return this.form.get('username');
+  }
+
+  get password() {
+    return this.form.get('password');
   }
 
 }
