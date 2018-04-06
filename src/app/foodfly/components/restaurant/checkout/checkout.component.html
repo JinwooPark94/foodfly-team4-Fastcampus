@@ -1,3 +1,82 @@
-<p>
-  checkout works!
-</p>
+<div class="container">
+  <div class="row chk-title">
+    <div class="col-md-8">
+      <div class="list-group">
+        <div class="list-group-item sub-title">결제하기</div>
+        <div class="list-group-item subsidiary-title">배송정보</div>
+        <!-- 주소 & 휴대전화 -->
+        <form class="form-horizontal list-group-item">
+          <div class="form-group">
+            <label for="address" class="col-md-2 control-label chk-address">주소</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control chk-address" id="address" value="서울특별시 강남구 신사동" disabled>
+              <input type="text" class="form-control chk-address" id="address" placeholder="(필수)상세주소를 입력해주세요.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cellphone" class="col-md-2 control-label chk-addres">연락처</label>
+            <div class="col-md-10">
+              <input type="password" class="form-control" id="cellphone" placeholder="(필수) 휴대전화번호 입력">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              <div class="checkbox">
+                <label class="chk-agree">
+                  <input type="checkbox"> SMS 수신 동의합니다
+                </label>
+                <label class="chk-agree">
+                  <input type="checkbox"> Foodfly 이용약관에 동의합니다
+                </label>
+                <label class="chk-agree">
+                  <input type="checkbox"> 개인정보 처리방침 동의합니다
+                </label>
+                <label class="chk-agree">
+                  <input type="checkbox"> 개인정보 제3자 제공에 동의합니다
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- 요청사항 -->
+        <div class="list-group-item subsidiary-title">주문시 요청사항</div>
+        <div class="list-group-item">
+          <textarea class="form-control chk-ask" rows="3" placeholder="주문시 요청 사항이 있으시면 남겨주세요. 단, 주류 등 청소년 유해물품 관련 단어는 입력하실 수 없습니다."></textarea>
+        </div>
+        <!-- 결제수단 선택 -->
+        <div class="list-group-item subsidiary-title">결제수단 선택</div>
+        <div class="list-group-item clearfix">
+          <div class="col-md-3 col-md-offset-3">
+            <button type="button" class="btn chk-pay-btn">
+                <label for="card">
+                  <input type="radio" name="chk-pay-way" id="card">
+                  카드 결제
+                </label>
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn chk-pay-btn">
+                <label for="cash">
+                  <input type="radio" name="chk-pay-way" id="cash">
+                  현금 결제
+                </label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 list-group">
+      <!-- 주문내역 -->
+      <div class="list-group-item sub-title">주문내역</div>
+      <p class="list-group-item">명품찜 & 탕</p>
+      <ul class="list-group-item list-unstyled">
+        <li>
+          <span>안동찜닭 X 1</span>
+          <span>2,5000원</span>
+        </li>
+      </ul>
+      <div class="list-group-item">합계 : 25,000원</div>
+      <button type="button" class="btn btn-lg btn-block chk-pay-final">결제하기</button>
+    </div>
+  </div>
+</div>
