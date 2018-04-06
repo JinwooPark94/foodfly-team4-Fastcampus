@@ -41,16 +41,14 @@ export class LoginComponent implements OnInit {
     this.auth.signin(this.form.value)
       .subscribe(
         () => this.router.navigate(['main']),
-        ({ error }) => this.message = error.message
-      );
+        ({ error }) => this.message = error.message);
   }
 
   socialSignin(provider: string) {
     this.auth.socialSignin(provider)
       .subscribe(
         () => this.router.navigate(['main']),
-        ({ error }) => this.message = error.message
-      );
+        ({ error }) => this.message = error.message);
   }
 
   get username() {

@@ -45,7 +45,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return token ? !this.isTokenExpired(token) : false;
+    return token ? true : false;
   }
 
   // 토큰으로부터 사용자 아이디 취득

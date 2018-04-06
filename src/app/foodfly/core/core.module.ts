@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-// 3rd party
 // npm i angular2-jwt
 import { JwtHelper } from 'angular2-jwt';
 
