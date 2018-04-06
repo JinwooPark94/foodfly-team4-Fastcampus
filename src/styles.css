@@ -16,6 +16,10 @@ a {
   cursor: pointer;
 }
 
+.form-control {
+  font-weight:initial;
+}
+
 .nav {
   float: left;
 }
@@ -100,7 +104,7 @@ a {
   width: 100%;
   position: absolute;
   bottom: 0;
-  
+
 }
 
 .footer-list{
