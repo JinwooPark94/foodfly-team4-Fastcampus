@@ -1,81 +1,54 @@
 /* 공용 */
-.remove-space {
-  margin: 0;
+.sub-title {
+  background-color: #423b3c;
+  color: #fff;
 }
 
-/* 음식주문 타이틀 */
-
-.foodorder-title {
+/* 매장 상호명 */
+.fdr-store {
   margin-top: 20px;
 }
 
-.foodorder-title, .foodorder-content {
-  border: 1px solid rgb(236, 236, 236);
-  padding: 10px
-}
-
-/* 음식주문 본문 */
-
-.foodorder-content {
-  margin-bottom: 20px;
-}
-
-.foodorder-content img{
-  float: left;
-  width: 80px;
-  height: 80px;
-}
-
-/* 음식주문 nav tab */
-
-.foodorder-tap {
-  border: 1px solid #fff;
-}
-
-.foodorder-btn, .foodorder-add-btn {
-  background-color: #25c1f1;
-  height: 40px;
-}
-
 /* 메뉴 리스트 */
-
-.foodorder-list, .foodorder-add-list {
-  border: 1px solid rgb(236, 236, 236);
-  padding: 10px;
-}
-/* 추가 메뉴 */
-
-.foodorder-menu-img {
+.fdr-menu-img {
   float: right;
   width: 100px;
   height: 70px;
 }
 
-.foodorder-menu-name, .foodorder-menu-price {
+.fdr-menu-name, .fdr-menu-price {
   text-align: left;
 }
 
-/* 주문표 */
+.fdr-menu {
+  border-bottom: 1px solid #e7e7e7
+}
 
-.foodorder-cart {
+/* 정보 탭 */
+.fdr-info {
+  /* border-left: 1px solid #e7e7e7;
+  border-right: 1px solid #e7e7e7; */
+  border-bottom: 2px solid #e7e7e7;
+}
+
+.fdr-info h2{
+  font-size: 15px;
+}
+
+/* 리뷰 탭 */
+.fdr-review-total {
+  text-align: right;
+  line-height: 80px;
+  font-size: 40px;
+}
+
+/* 주문표 */
+.fdr-cart {
   position: sticky;
   top: 20px;
 }
 
-.foodorder-cart-title {
-  background-color: #423b3c;
-  color: #fff;
-}
-
-.foodorder-cart-lsit {
-  border: solid 1px rgb(236, 236, 236)
-}
-
-.foodorder-cart-content {
-  padding-left: 25%;
-}
-
-.foodorder-cart-order {
+.fdr-cart-order {
   margin-top: 20px;
   background-color: #f0ad4e;
   color: white;
