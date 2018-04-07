@@ -17,10 +17,19 @@ import {
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
         style({ opacity: 0 }),
-        animate(1000, style({ opacity: 1 }))
+        animate(500, style({ opacity: 1 }))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
-        animate(1000, style({ opacity: 0 }))
+        animate(500, style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('accordion', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ height: 0 }),
+        animate(500, style({ height: '*' }))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(500, style({ height: 0 }))
       ])
     ])
   ]
@@ -30,9 +39,7 @@ export class SignupComponent implements OnInit {
   message: string;
   userform: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router ) {
-    console.dir(fb);
-  }
+  constructor(private fb: FormBuilder, private router: Router ) { }
 
   ngOnInit() {
     this.userform = this.fb.group({
@@ -55,12 +62,9 @@ export class SignupComponent implements OnInit {
       ]],
       userphonenumber: ['', [
         Validators.required,
-        Validators.pattern(/^[0-9]+$/),
-        Validators.minLength(9),
-        Validators.maxLength(11)
+        Validators.pattern(/^[0-9]+$/)
       ]]
     });
-    console.dir(this.userform);
   }
 
   get useremail() {
@@ -88,7 +92,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-
+    console.dir(this.userform);
   }
 }
 

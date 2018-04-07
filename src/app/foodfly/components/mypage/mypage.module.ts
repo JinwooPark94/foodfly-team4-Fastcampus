@@ -1,6 +1,8 @@
 // Common Module
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Mypage Route Module
 import { MypageroutesModule } from './mypage-routes.module';
@@ -19,7 +21,7 @@ import { MypageManagementComponent } from './mypage.management.component';
     MyorderComponent
   ],
   imports: [
-    CommonModule, MypageroutesModule
+    CommonModule, MypageroutesModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule
   ],
   exports: [
     MypageManagementComponent,

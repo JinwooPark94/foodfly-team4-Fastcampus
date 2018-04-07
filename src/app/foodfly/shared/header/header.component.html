@@ -17,10 +17,16 @@
       <div class="main-top collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
         <ul class="main-menu nav navbar-nav">
           <li>
-            <a routerLink="/member/login">로그인</a>
+            <a routerLink="/member/login" routerLinkActive="active" *ngIf="!this.auth.isAuthenticated()">로그인</a>
           </li>
           <li>
-            <a routerLink="/member/signup">회원가입</a>
+            <a routerLink="/member/signup" routerLinkActive="active" *ngIf="!this.auth.isAuthenticated()">회원가입</a>
+          </li>
+          <li>
+            <a routerLink="/mypage/account" routerLinkActive="active" *ngIf="this.auth.isAuthenticated()">마이페이지</a>
+          </li>
+          <li>
+            <a (click)="signout()" *ngIf="this.auth.isAuthenticated()">로그아웃</a>
           </li>
           <li>
             <button class="btn btn-warning order-table">주문표(0)</button>
