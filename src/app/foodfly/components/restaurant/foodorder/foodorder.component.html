@@ -1,161 +1,184 @@
 <div class="container">
-
-  <!-- 음식주문 타이틀 -->
-  <div class="foodorder-title">
-    명품찜&탕
+  <!-- 매장 상호명 -->
+  <div class="list-group fdr-store">
+    <h2 class="list-group-item sub-title">
+      명품찜&탕
+    </h2>
+    <!-- 매장 소개 -->
+    <div class="list-group-item">
+      <div class="row">
+        <img class="col-md-2" alt="fdr-img" src="../../../../../assets/images/foodorder/chicken-store.jpg">
+        <ul class="list-unstyled col-md-10">
+          <li>
+            <strong>★</strong>
+            <strong>★</strong>
+            <strong>★</strong>
+            <strong>★</strong>
+            <strong>★</strong>
+            <strong>0.0</strong>
+            <p>최소주문금액: 20,000원</p>
+            <p>결제 신용카드 , 현금</p>
+        </ul>
+      </div>
+    </div>
   </div>
-
-  <!-- 음식주문 본문 -->
-  <div class="foodorder-content clearfix">
-    <img src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="foodorder-img">
-    <ul class="list-unstyled">
-      <li>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>0.0</span>
-      </li>
-      <li>
-        <span>최소주문금액</span>
-        <span>20.000원</span>
-      </li>
-      <li>
-          결제 신용카드 , 현금
-      </li>
-    </ul>
-  </div>
-
   <div class="row">
     <div class="col-md-8">
-      <!-- 음식주문 nav tab -->
-      <div class="btn-group btn-group-justified" role="group">
-        <div class="btn-group foodorder-tap" role="group">
-          <button type="button" class="btn foodorder-btn">메뉴</button>
-        </div>
-        <div class="btn-group foodorder-tap" role="group">
-          <button type="button" class="btn foodorder-btn">리뷰</button>
-        </div>
-        <div class="btn-group foodorder-tap" role="group">
-          <button type="button" class="btn foodorder-btn">정보</button>
-        </div>
-      </div>
-
-      <!-- 메뉴 리스트 -->
-        <ul class="list-unstyled remove-space">
-          <li class="foodorder-list">
-            <button type="button" class="btn btn-block" data-toggle="modal" data-target="#myModal">
+      <!-- 리스트 탭 -->
+      <nav>
+        <ul class="nav nav-tabs nav-justified">
+          <li role="presentation" class="active"><a href="#">메뉴</a></li>
+          <li role="presentation"><a href="#">정보</a></li>
+          <li role="presentation"><a href="#">리뷰</a></li>
+        </ul>
+      </nav>
+      <!-- **** 메뉴 리스트 **** -->
+      <div>
+        <ul class="list-unstyled">
+          <li>
+            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal">
               <div>
-                <img class="foodorder-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
-                <p class="foodorder-menu-name">안동찜닭</p>
-                <p class="foodorder-menu-price">25,000원</p>
+                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
+                <p class="fdr-menu-name">안동찜닭</p>
+                <p class="fdr-menu-price">25,000원</p>
               </div>
             </button>
           </li>
-
-          <li class="foodorder-list">
-            <button type="button" class="btn btn-block" data-toggle="modal" data-target="#myModal">
+          <li>
+            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal">
               <div>
-                <img class="foodorder-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img">
-                <p class="foodorder-menu-name">안동찜닭</p>
-                <p class="foodorder-menu-price">25,000원</p>
+                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img">
+                <p class="fdr-menu-name">안동찜닭</p>
+                <p class="fdr-menu-price">25,000원</p>
               </div>
             </button>
           </li>
         </ul>
-
-      <!-- 모달 -->
-
+      </div>
       <!-- 추가 메뉴 -->
-      <div class="list-group remove-space">
-        <a href="#" class="list-group-item foodorder-add-btn">
-          인기메뉴
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="clearfix">
-            <div class="foodorder-menu-name">안동찜닭</div>
-            <div class="foodorder-menu-price">25,000원</div>
-          </div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          추가메뉴
+          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+        </div>
+        <div class="list-group panel-body">
+          <ul class="list-unstyled">
+            <li class="list-group-item">
+              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
+                <p class="fdr-menu-name">후라이드</p>
+                <p class="fdr-menu-price">25,000원</p>
+              </button>
+            </li>
+            <li class="list-group-item">
+              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
+                <p class="fdr-menu-name">양념</p>
+                <p class="fdr-menu-price">25,000원</p>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-
       <!-- 사이드 메뉴 -->
-      <div class="list-group remove-space">
-        <a href="#" class="list-group-item foodorder-add-btn">
+      <div class="panel panel-default">
+        <div class="panel-heading">
           사이드 메뉴
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="clearfix">
-            <div class="foodorder-menu-name">안동찜닭</div>
-            <div class="foodorder-menu-price">25,000원</div>
-          </div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
-        <a href="#" class="list-group-item">
-          <div class="foodorder-menu-name">안동찜닭</div>
-          <div class="foodorder-menu-price">25,000원</div>
-        </a>
+          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+        </div>
+        <div class="list-group panel-body">
+          <ul class="list-unstyled">
+            <li class="list-group-item">
+              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
+                <p class="fdr-menu-name">콜라</p>
+                <p class="fdr-menu-price">2,000원</p>
+              </button>
+            </li>
+            <li class="list-group-item">
+              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
+                <p class="fdr-menu-name">사이다</p>
+                <p class="fdr-menu-price">2,000원</p>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-4 foodorder-cart">
-      <!-- 주문표 -->
-      <div href="#" class="list-group-item foodorder-cart-title">주문표</div>
-      <ul class="list-group-item list-unstyled remove-space">
-        <li>
-          <p>안동찜닭</p>
-          <div class="foodorder-cart-content">
-            <button>X</button>
-            <span>25,000원</span>
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
-          </div>
+      <!-- **** 정보 탭 **** -->
+      <!-- <div class="fdr-info col-md-12">
+        <h2>업체정보</h2>
+        <p>영업시간: 10:00 ~ 21:00</p>
+        <p>부가정보: 세스코멤버스 사업장</p>
+      </div>
+      <div class="fdr-info col-md-12">
+        <h2>결제정보</h2>
+        <p>최소주문금액: 15,000원/p>
+        <p>결제수단: 신용카드, 현금</p>
+      </div>
+      <div class="fdr-info col-md-12">
+        <h2>사업자정보</h2>
+        <p>상호명: 명품찜&탕</p>
+        <p>부가정보: 세스코멤버스 사업장</p>
+      </div>
+      <div class="fdr-info col-md-12">
+        <h2>원산지 정보</h2>
+        <p>돼지 - 국내산</p>
+        <p>닭 - 국내산</p>
+        <p>김치 - 국내산</p>
+        <p>치즈 - 국내산</p>
+      </div> -->
+
+      <!-- **** 리뷰 탭 **** -->
+      <!-- <div class="col-md-12">
+        <div class="col-md-3 col-md-offset-3 fdr-review-total">
+          <strong>4.2</strong>
+        </div>
+        <div class="col-md-3">
+          <p>맛: ★★★★</p>
+          <p>양: ★★★★</p>
+          <p>배달: ★★★★</p>
+        </div>
+      </div>
+      <h3>리뷰: 5개 사장님 댓글: 5개</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <p>foodf**님 8시간 전</p>
+          <p>★★★★★|맛★5 양★5 배달5</p>
         </li>
-      </ul>
-      <ul class="list-group-item list-unstyled remove-space">
-        <li>
-          <p>안동찜닭</p>
-          <div class="foodorder-cart-content">
-            <button>X</button>
-            <span>25,000원</span>
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
-          </div>
+        <li class="list-group-item">
+          <p>foodf**님 2018년 4월 5일</p>
+          <p>★★★★★|맛★5 양★5 배달5</p>
         </li>
-      </ul>
-      <div class="list-group-item">최소주문금액 : 10,000원</div>
-      <div class="list-group-item">합계 : 25,000원</div>
-      <button type="button" class="btn btn-lg btn-block foodorder-cart-order">주문하기</button>
+      </ul> -->
+    </div>
+    <!-- 주문표 -->
+    <div class="col-md-4 fdr-cart">
+      <div href="#" class="list-group">
+        <h3 class="list-group-item sub-title">주문표</h3>
+        <ul class="list-group-item list-unstyled remove-space">
+          <li>
+            <div>
+              <span>안동찜닭</span>
+              <span>25,000원</span>
+              <button class="glyphicon glyphicon-minus" aria-hidden="true"></button>
+              <span>1</span>
+              <button class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"></button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <span>안동찜닭</span>
+              <span>25,000원</span>
+              <button class="glyphicon glyphicon-minus" aria-hidden="true"></button>
+              <span>1</span>
+              <button class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"></button>
+            </div>
+          </li>
+        </ul>
+        <div class="list-group-item">최소주문금액 : 10,000원</div>
+        <div class="list-group-item">합계 : 25,000원</div>
+      </div>
+      <button type="button" class="btn btn-lg btn-block fdr-cart-order">주문하기</button>
     </div>
   </div>
 </div>
