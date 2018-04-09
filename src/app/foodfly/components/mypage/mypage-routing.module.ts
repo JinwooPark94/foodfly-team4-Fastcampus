@@ -7,14 +7,14 @@ import { AccountComponent } from '../../components/mypage/account/account.compon
 import { MyorderComponent } from '../../components/mypage/myorder/myorder.component';
 import { QnaComponent } from '../../components/mypage/qna/qna.component';
 
-import { AuthGuard } from '../../core/guards/auth.guard';
+import { TokenGuard } from '../../core/guards/token.guard';
 
 const routes: Routes = [
   {
     path: 'mypage', children: [
-      { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
-      { path: 'myorder', component: MyorderComponent, canActivate: [AuthGuard] },
-      { path: 'qna', component: QnaComponent, canActivate: [AuthGuard] }
+      { path: 'account', component: AccountComponent, canActivate: [TokenGuard] },
+      { path: 'myorder', component: MyorderComponent, canActivate: [TokenGuard] },
+      { path: 'qna', component: QnaComponent, canActivate: [TokenGuard] }
     ]
   }
 ];
@@ -23,4 +23,4 @@ const routes: Routes = [
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ]
 })
-export class MypageroutesModule { }
+export class MypageRoutingModule { }

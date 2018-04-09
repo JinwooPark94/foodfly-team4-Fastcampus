@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService, SocialAuthService } from './../../../core';
+import { LoginService, SocialLoginService } from './../../../core';
 
 @Component({
   selector: 'foodfly-login',
@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBilder: FormBuilder,
     private router: Router,
-    private auth: AuthService,
-    private socialAuth: SocialAuthService
+    private auth: LoginService,
+    private socialAuth: SocialLoginService
   ) { }
 
   ngOnInit() {

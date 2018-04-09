@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { LoginService } from '../services/login.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class TokenGuard implements CanActivate {
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: LoginService) { }
 
   canActivate() {
     // 토큰 유효 기간 확인

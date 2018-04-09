@@ -8,12 +8,12 @@ import { Token } from '../interface/token.interface';
 import { User } from '../interface/user.interface';
 
 import { JwtHelper } from 'angular2-jwt';
-import { SocialAuthService } from './social-auth.service';
+import { SocialLoginService } from './social-login.service';
 
 import { environment } from '../../../../environments/environment';
 
 @Injectable()
-export class AuthService {
+export class LoginService {
   URL = `${environment.apiUrl}`;
   TOKEN_NAME = environment.tokenName;
   userId: string;
@@ -21,7 +21,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelper,
-    private socialAuth: SocialAuthService) {}
+    private socialAuth: SocialLoginService) {}
 
   signin(credential: User): Observable<Token> {
     return this.http.post<Token>(`${this.URL}/user/login/`, credential)
@@ -35,7 +35,10 @@ export class AuthService {
   socialSignin(provider: string): Observable<Token> {
     return this.socialAuth.getSocialCredential(provider)
       .switchMap(credential => this.http.post<Token>(`${this.URL}/user/facebook-login/`, credential))
-      .do(res => this.setToken(res.token))
+      .do(res => {
+        this.setToken(res.token);
+        console.dir(res);
+      })
       .shareReplay();
   }
 

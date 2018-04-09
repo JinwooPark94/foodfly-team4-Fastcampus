@@ -42,3 +42,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+certs/server.key
+certs/server.csr
+certs/server.crt
+certs/gen.sh
+certs/browsersync.pfx

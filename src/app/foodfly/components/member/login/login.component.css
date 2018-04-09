@@ -19,6 +19,7 @@
   text-align: center;
   margin-bottom: 40px;
   font-size: 32px;
+  font-weight:bold;
 }
 
 .login-button, .signup-button{
@@ -115,12 +116,20 @@
 
 .btn-facebook {
   background-color: #3b5998;
+  color:#fff;
 }
 
-.btn-google {
-  background-color: #DD4B39;
+.btn-facebook > svg {
+  float:left;
+  height:22px;
 }
 
-.btn-kakao {
-  background-color: #FFEC42;
+.btn-facebook:hover, .btn-facebook:active, .btn-facebook:link {
+  background:#3b5998;
+  color:#fff;
+}
+
+.login-hr {
+  border-color:#e0e0e0;
+  margin:15px 0;
 }

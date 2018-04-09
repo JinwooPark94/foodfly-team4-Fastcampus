@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { LoginService } from '../../core/services/login.service';
 
 @Component({
   selector: 'foodfly-header',
@@ -11,7 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class HeaderComponent implements OnInit {
   userid: string;
 
-  constructor( private auth: AuthService, private router: Router ) { }
+  constructor(private auth: LoginService, private router: Router ) { }
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
