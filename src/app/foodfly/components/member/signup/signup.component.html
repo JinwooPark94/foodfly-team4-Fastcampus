@@ -43,7 +43,7 @@
               <i @fadeInOut *ngIf="!passwordGroup.errors && !userconfirmPassword.errors && userconfirmPassword.touched" class="icon-ok"></i>
               <input type="password" formControlName="userconfirmPassword" name="userconfirmPassword" class="form-control form-size" id="confirmPasswordInput" placeholder="(필수)비밀번호 확인">
             </label>
-            <div class="alert-box" @accordion *ngIf="(userconfirmPassword.invalid || passwordGroup.invalid) && (userconfirmPassword.dirty || userconfirmPassword.touched)">
+            <div class="alert-box" @accordion *ngIf="(userconfirmPassword.invalid || passwordGroup.invalid) && userconfirmPassword.touched">
               <em *ngIf="userconfirmPassword.errors?.required && userconfirmPassword.touched" class="error-message">
                 비밀번호를 입력하세요.
               </em>
