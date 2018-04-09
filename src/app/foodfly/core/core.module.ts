@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 // npm i angular2-jwt
 import { JwtHelper } from 'angular2-jwt';
 
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from './guards/auth.guard';
-import { SocialAuthService } from './services/social-auth.service';
+import { LoginService } from './services/login.service';
+import { TokenGuard } from './guards/token.guard';
+import { SocialLoginService } from './services/social-login.service';
 
 @NgModule({
   providers: [
     JwtHelper,
-    AuthService,
-    AuthGuard,
-    SocialAuthService
+    LoginService,
+    TokenGuard,
+    SocialLoginService
   ]
 })
 export class CoreModule { }

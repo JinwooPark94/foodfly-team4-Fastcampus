@@ -1,3 +1,3 @@
-export * from './services/auth.service';
-export * from './services/social-auth.service';
-export * from './guards/auth.guard';
+export * from './services/login.service';
+export * from './services/social-login.service';
+export * from './guards/token.guard';

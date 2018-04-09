@@ -1,9 +1,12 @@
+// Common 모듈
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+// root App 컴포넌트
 import { AppComponent } from './app.component';
 
+// 라우터 모듈
 import { AppRoutingModule } from './app-routing.module';
 
 // 공용 모듈
@@ -18,13 +21,10 @@ import { MemberModule } from './foodfly/components/member/member.module';
 import { MypageModule } from './foodfly/components/mypage/mypage.module';
 import { RestaurantModule } from './foodfly/components/restaurant/restaurant.module';
 
-import { NotfoundpageComponent } from './foodfly/components/notfoundpage/notfoundpage.component';
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NotfoundpageComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
