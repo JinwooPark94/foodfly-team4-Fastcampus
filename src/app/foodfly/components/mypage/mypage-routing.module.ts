@@ -12,6 +12,7 @@ import { TokenGuard } from '../../core/guards/token.guard';
 const routes: Routes = [
   {
     path: 'mypage', children: [
+      { path: '', redirectTo: '/mypage/account', pathMatch: 'full' },
       { path: 'account', component: AccountComponent, canActivate: [TokenGuard] },
       { path: 'myorder', component: MyorderComponent, canActivate: [TokenGuard] },
       { path: 'qna', component: QnaComponent, canActivate: [TokenGuard] }

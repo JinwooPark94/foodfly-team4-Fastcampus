@@ -7,7 +7,8 @@ import { FindmemberinfoComponent } from '../../components/member/findmemberinfo/
 
 const routes: Routes = [
   {
-    path: 'member', children: [
+    path: 'member' , children: [
+      { path: '', redirectTo: '/member/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'findmemberinfo', component: FindmemberinfoComponent }
