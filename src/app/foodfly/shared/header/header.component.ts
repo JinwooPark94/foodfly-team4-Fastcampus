@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { LoginService } from '../../core/services/login.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'foodfly-header',
@@ -11,7 +13,7 @@ import { LoginService } from '../../core/services/login.service';
 export class HeaderComponent implements OnInit {
   userid: string;
 
-  constructor(private auth: LoginService, private router: Router ) { }
+  constructor(private auth: LoginService, private toastService: ToastService, private router: Router ) { }
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   signout() {
     this.auth.signout();
+    this.toastService.messageAdd('로그아웃 되었습니다.', 'success');
     this.router.navigate(['main']);
   }
 
