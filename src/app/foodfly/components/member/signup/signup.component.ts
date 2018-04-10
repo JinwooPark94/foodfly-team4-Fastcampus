@@ -1,7 +1,9 @@
-import { Component, Input , OnInit } from '@angular/core';
+import { Component, Input , OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidator } from '../password.validator';
+
+import { ToastService } from '../../../core/services/toast.service';
 import {
   trigger,
   style,
@@ -36,10 +38,9 @@ import {
 })
 export class SignupComponent implements OnInit {
 
-  message: string;
   userform: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router ) { }
+  constructor(private fb: FormBuilder, private router: Router, private render: Renderer2, private toastService: ToastService) {}
 
   ngOnInit() {
     this.userform = this.fb.group({
@@ -92,7 +93,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    console.dir(this.userform);
+    this.toastService.messageAdd('회원가입이 완료되었습니다.', 'success');
   }
 }
 

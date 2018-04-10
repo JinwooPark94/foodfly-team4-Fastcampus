@@ -11,8 +11,8 @@ import {
 declare const FB: any;
 
 interface Credential {
-  uid: number;
-  accessToken: string;
+  // uid: number;
+  access_token: string;
 }
 
 @Injectable()
@@ -45,8 +45,8 @@ export class SocialLoginService {
 
   private fetchFacebookCredential(authResponse): Credential {
     return {
-      uid: authResponse.userID,
-      accessToken: authResponse.accessToken
+      // uid: authResponse.userID,
+      access_token: authResponse.accessToken
     };
   }
 
