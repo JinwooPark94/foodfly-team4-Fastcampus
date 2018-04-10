@@ -11,48 +11,34 @@ import { HttpClient } from '@angular/common/http';
 export class FoodlistComponent implements OnInit {
   url = 'http://localhost:3000/restaurant';
   foodflyDB;
-
-  items = [];
-  item;
+  items;
 
   over: boolean[];
   scrollTopVisble: boolean;
 
+  pageItemNum = 8;
+  scrollMessage;
+
   filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
   selectedFilter = '';
-
-  state = 'smaller';
 
   constructor(public http: HttpClient) {
     this.scrollTopVisble = false;
   }
 
   ngOnInit() {
-    this.itemRepeat();
-    console.log();
-
     this.http.get(this.url)
       // 요청 결과를 프로퍼티에 할당
       .subscribe(data => {
         this.foodflyDB = data;
         console.log('[data]', data);
+        this.pagination();
 
         this.over = new Array(this.foodflyDB.length);
         this.over.fill(false);
       });
-
     console.log(window);
   }
-
-
-  itemRepeat() {
-    const repeatNum = 12;
-    for (let i = 0; i < repeatNum; i++) {
-      this.items = [...this.items, this.item];
-    }
-    console.log(this.items);
-  }
-
 
   scrollTop() {
     window.scrollTo({
@@ -66,14 +52,33 @@ export class FoodlistComponent implements OnInit {
   onWindowScroll() {
     // we'll do some stuff here when the window is scrolled
     const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (number > 100) {
+        this.scrollTopVisble = true;
+      } else if (this.scrollTopVisble && number < 10) {
+        this.scrollTopVisble = false;
+      }
 
-  if (number > 100) {
-      this.scrollTopVisble = true;
-    } else if (this.scrollTopVisble && number < 10) {
-      this.scrollTopVisble = false;
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      this.pagination();
     }
   }
 
+  pagination() {
+    if (!this.items) {
+      this.items = this.foodflyDB.slice(0, this.pageItemNum);
+      console.log('[items 0 ]');
+      return;
+    }
+
+    const arr = this.foodflyDB.slice(this.items.length, this.items.length + this.pageItemNum);
+    console.log('현재 item', this.items, 'slice', this.items.length + this.pageItemNum);
+    if (this.foodflyDB.length === this.items.length) {
+      this.scrollMessage = '마지막 페이지 입니다.';
+      return;
+    }
+
+    this.items = [...this.items, ...arr];
+  }
 
 
   selectFilter(e) {
