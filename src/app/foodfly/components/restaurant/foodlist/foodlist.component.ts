@@ -17,6 +17,7 @@ export class FoodlistComponent implements OnInit {
   scrollTopVisble: boolean;
 
   pageItemNum = 8;
+  scrollMessage;
 
   filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
   selectedFilter = '';
@@ -38,16 +39,6 @@ export class FoodlistComponent implements OnInit {
       });
     console.log(window);
   }
-
-
-  // itemRepeat() {
-  //   const repeatNum = 12;
-  //   for (let i = 0; i < repeatNum; i++) {
-  //     this.items = [...this.items, this.item];
-  //   }
-  //   console.log(this.items);
-  // }
-
 
   scrollTop() {
     window.scrollTo({
@@ -78,9 +69,14 @@ export class FoodlistComponent implements OnInit {
       console.log('[items 0 ]');
       return;
     }
-    const currentPage = this.items.length / this.pageItemNum;
-    const currenItemNum = currentPage * this.pageItemNum;
-    const arr = this.foodflyDB.slice(currenItemNum, currenItemNum + this.pageItemNum);
+
+    const arr = this.foodflyDB.slice(this.items.length, this.items.length + this.pageItemNum);
+    console.log('현재 item', this.items, 'slice', this.items.length + this.pageItemNum);
+    if (this.foodflyDB.length === this.items.length) {
+      this.scrollMessage = '마지막 페이지 입니다.';
+      return;
+    }
+
     this.items = [...this.items, ...arr];
   }
 

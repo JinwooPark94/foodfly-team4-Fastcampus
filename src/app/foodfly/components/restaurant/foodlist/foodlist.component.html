@@ -13,6 +13,7 @@
       <a [routerLink]="['/restaurant/foodlist']">최소 주문금액 순</a>
     </li>
   </ul>
+  <p *ngIf="items">현재 {{items.length}}개의 음식점을 찾았습니다.</p>
 </section>
 
 <style>
@@ -46,6 +47,13 @@
     <!-- end ngfor -->
   </div>
   <!-- end row-->  
+  <div *ngIf="scrollMessage" class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div  class="alert alert-success text-center" role="alert">{{scrollMessage}}</div>
+    </div>
+  </div>
+
+  
 </section>
 
 <button id="btn-scroll-top" type="button" class="btn btn-default" [class.hidden]="!scrollTopVisble"
