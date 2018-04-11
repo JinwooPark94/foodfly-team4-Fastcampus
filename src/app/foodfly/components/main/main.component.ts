@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Component, OnInit, ViewChild  } from '@angular/core';
 
 // third-party
@@ -6,9 +5,6 @@ import {
   SwiperComponent, SwiperDirective, SwiperConfigInterface,
   SwiperScrollbarInterface, SwiperPaginationInterface
 } from 'ngx-swiper-wrapper';
-=======
-import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
->>>>>>> feature/createMessageBox
 
 @Component({
   selector: 'foodfly-main',
