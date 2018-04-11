@@ -21,7 +21,6 @@ import { MemberModule } from './foodfly/components/member/member.module';
 import { MypageModule } from './foodfly/components/mypage/mypage.module';
 import { RestaurantModule } from './foodfly/components/restaurant/restaurant.module';
 
-
 @NgModule({
   declarations: [
     AppComponent

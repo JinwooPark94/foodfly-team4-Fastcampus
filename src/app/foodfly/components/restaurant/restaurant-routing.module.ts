@@ -8,6 +8,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 const routes: Routes = [
   {
     path: 'restaurant', children: [
+      { path: '', redirectTo: '/restaurant/foodlist', pathMatch: 'full' },
       { path: 'foodorder', component: FoodorderComponent },
       { path: 'foodlist', component: FoodlistComponent },
       { path: 'checkout', component: CheckoutComponent }

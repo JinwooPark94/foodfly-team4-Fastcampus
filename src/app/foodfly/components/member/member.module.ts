@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Route Module
 import { MemberRoutingModule } from './member-routing.module';
 
+// import { CoreModule } from '../../core/core.module';
+
 // Component member
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
