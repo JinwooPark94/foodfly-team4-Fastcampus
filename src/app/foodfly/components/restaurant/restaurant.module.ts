@@ -8,6 +8,8 @@ import { FoodlistComponent } from './foodlist/foodlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RestaurantManagementComponent } from './restaurant.management.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     RestaurantManagementComponent,
@@ -16,7 +18,7 @@ import { RestaurantManagementComponent } from './restaurant.management.component
     CheckoutComponent
   ],
   imports: [
-    CommonModule, RestaurantRoutingModule
+    CommonModule, RestaurantRoutingModule, BrowserAnimationsModule
   ],
   exports: [
     RestaurantManagementComponent,

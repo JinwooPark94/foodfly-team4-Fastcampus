@@ -27,158 +27,139 @@
       <!-- 리스트 탭 -->
       <nav>
         <ul class="nav nav-tabs nav-justified">
-          <li role="presentation" class="active"><a href="#">메뉴</a></li>
-          <li role="presentation"><a href="#">정보</a></li>
-          <li role="presentation"><a href="#">리뷰</a></li>
+          <li *ngFor="let navItem of navItems" role="presentation"
+            [class.active]="navItem === selectedItem"
+            (click)="changeNavItem(navItem)">
+            <a>{{ navItem }}</a>
+          </li>
         </ul>
       </nav>
       <!-- **** 메뉴 리스트 **** -->
-      <div>
+      <div class="fdr-menu" [hidden]="selectedItem !== navItems[0]">
         <ul class="list-unstyled">
-          <li>
-            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal">
+          <li *ngFor="let food of foodlist">
+            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal"
+              (click)="addToOrder(food)">
               <div>
                 <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
-                <p class="fdr-menu-name">안동찜닭</p>
-                <p class="fdr-menu-price">25,000원</p>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal">
-              <div>
-                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img">
-                <p class="fdr-menu-name">안동찜닭</p>
-                <p class="fdr-menu-price">25,000원</p>
+                <p class="fdr-menu-name">{{ food.name }}</p>
+                <p class="fdr-menu-price">{{ food.price }}원</p>
               </div>
             </button>
           </li>
         </ul>
-      </div>
-      <!-- 추가 메뉴 -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          추가메뉴
-          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-        </div>
-        <div class="list-group panel-body">
-          <ul class="list-unstyled">
+        <div class="panel panel-default">
+          <button class="btn btn-block"
+            (click)="subMenu = !subMenu">
+              추가 메뉴
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          </button>
+          <ul class="list-group list-unstyled" @accordion *ngIf="subMenu">
             <li class="list-group-item">
               <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
                 <p class="fdr-menu-name">후라이드</p>
-                <p class="fdr-menu-price">25,000원</p>
-              </button>
-            </li>
-            <li class="list-group-item">
-              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
-                <p class="fdr-menu-name">양념</p>
-                <p class="fdr-menu-price">25,000원</p>
+                <p class="fdr-menu-price">20,000원</p>
               </button>
             </li>
           </ul>
         </div>
-      </div>
-      <!-- 사이드 메뉴 -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          사이드 메뉴
-          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-        </div>
-        <div class="list-group panel-body">
-          <ul class="list-unstyled">
-            <li class="list-group-item">
-              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
-                <p class="fdr-menu-name">콜라</p>
-                <p class="fdr-menu-price">2,000원</p>
-              </button>
-            </li>
+        <!-- 사이드 메뉴 -->
+        <div class="panel panel-default" >
+          <button class="btn btn-block"
+            (click)="sideMenu = !sideMenu">
+              사이드 메뉴
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          </button>
+          <ul class="list-group list-unstyled" @accordion *ngIf="sideMenu">
             <li class="list-group-item">
               <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
                 <p class="fdr-menu-name">사이다</p>
                 <p class="fdr-menu-price">2,000원</p>
               </button>
             </li>
+            <li class="list-group-item">
+              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
+                <p class="fdr-menu-name">콜라</p>
+                <p class="fdr-menu-price">1,900원</p>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
-
       <!-- **** 정보 탭 **** -->
-      <!-- <div class="fdr-info col-md-12">
-        <h2>업체정보</h2>
-        <p>영업시간: 10:00 ~ 21:00</p>
-        <p>부가정보: 세스코멤버스 사업장</p>
+      <div class="fdr-info col-md-12" [hidden]="selectedItem !== navItems[1]">
+        <ul class="list-unstyled">
+          <li>
+            <h2>업체정보</h2>
+            <p>영업시간: 10:00 ~ 21:00</p>
+            <p>부가정보: 세스코멤버스 사업장</p>
+          </li>
+          <li>
+            <h2>결제정보</h2>
+            <p>최소주문금액: 15,000원</p>
+            <p>결제수단: 신용카드, 현금</p>
+          </li>
+          <li>
+            <h2>사업자정보</h2>
+            <p>상호명: 명품찜&탕</p>
+            <p>부가정보: 세스코멤버스 사업장</p>
+          </li>
+          <li>
+            <h2>원산지 정보</h2>
+            <p>돼지 - 국내산</p>
+            <p>닭 - 국내산</p>
+            <p>김치 - 국내산</p>
+            <p>치즈 - 국내산</p>
+          </li>
+        </ul>
       </div>
-      <div class="fdr-info col-md-12">
-        <h2>결제정보</h2>
-        <p>최소주문금액: 15,000원/p>
-        <p>결제수단: 신용카드, 현금</p>
-      </div>
-      <div class="fdr-info col-md-12">
-        <h2>사업자정보</h2>
-        <p>상호명: 명품찜&탕</p>
-        <p>부가정보: 세스코멤버스 사업장</p>
-      </div>
-      <div class="fdr-info col-md-12">
-        <h2>원산지 정보</h2>
-        <p>돼지 - 국내산</p>
-        <p>닭 - 국내산</p>
-        <p>김치 - 국내산</p>
-        <p>치즈 - 국내산</p>
-      </div> -->
-
       <!-- **** 리뷰 탭 **** -->
-      <!-- <div class="col-md-12">
-        <div class="col-md-3 col-md-offset-3 fdr-review-total">
-          <strong>4.2</strong>
+      <div class="fdr-review col-md-12" [hidden]="selectedItem !== navItems[2]">
+        <div class="row">
+          <strong class="col-md-3 col-md-offset-3 fdr-review-total">4.2</strong>
+          <div class="col-md-3">
+            <p>맛: ★★★★</p>
+            <p>양: ★★★★</p>
+            <p>배달: ★★★★</p>
+          </div>
         </div>
-        <div class="col-md-3">
-          <p>맛: ★★★★</p>
-          <p>양: ★★★★</p>
-          <p>배달: ★★★★</p>
-        </div>
+        <h3>리뷰: 5개 사장님 댓글: 5개</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <p>foodf**님 8시간 전</p>
+            <p>★★★★★|맛★5 양★5 배달5</p>
+          </li>
+          <li class="list-group-item">
+            <p>foodf**님 2018년 4월 5일</p>
+            <p>★★★★★|맛★5 양★5 배달5</p>
+          </li>
+        </ul>
       </div>
-      <h3>리뷰: 5개 사장님 댓글: 5개</h3>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <p>foodf**님 8시간 전</p>
-          <p>★★★★★|맛★5 양★5 배달5</p>
-        </li>
-        <li class="list-group-item">
-          <p>foodf**님 2018년 4월 5일</p>
-          <p>★★★★★|맛★5 양★5 배달5</p>
-        </li>
-      </ul> -->
     </div>
     <!-- 주문표 -->
     <div class="col-md-4 fdr-cart">
       <div href="#" class="list-group">
         <h3 class="list-group-item sub-title">주문표</h3>
         <ul class="list-group-item list-unstyled">
-          <li>
+          <li *ngFor="let order of orderlist">
             <div>
-              <span>안동찜닭</span>
-              <span>25,000원</span>
-              <button class="glyphicon glyphicon-minus" aria-hidden="true"></button>
-              <span>1</span>
-              <button class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"></button>
-            </div>
-          </li>
-          <li>
-            <div>
-              <span>안동찜닭</span>
-              <span>25,000원</span>
-              <button class="glyphicon glyphicon-minus" aria-hidden="true"></button>
-              <span>1</span>
-              <button class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"></button>
+              <span>{{ order.name }}</span>
+              <span>{{ order.price }}원</span>
+              <button class="glyphicon glyphicon-minus" aria-hidden="true"
+                (click)="minusAmount(order.id)"></button>
+              <span>{{ order.amount }}</span>
+              <button class="glyphicon glyphicon-plus" aria-hidden="true"
+                (click)="addAmount(order.id)"></button>
+              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"
+                (click)="removeToOrder(order.id)"></button>
             </div>
           </li>
         </ul>
-        <div class="list-group-item">최소주문금액 : 10,000원</div>
-        <div class="list-group-item">합계 : 25,000원</div>
+        <p class="list-group-item">최소주문금액: {{ minOrderPrice }}원</p>
+        <p class="list-group-item">합계: {{ orderlistSum() }} 원</p>
       </div>
-      <button type="button" class="btn btn-lg btn-block fdr-cart-order">주문하기</button>
+      <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout"
+        [class.disabled]="minOrderPrice > orderSum">주문하기</a>
     </div>
   </div>
 </div>
