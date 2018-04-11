@@ -1,19 +1,23 @@
 <section class="container foodlist-nav">
-  <ul class="nav nav-pills">
-    <li role="presentation" class="active" (click)="selectFilter()">
-      <a [routerLink]="['/restaurant/foodlist']">거리순</a>
-    </li>
-    <li role="presentation">
-      <a [routerLink]="['/restaurant/foodlist']">인기순</a>
-    </li>
-    <li role="presentation">
-      <a [routerLink]="['/restaurant/foodlist']">배달 팁 순</a>
-    </li>
-    <li role="presentation">
-      <a [routerLink]="['/restaurant/foodlist']">최소 주문금액 순</a>
-    </li>
-  </ul>
-  <p *ngIf="items">현재 {{items.length}}개의 음식점을 찾았습니다.</p>
+  <div class="col-md-8">
+    <ul class="nav nav-pills">
+      <li role="presentation" class="active" (click)="selectFilter()">
+        <a [routerLink]="['/restaurant/foodlist']">거리순</a>
+      </li>
+      <li role="presentation">
+        <a [routerLink]="['/restaurant/foodlist']">인기순</a>
+      </li>
+      <li role="presentation">
+        <a [routerLink]="['/restaurant/foodlist']">배달 팁 순</a>
+      </li>
+      <li role="presentation">
+        <a [routerLink]="['/restaurant/foodlist']">최소 주문금액 순</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <p *ngIf="items" class="nav text-right">현재 {{items.length}}개의 음식점을 찾았습니다.</p>
+  </div>  
 </section>
 
 <style>
