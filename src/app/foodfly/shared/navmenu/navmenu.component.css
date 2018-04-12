@@ -4,18 +4,36 @@
 */
 
 .navi-wrap{
-  background:#423b3c
+  background:#423b3c;
+  position: relative;
+}
+
+.navi-wrap .container {
+    position: relative;
 }
 .navi-nav > ul > li{
   float: left;
+
 }
 
 .navi-nav > ul > li > a {
   color:#fff;
-  padding:15px 32px;
+  padding:15px 24px;
   font-weight:bold;
 }
 
 .navi-nav > ul > li > a:hover {
   color:#25c1f1;
 }
+
+.search-wrap {
+  outline: goldenrod solid 2px;
+}
+
+.search{
+  position: absolute;
+  color: deeppink;
+  max-width: 300px;
+  top: 60px;
+}
+
