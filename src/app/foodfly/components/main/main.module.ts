@@ -26,8 +26,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NotfoundpageComponent
   ],
   imports: [
-    CommonModule, 
-    ShareModule, 
+    CommonModule,
+    ShareModule,
     MainRoutingModule,
     // thiyrd-part
     SwiperModule,
@@ -44,4 +44,4 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NotfoundpageComponent
   ]
 })
-export class MainModule { }
+export class MainModule {}
