@@ -20,22 +20,30 @@
     </h2>
     <div class="row">
       <div class="col-md-12">
-        <swiper [config]="config" [(index)]="index1">
-          <div *ngFor="let item of items" class="swiper-slide">
-            <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-
-              <img class="restaurant-img" src="{{item.img}}">
-              <p class="restaurant-name">{{item.name}}</p>
-              <div class="restaurant-info">
-                <p class="restaurant-kinds">{{item.category}}</p>
-                <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
-                <p class="restaurant-distance">거리: {{item.distance}} km</p>
-                <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+        <!-- start swiper  -->
+        <div class="swiper-container" [swiper]="config" [(index)]="index" >
+          <div class="swiper-wrapper" >
+            <div *ngFor="let item of items" class="swiper-slide" >
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+              
+                <img class="restaurant-img" src="{{item.img}}">
+                <p class="restaurant-name">{{item.name}}</p>
+                <div class="restaurant-info">
+                  <p class="restaurant-kinds">{{item.category}}</p>
+                  <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
+                  <p class="restaurant-distance">거리: {{item.distance}} km</p>
+                  <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+                </div>
+              
               </div>
-
             </div>
           </div>
-        </swiper>
+        </div>
+        <div class="swiper-button-prev">
+          
+        </div>
+        <div class="swiper-button-next"></div>
+        <!-- end swiper -->
       </div>
       <!-- end col -->
     </div>
@@ -51,22 +59,30 @@
     </h2>
     <div class="row">
       <div class="col-md-12">
-        <swiper [config]="config" [(index)]="index2">
-          <div *ngFor="let item of items" class="swiper-slide">
-            <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-
-              <img class="restaurant-img" src="{{item.img}}">
-              <p class="restaurant-name">{{item.name}}</p>
-              <div class="restaurant-info">
-                <p class="restaurant-kinds">{{item.category}}</p>
-                <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
-                <p class="restaurant-distance">거리: {{item.distance}} km</p>
-                <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+        <!-- start swiper  -->
+        <div class="swiper-container" [swiper]="config" [(index)]="index">
+          <div class="swiper-wrapper">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        
+                <img class="restaurant-img" src="{{item.img}}">
+                <p class="restaurant-name">{{item.name}}</p>
+                <div class="restaurant-info">
+                  <p class="restaurant-kinds">{{item.category}}</p>
+                  <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
+                  <p class="restaurant-distance">거리: {{item.distance}} km</p>
+                  <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+                </div>
+        
               </div>
-
             </div>
           </div>
-        </swiper>
+        </div>
+        <div class="swiper-button-prev">
+        
+        </div>
+        <div class="swiper-button-next"></div>
+        <!-- end swiper -->
       </div>
       <!-- end col -->
     </div>
@@ -85,22 +101,30 @@
     </h2>
     <div class="row">
       <div class="col-md-12">
-        <swiper [config]="config" [(index)]="index3">
-          <div *ngFor="let item of items" class="swiper-slide">
-            <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-
-              <img class="restaurant-img" src="{{item.img}}">
-              <p class="restaurant-name">{{item.name}}</p>
-              <div class="restaurant-info">
-                <p class="restaurant-kinds">{{item.category}}</p>
-                <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
-                <p class="restaurant-distance">거리: {{item.distance}} km</p>
-                <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+        <!-- start swiper  -->
+        <div class="swiper-container" [swiper]="config" [(index)]="index">
+          <div class="swiper-wrapper">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        
+                <img class="restaurant-img" src="{{item.img}}">
+                <p class="restaurant-name">{{item.name}}</p>
+                <div class="restaurant-info">
+                  <p class="restaurant-kinds">{{item.category}}</p>
+                  <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
+                  <p class="restaurant-distance">거리: {{item.distance}} km</p>
+                  <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+                </div>
+        
               </div>
-
             </div>
           </div>
-        </swiper>
+        </div>
+        <div class="swiper-button-prev">
+        
+        </div>
+        <div class="swiper-button-next"></div>
+        <!-- end swiper -->
       </div>
       <!-- end col -->
     </div>
@@ -118,22 +142,30 @@
     </h2>
     <div class="row">
       <div class="col-md-12">
-        <swiper [config]="config" [(index)]="index4">
-          <div *ngFor="let item of items" class="swiper-slide">
-            <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-
-              <img class="restaurant-img" src="{{item.img}}">
-              <p class="restaurant-name">{{item.name}}</p>
-              <div class="restaurant-info">
-                <p class="restaurant-kinds">{{item.category}}</p>
-                <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
-                <p class="restaurant-distance">거리: {{item.distance}} km</p>
-                <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+        <!-- start swiper  -->
+        <div class="swiper-container" [swiper]="config" [(index)]="index">
+          <div class="swiper-wrapper">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        
+                <img class="restaurant-img" src="{{item.img}}">
+                <p class="restaurant-name">{{item.name}}</p>
+                <div class="restaurant-info">
+                  <p class="restaurant-kinds">{{item.category}}</p>
+                  <p class="restaurant-delivery-tips">배달팁: {{item.flyTip}}</p>
+                  <p class="restaurant-distance">거리: {{item.distance}} km</p>
+                  <p class="restaurant-minimum-order">최소주문: {{item.minPrice}}원</p>
+                </div>
+        
               </div>
-
             </div>
           </div>
-        </swiper>
+        </div>
+        <div class="swiper-button-prev">
+        
+        </div>
+        <div class="swiper-button-next"></div>
+        <!-- end swiper -->
       </div>
       <!-- end col -->
     </div>

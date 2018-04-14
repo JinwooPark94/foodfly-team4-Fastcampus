@@ -1,82 +1,157 @@
 <div class="container">
-  <div class="row chk-title">
-    <div class="col-md-8">
-      <div class="list-group">
-        <div class="list-group-item sub-title">결제하기</div>
-        <div class="list-group-item subsidiary-title">배송정보</div>
-        <!-- 주소 & 휴대전화 -->
-        <form class="form-horizontal list-group-item">
-          <div class="form-group">
-            <label for="address" class="col-md-2 control-label chk-address">주소</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control chk-address" id="address" value="서울특별시 강남구 신사동" disabled>
-              <input type="text" class="form-control chk-address" id="address" placeholder="(필수)상세주소를 입력해주세요.">
-            </div>
+ 
+
+  <div class="row">
+    <form class="form-horizontal" 
+    [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="col-md-8 checkout">
+        <!-- start panel-main -->
+        <div class="panel panel-default panel-main">
+          <div class="panel-heading">
+            <h3 class="panel-title">결제하기</h3>
           </div>
-          <div class="form-group">
-            <label for="cellphone" class="col-md-2 control-label chk-addres">연락처</label>
-            <div class="col-md-10">
-              <input type="password" class="form-control" id="cellphone" placeholder="(필수) 휴대전화번호 입력">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-              <div class="checkbox">
-                <label class="chk-agree">
-                  <input type="checkbox"> SMS 수신 동의합니다
-                </label>
-                <label class="chk-agree">
-                  <input type="checkbox"> Foodfly 이용약관에 동의합니다
-                </label>
-                <label class="chk-agree">
-                  <input type="checkbox"> 개인정보 처리방침 동의합니다
-                </label>
-                <label class="chk-agree">
-                  <input type="checkbox"> 개인정보 제3자 제공에 동의합니다
-                </label>
+          <div class="panel-body">
+
+            <!-- 배송정보 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">배송정보</div>
+              <div class="panel-body ">        
+
+                <!-- 주소 -->
+                <div class="form-group">
+                  <label for="address" class="col-sm-2 control-label" >주소</label>
+                  <div class="col-md-10">
+                  <input type="text" name="address" class="form-control"
+                   autocomplete='address-line1'
+                  formControlName="address1">
+                  <input type="text" name="address" class="form-control"
+                   placeholder="(필수)상세주소를 입력해주세요."
+                   autocomplete='address-line2'
+                   formControlName="address2">
+                  <em *ngIf="address2.errors?.required && address2.touched" class="alert">
+                    상세주소를 입력하세요!
+                  </em>
+                  </div>
+                </div>        
+
+                <!-- 핸드폰 -->
+                <div class="form-group">
+                  <label for="cellphone" class="col-sm-2 control-label">연락처</label>
+                  <div class="col-md-10">
+                  <input type="text" name="cellphone" class="form-control"
+                   autocomplete='tel-national tel'
+                   formControlName="cellphone">
+                  <em *ngIf="cellphone.errors?.required && cellphone.touched" class="alert">
+                    연락처를 입력하세요!
+                  </em>
+                  <em *ngIf="cellphone.errors?.pattern && cellphone.touched" class="alert">
+                    숫자만 가능 합니다.
+                  </em>
+                  </div>
+                </div>
+
+                <!-- 동의 체크박스 -->
+                <div class="checkbox form-group col-sm-12">
+                  <label class="center-block">
+                    <input type="checkbox" formControlName="agree1"> SMS 수신 동의합니다
+                  </label>                
+                  <label class="center-block">
+                    <input type="checkbox" formControlName="agree2"> Foodfly 이용약관에 동의합니다
+                  </label>                
+                  <label class="center-block">
+                    <input type="checkbox" formControlName="agree3"> 개인정보 처리방침 동의합니다
+                  </label>                
+                  <label class="center-block">
+                    <input type="checkbox" formControlName="agree4"> 개인정보 제3자 제공에 동의합니다
+                  </label>
+                </div>
+
               </div>
             </div>
-          </div>
-        </form>
-        <!-- 요청사항 -->
-        <div class="list-group-item subsidiary-title">주문시 요청사항</div>
-        <div class="list-group-item">
-          <textarea class="form-control chk-ask" rows="3" placeholder="주문시 요청 사항이 있으시면 남겨주세요. 단, 주류 등 청소년 유해물품 관련 단어는 입력하실 수 없습니다."></textarea>
+
+            <!-- 주문시 요청사항 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">주문시 요청사항</div>
+              <div class="panel-body">
+                <textarea class="form-control" rows="3" placeholder="주문시 요청 사항이 있으시면 남겨주세요. 단, 주류 등 청소년 유해물품 관련 단어는 입력하실 수 없습니다."
+                 formControlName="orderRequest"></textarea>
+              </div>
+            </div>
+
+
+            <!-- 결제 수단 선택 -->
+            <div class="panel panel-default">
+              <div class="panel-heading"> 결제수단 선택</div>
+              <div class=" panel-body ">
+                <div class="radio">                  
+                  <label class="col-sm-6">
+                    <input type="radio" name="payment" formControlName="payment" value="card"> 카드 결제
+                  </label>                
+                  <label class="col-sm-6">
+                    <input type="radio" name="payment" formControlName="payment" value="cash"> 현금 결제
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>     
+          <!-- end panel body      -->
         </div>
-        <!-- 결제수단 선택 -->
-        <div class="list-group-item subsidiary-title">결제수단 선택</div>
-        <div class="list-group-item clearfix">
-          <div class="col-md-3 col-md-offset-3">
-            <button type="button" class="btn chk-pay-btn">
-                <label for="card">
-                  <input type="radio" name="chk-pay-way" id="card">
-                  카드 결제
-                </label>
-            </button>
-          </div>
-          <div class="col-md-3">
-            <button type="button" class="btn chk-pay-btn">
-                <label for="cash">
-                  <input type="radio" name="chk-pay-way" id="cash">
-                  현금 결제
-                </label>
-            </button>
-          </div>
-        </div>
+        <!-- end panel-main -->
       </div>
-    </div>
-    <div class="col-md-4 list-group">
-      <!-- 주문내역 -->
-      <div class="list-group-item sub-title">주문내역</div>
-      <p class="list-group-item">명품찜 & 탕</p>
-      <ul class="list-group-item list-unstyled">
-        <li>
-          <span>안동찜닭 X 1</span>
-          <span>2,5000원</span>
-        </li>
-      </ul>
-      <div class="list-group-item">합계 : 25,000원</div>
-      <button type="button" class="btn btn-lg btn-block chk-pay-final">결제하기</button>
-    </div>
+      <!-- end .checkout -->
+
+
+      <!-- star .order-list -->
+      <div class="col-md-4 order-list">
+        <!-- 주문내역 -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">주문내역</h3>
+          </div>
+          <div class="panel-body">
+           <table>
+             <thead>
+               <th colspan="2">스몰하노이-은행점</th>
+               
+             </thead>
+            <tfoot>
+              <tr>
+                <td>총 결제 금액</td>
+                <td>39,000원</td>
+              </tr>
+            </tfoot>
+             <tbody>
+               <tr>
+                 <td>치즈돈까스 x 1개</td>
+                 <td>8,000원</td>
+               </tr>
+               <tr>
+                 <td>새우볶음밥 x 1개</td>
+                 <td>7,000원</td>
+               </tr>
+               <tr>
+                 <td>감자튀김 x 2개</td>
+                 <td>13,000원</td>
+               </tr>               
+               <tr>
+                 <td>케이준샐러드 x 1개</td>
+                 <td>11,000원</td>
+               </tr>               
+             </tbody>
+           </table>
+          </div>
+        </div>
+        <button type="submit" 
+        class="btn btn-primary btn-lg btn-block"
+        [disabled]="checkoutForm.invalid">결제하기</button>
+
+      </div>
+      <!-- end .order -->
+    </form>
   </div>
+
+  <pre>{{ checkoutForm.value | json }}</pre>
+  <pre>{{ checkoutForm.status }}</pre>
 </div>

@@ -1,40 +1,89 @@
-/* 공용 */
-.chk-title {
-  margin-top: 30px;
+div {
+  border-radius: 0;
+}
+.container {
+  margin-top: 2rem
 }
 
-.sub-title {
-  background-color: #423b3c;
-  color: #fff;
+input[name= "address"]:first-of-type {
+  margin-bottom: 1rem;
 }
 
-.subsidiary-title {
-  background-color: #e6e6e6
+.radio {
+  text-align: center;
 }
 
-/* 주소 & 휴대전화 */
-.chk-address {
-  margin: 20px 0;
+.radio > label {
+  text-align: left;
+  outline: 1px solid silver;
+  text-indent: 1rem;
 }
 
-.chk-agree {
-  display: block;
+
+.panel-main {
+  /* background: yellow; */
+ /* border: 0; */
 }
 
-/* 요청사항 */
-.chk-ask {
-  font-size: 11px;
+.panel-main > .panel-body {
+  padding: 0;
+  margin: 0;
+   
 }
 
-/* 결제수단 선택 */
-.chk-pay-btn {
-  border: 1px solid #eeeeee;
-  padding: 5px 40px;
+.panel-main  .panel {
+  /* background: turquoise; */
+  margin: 0
 }
 
-.chk-pay-final {
-  margin-top: 20px;
-  background-color: #f0ad4e;
-  color: white;
+.panel-main  .panel:last-of-type {
+  /* margin: 0; */
 }
 
+
+.order-list .panel-body {
+  padding: 0;
+}
+
+table {
+  /* outline: 1px solid salmon; */
+  width: 100%;  
+  text-indent: 1rem  
+}
+
+th {
+  text-align: left;
+  padding: 1rem
+}
+
+td {
+  background: #FFF8EB;
+  padding : .5rem 1rem;
+  font-size: 1.3rem;
+  
+}
+
+tfoot td {  
+  border-top: 1px solid gray;
+  color: firebrick;  
+  padding: 1rem;
+  font-size: 1.5rem;
+  
+}
+
+td:first-of-type{
+  /* background: yellow; */
+  text-align: left;
+  
+}
+
+td:last-of-type{
+  /* background: yellow; */
+  text-align: right;
+  text-indent: 1rem;
+}
+
+
+.bg-color {
+  background: #AF5E00;
+}

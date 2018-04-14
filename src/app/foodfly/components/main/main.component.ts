@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener  } from '@angular/core';
 
 // third-party
 import {
@@ -20,25 +20,25 @@ export class MainComponent implements OnInit {
 
   config: SwiperConfigInterface = {
     direction: 'horizontal',
-    slidesPerView: 4,
-    keyboard: true,
-    mousewheel: true,
+    // slidesPerView: 1,
+    // keyboard: true,
+    // mousewheel: true,
     scrollbar: false,
     navigation: true,
-    pagination: true
+    pagination: false
   };
 
-  scrollbar: SwiperScrollbarInterface = {
-    el: '.swiper-scrollbar',
-    hide: false,
-    draggable: true
-  };
+  // scrollbar: SwiperScrollbarInterface = {
+  //   el: '.swiper-scrollbar',
+  //   hide: false,
+  //   draggable: true
+  // };
 
-  pagination: SwiperPaginationInterface = {
-    el: '.swiper-pagination',
-    clickable: true,
-    hideOnClick: false
-  };
+  // pagination: SwiperPaginationInterface = {
+  //   el: '.swiper-pagination',
+  //   clickable: true,
+  //   hideOnClick: false
+  // };
 
 
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -100,6 +100,25 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.autoSlidesPerView();
   }
 
+  @HostListener('window:resize', [])
+  autoSlidesPerView() {
+    console.log('window.innerWidth', window.innerWidth);
+
+    this.config['slidesPerView'] = 1;
+
+    if (window.innerWidth > 550) {
+      this.config['slidesPerView'] = 2;
+    }
+
+    if (window.innerWidth > 750) {
+      this.config['slidesPerView'] = 3;
+    }
+
+    if (window.innerWidth > 970) {
+      this.config['slidesPerView'] = 4;
+    }
+  }
 }

@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // root App 컴포넌트
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { RestaurantModule } from './foodfly/components/restaurant/restaurant.mod
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ShareModule,
     CoreModule,
     MainModule,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RestaurantRoutingModule } from './restaurant-routing.module';
 
@@ -16,7 +17,9 @@ import { RestaurantManagementComponent } from './restaurant.management.component
     CheckoutComponent
   ],
   imports: [
-    CommonModule, RestaurantRoutingModule
+    CommonModule,
+    ReactiveFormsModule,
+    RestaurantRoutingModule
   ],
   exports: [
     RestaurantManagementComponent,
