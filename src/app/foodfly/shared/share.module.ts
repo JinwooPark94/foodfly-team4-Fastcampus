@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreModule } from '../core/core.module';
 
@@ -19,7 +20,7 @@ import { ToastComponent } from './toast/toast.component';
     ToastComponent
   ],
   imports: [
-    CommonModule, RouterModule, CoreModule
+    CommonModule, RouterModule, CoreModule, FormsModule, ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

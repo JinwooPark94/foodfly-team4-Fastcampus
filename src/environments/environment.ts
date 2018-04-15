@@ -6,8 +6,10 @@
 export const environment = {
   production: false,
   apiUrl: 'https://himanmen.com',
+  roadApiUrl: 'http://www.juso.go.kr/addrlink/addrLinkApi.do',
+  googleApiUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   tokenName: 'access_token',
   facebookAppId: '163847600981594',
-  googleAppId: '352872911177-ubo95b1angem3o3ke4ln3s3k8g153llq.apps.googleusercontent.com',
-  kakaoAppId: 'f913ce6637dca15864dee2f8ee687664'
+  roadAddressAppId: 'U01TX0FVVEgyMDE4MDMxODIxMzA0MzEwNzczNjI=',
+  googleMapAppId: 'AIzaSyD1ufdlczvIvQCCRgOHfEgpCkINFlMIq2s'
 };

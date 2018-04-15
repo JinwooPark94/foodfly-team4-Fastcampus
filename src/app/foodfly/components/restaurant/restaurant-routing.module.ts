@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/restaurant/foodlist', pathMatch: 'full' },
       { path: 'foodorder', component: FoodorderComponent },
       { path: 'foodlist', component: FoodlistComponent },
+      { path: 'foodlist/:lat/:lng', component: FoodlistComponent },
       { path: 'checkout', component: CheckoutComponent }
     ]
   }

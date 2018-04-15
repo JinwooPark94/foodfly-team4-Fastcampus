@@ -8,8 +8,7 @@ export class ToastService {
   toastArr: Toast[] = [];
   style: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   getId() {
     return this.toastArr.length ? Math.max.apply('', this.toastArr.map(toast => toast.id)) + 1 : 1;

@@ -30,7 +30,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ShareModule,
     MainRoutingModule,
     // thiyrd-part
-    SwiperModule,
+    SwiperModule
   ],
   providers: [
     // thiyrd-part
