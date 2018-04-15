@@ -13,12 +13,11 @@
 }
 .navi-nav > ul > li{
   float: left;
-
 }
 
 .navi-nav > ul > li > a {
   color:#fff;
-  padding:15px 24px;
+  padding:15px 29px;
   font-weight:bold;
 }
 
@@ -35,5 +34,31 @@
   color: deeppink;
   max-width: 300px;
   top: 60px;
+  left:31px
 }
 
+.search > form > div > input {
+  font-size:12px;
+  border:0;
+  padding:19px 12px;
+}
+
+.search > form > div > span > button {
+  padding: 4px;
+  background: #25c1f1;
+  color: #fff;
+  border: 0;
+  border-left: 1px solid #e0e0e0;
+}
+
+
+.navi-nav > ul > li > .search-button {
+  background: white;
+  color: #25c1f1;
+  padding: 0;
+  margin: 9px 17px;
+}
+
+.glyphicon {
+  padding: 8px 11px;
+}

@@ -121,3 +121,8 @@
 // Large screen / wide desktop
 // 1140px -> 1020px로 수정
 @container-large-desktop:      (1020px + @grid-gutter-width);
+
+// 메인 화면 크기에 맞게 이미지 조절
+.main-wrap{
+  min-height: calc(~"100vh - 122px");
+}
