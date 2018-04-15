@@ -19,13 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CheckoutComponent
   ],
   imports: [
-<<<<<<< HEAD
-    CommonModule, RestaurantRoutingModule, BrowserAnimationsModule
-=======
     CommonModule,
     ReactiveFormsModule,
     RestaurantRoutingModule
->>>>>>> 82fc24d35fd56f247c8c147ef8fae37e848ca084
   ],
   exports: [
     RestaurantManagementComponent,
