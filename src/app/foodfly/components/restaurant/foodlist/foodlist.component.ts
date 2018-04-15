@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,11 +23,14 @@ export class FoodlistComponent implements OnInit {
   filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
   selectedFilter = '';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private route: ActivatedRoute) {
     this.scrollTopVisble = false;
   }
 
   ngOnInit() {
+    console.log(this.route.snapshot.paramMap.get('lat'));
+    console.log(this.route.snapshot.paramMap.get('lng'));
+
     this.http.get(this.url)
       // 요청 결과를 프로퍼티에 할당
       .subscribe(data => {

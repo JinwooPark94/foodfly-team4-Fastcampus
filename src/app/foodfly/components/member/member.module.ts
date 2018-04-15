@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Route Module
 import { MemberRoutingModule } from './member-routing.module';
@@ -23,7 +22,7 @@ import { MemberManagementComponent } from './member.management.component';
     MemberManagementComponent
   ],
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, MemberRoutingModule, BrowserAnimationsModule
+    CommonModule, FormsModule, ReactiveFormsModule, MemberRoutingModule
   ],
   exports: [
     LoginComponent,

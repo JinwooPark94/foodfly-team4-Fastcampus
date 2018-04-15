@@ -1,7 +1,10 @@
 <div class="navi-wrap">
   <div class="container">
-    <nav class="navi-nav">
+    <nav class="navi-nav">      
       <ul class="nav navbar-nav">
+        <li>
+          <a (click)="searchToggle()" class="btn btn-default" role="button" ><span class="glyphicon glyphicon-search"></span></a>
+        </li>
         <li>
           <a>전체</a>
         </li>
@@ -35,7 +38,38 @@
         <li>
           <a>피자</a>
         </li>
+        <li class="search" [class.hidden]="!searchToggleStatus">
+          <!-- <form action="." onsubmit="return false" class="ng-pristine ng-valid">
+            <div class="input-group">
+              <input type="search" name="category_keyword" class="form-control ng-pristine ng-valid ng-touched" placeholder="음식점이나 메뉴를 검색해보세요."
+                ng-model="category_keyword.v" ng-change="show_search_cancel_button()">
+              <span class="input-group-btn">
+                <button class="btn-search-category-cancel btn btn-default ng-hide" type="button" ng-show="is_show_cancel_button" ng-click="clear_search_keyword($event)"></button>
+                <button class="btn btn-default ico-search" type="button" id="category_search_button" ng-click="search_restaurant()">&nbsp;</button>
+              </span>
+            </div>
+          </form> -->
+
+          <form action="." onsubmit="return false" >
+            <div class="input-group">
+              <input type="search" name="category_keyword" class="form-control" placeholder="음식점이나 메뉴를 검색해보세요." #searchInput>
+              <span class="input-group-btn">
+                <button class="btn btn-default " type="button" id="category_search_button"
+                (click)=search(searchInput.value)><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+              </span>
+            </div>
+          </form>
+        </li>
       </ul>
     </nav>
   </div>
+
 </div>
+<!-- <div class="search-wrap">
+  <div class="container">
+    찾기
+  </div>
+</div> -->
+
+
+  

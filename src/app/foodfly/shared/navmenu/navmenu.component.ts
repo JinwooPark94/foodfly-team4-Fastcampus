@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navmenu.component.css']
 })
 export class NavmenuComponent implements OnInit {
+  searchToggleStatus;
 
-  constructor() { }
+  constructor() {
+    this.searchToggleStatus = false;
+  }
 
   ngOnInit() {
   }
 
+  searchToggle() {
+    this.searchToggleStatus = !this.searchToggleStatus;
+    console.log('[searchToggleStatus]', this.searchToggleStatus);
+  }
+
+
+  search(value) {
+    console.log('go search=>', value);
+  }
 }
