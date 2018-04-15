@@ -26,11 +26,11 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NotfoundpageComponent
   ],
   imports: [
-    CommonModule, 
-    ShareModule, 
+    CommonModule,
+    ShareModule,
     MainRoutingModule,
     // thiyrd-part
-    SwiperModule,
+    SwiperModule
   ],
   providers: [
     // thiyrd-part
