@@ -70,7 +70,7 @@
         <div class="form-group">
           <label for="phonenumberInput">
             <i @fadeInOut *ngIf="!userphonenumber.errors && userphonenumber.touched" class="icon-ok"></i>
-            <input type="text" formControlName="userphonenumber" name="userphonenumber" class="form-control form-size" id="phonenumberInput" placeholder="(필수)휴대폰 전화번호 입력(-제외)">
+            <input type="text" formControlName="userphonenumber" maxlength="11" name="userphonenumber" class="form-control form-size" id="phonenumberInput" placeholder="(필수)휴대폰 전화번호 입력(-제외)">
           </label>
           <div class="alert-box" @accordion *ngIf="userphonenumber.errors && (userphonenumber.dirty || userphonenumber.touched)" >
             <em *ngIf="userphonenumber.errors?.required && userphonenumber.touched" class="error-message">
@@ -78,6 +78,9 @@
             </em>
             <em *ngIf="userphonenumber.errors?.pattern && userphonenumber.touched" class="error-message">
               휴대폰 번호는 숫자만 입력 가능합니다.
+            </em>
+            <em *ngIf="userphonenumber.errors?.minLength && userphonenumber.touched" class="error-message">
+              휴대폰 번호 11자리 이상으로 입력하세요.
             </em>
           </div>
         </div>

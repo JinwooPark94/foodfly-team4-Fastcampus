@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'foodorder', component: FoodorderComponent },
       { path: 'foodlist', component: FoodlistComponent },
       { path: 'foodlist/:lat/:lng', component: FoodlistComponent },
-      { path: 'checkout', component: CheckoutComponent }
+      { path: 'checkout', component: CheckoutComponent },
       { path: 'paymentcompleted', component: PaymentcompletedComponent }
     ]
   }

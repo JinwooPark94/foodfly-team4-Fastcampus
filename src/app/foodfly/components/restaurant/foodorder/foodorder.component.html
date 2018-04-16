@@ -158,8 +158,8 @@
         <p class="list-group-item">최소주문금액: {{ minOrderPrice }}원</p>
         <p class="list-group-item">합계: {{ orderlistSum() }} 원</p>
       </div>
-      <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout"
-        [class.disabled]="minOrderPrice > orderSum">주문하기</a>
+      <a type="button" class="btn btn-lg btn-block fdr-cart-order"
+        [class.disabled]="minOrderPrice > orderSum" (click)="foodOrderSubmit()">주문하기</a>
     </div>
   </div>
 </div>

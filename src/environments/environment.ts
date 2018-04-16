@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://himanmen.com',
+  apiUrl: 'https://foodfly.lhy.kr',
   roadApiUrl: 'http://www.juso.go.kr/addrlink/addrLinkApi.do',
   googleApiUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   tokenName: 'access_token',

@@ -6,12 +6,12 @@
       <fieldset>
       <div class="form-group">
         <label for="idInput">
-          <input type="text" formControlName="username" class="form-control form-size" id="idInput" placeholder="이메일을 입력하세요">
+          <input type="text" formControlName="email" class="form-control form-size" id="idInput" placeholder="이메일을 입력하세요">
         </label>
         <div class="alert-box">
-          <em *ngIf="username.errors?.required && username.touched" class="error-message">
+          <em *ngIf="email.errors?.required && email.touched" class="error-message">
             이메일을 입력하세요.</em>
-          <em *ngIf="username.errors?.pattern && username.touched" class="error-message">
+          <em *ngIf="email.errors?.pattern && email.touched" class="error-message">
             이메일 형식에 맞게 입력하세요.</em>
         </div>
       </div>

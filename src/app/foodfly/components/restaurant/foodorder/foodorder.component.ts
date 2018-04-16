@@ -103,5 +103,13 @@ export class FoodorderComponent implements OnInit {
       return this.orderSum = 0;
     }
   }
+
+  foodOrderSubmit() {
+    const foodOrderList = [
+      { 'restaurantPn': '아리랑' },
+      ...this.orderlist,
+      { 'orderSum': this.orderlistSum() }];
+    sessionStorage.setItem('sessionStorage-cart', JSON.stringify(foodOrderList));
+  }
 }
 

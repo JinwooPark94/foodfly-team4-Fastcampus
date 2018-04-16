@@ -1,4 +1,4 @@
-import { Component, Input , OnInit, Renderer2 } from '@angular/core';
+import { Component, Input , OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidator } from '../password.validator';
@@ -10,6 +10,9 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'foodfly-signup',
@@ -40,7 +43,9 @@ export class SignupComponent implements OnInit {
 
   userform: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private render: Renderer2, private toastService: ToastService) {}
+  apiUrl = `${environment.apiUrl}`;
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private toastService: ToastService) {}
 
   ngOnInit() {
     this.userform = this.fb.group({
@@ -63,7 +68,8 @@ export class SignupComponent implements OnInit {
       ]],
       userphonenumber: ['', [
         Validators.required,
-        Validators.pattern(/^[0-9]+$/)
+        Validators.pattern(/^[0-9]+$/),
+        Validators.minLength(11)
       ]]
     });
   }
@@ -93,7 +99,23 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    this.toastService.messageAdd('회원가입이 완료되었습니다.', 'success');
+    let userPhoneNum = this.userform.value.userphonenumber;
+    userPhoneNum = `+82 ${userPhoneNum.substring(0, 3)}-${userPhoneNum.substring(3, 7)}-${userPhoneNum.substring(7, 11)}`;
+
+    const userData = {
+      'email': this.userform.value.useremail,
+      'password': this.userform.value.passwordGroup.userpassword,
+      'passwordConfirm': this.userform.value.passwordGroup.userconfirmPassword,
+      'name': this.userform.value.username,
+      'phoneNumber': userPhoneNum
+    };
+
+    this.http
+      .post(`${this.apiUrl}/members/signup/`, userData)
+      .subscribe( data => {
+        this.router.navigate(['member/login']);
+        this.toastService.messageAdd('회원가입이 완료되었습니다.', 'success');
+      });
   }
 }
 
