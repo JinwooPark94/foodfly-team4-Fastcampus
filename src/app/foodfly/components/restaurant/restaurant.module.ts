@@ -7,6 +7,7 @@ import { RestaurantRoutingModule } from './restaurant-routing.module';
 import { FoodorderComponent } from './foodorder/foodorder.component';
 import { FoodlistComponent } from './foodlist/foodlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentcompletedComponent } from './paymentcompleted/paymentcompleted.component';
 import { RestaurantManagementComponent } from './restaurant.management.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RestaurantManagementComponent,
     FoodlistComponent,
     FoodorderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    PaymentcompletedComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RestaurantManagementComponent,
     FoodlistComponent,
     FoodorderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    PaymentcompletedComponent
   ]
 })
 export class RestaurantModule { }

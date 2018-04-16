@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FoodorderComponent } from './foodorder/foodorder.component';
 import { FoodlistComponent } from './foodlist/foodlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentcompletedComponent } from './paymentcompleted/paymentcompleted.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'foodlist', component: FoodlistComponent },
       { path: 'foodlist/:lat/:lng', component: FoodlistComponent },
       { path: 'checkout', component: CheckoutComponent }
+      { path: 'paymentcompleted', component: PaymentcompletedComponent }
     ]
   }
 ];
