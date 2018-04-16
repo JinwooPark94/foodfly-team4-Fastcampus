@@ -1,0 +1,20 @@
+.payment-bg {
+  margin: 30px;
+  height: 300px;
+  border: 1px solid #00F4FF;
+  border-radius: 5px;
+}
+
+.payment-bg h3{
+  text-align: center;
+}
+
+.payment-bg h4{
+  text-align: center;
+}
+
+.payment-checked {
+  display: block;
+  margin: 30px auto;
+}
+
