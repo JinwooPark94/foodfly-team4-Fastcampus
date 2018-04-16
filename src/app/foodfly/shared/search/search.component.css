@@ -50,8 +50,8 @@
 }
 
 .input-group-btn .ico-loc{
-  background: #fff url('../../../../assets/images/common/sprite-icon.png') no-repeat 0 0;
-  background-size: 113px;
+  background: #fff url('../../../../assets/images/common/sprite-icon.png') no-repeat 2px 1px;
+  background-size: 220px;
   width: 40px;
   height: 40px;
   border-radius: 4px !important;
@@ -70,7 +70,7 @@
 
 .cancel-button-ico{
   background: #fff url('../../../../assets/images/common/sprite-icon.png') no-repeat -33px -2px;
-  background-size: 104px;
+  background-size: 220px;
   width: 12px;
   height: 12px;
   border-radius: 4px !important;
@@ -102,12 +102,13 @@
   margin-left: 48px;
   display: block;
   padding:0;
-  max-height:300px;
+  max-height:260px;
   overflow-x:hidden;
 }
 
 .search-address {
   margin-bottom:0;
+  background:white
 }
 
 .search-list > li > a{
@@ -119,8 +120,8 @@
 }
 
 .address-List > a{
-  background: #fff url('../../../../assets/images/common/sprite-icon.png') no-repeat -76px 5px;
-  background-size: 113px;
+  background: #fff url('../../../../assets/images/common/sprite-icon.png') no-repeat -72px 6px;
+  background-size: 220px;
   padding: 9px 11px 9px 40px;
 }
 

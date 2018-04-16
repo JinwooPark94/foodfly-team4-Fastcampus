@@ -159,7 +159,7 @@
         <p class="list-group-item">합계: {{ orderlistSum() }} 원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order"
-        [class.disabled]="minOrderPrice > orderSum" (click)="foodOrderSubmit()">주문하기</a>
+        [class.disabled]="minOrderPrice > orderSum">주문하기</a>
     </div>
   </div>
 </div>
