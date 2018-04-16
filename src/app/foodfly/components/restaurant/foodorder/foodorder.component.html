@@ -39,7 +39,7 @@
         <ul class="list-unstyled">
           <li *ngFor="let food of foodlist">
             <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal"
-              (click)="addToOrder(food)">
+              (click)="foodorderservice.checkOrderList(food)">
               <div>
                 <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
                 <p class="fdr-menu-name">{{ food.name }}</p>
@@ -139,27 +139,41 @@
     <!-- 주문표 -->
     <div class="col-md-4 fdr-cart">
       <div href="#" class="list-group">
-        <h3 class="list-group-item sub-title">주문표</h3>
+        <div class="list-group-item fdr-cart-subtitle">
+          <span>주문표</span>
+          <button
+            (click)="foodorderservice.removeAllOrder()">
+            <img src="../../../../../assets/images/foodorder/delete-button.png" alt="remove">
+          </button>
+        </div>
         <ul class="list-group-item list-unstyled">
-          <li *ngFor="let order of orderlist">
-            <div>
-              <span>{{ order.name }}</span>
-              <span>{{ order.price }}원</span>
-              <button class="glyphicon glyphicon-minus" aria-hidden="true"
-                (click)="minusAmount(order.id)"></button>
-              <span>{{ order.amount }}</span>
-              <button class="glyphicon glyphicon-plus" aria-hidden="true"
-                (click)="addAmount(order.id)"></button>
-              <button class="glyphicon glyphicon-remove fdr-cart-rmv" aria-hidden="true"
-                (click)="removeToOrder(order.id)"></button>
+          <li *ngFor="let order of foodorderservice.orderlist">
+            <div class="row">
+              <p class="col-md-12">{{ order.name }}</p>
+              <div class="col-md-6">
+                <button class="cancel-button btn btn-default fdr-cart-rmv" aria-hidden="true"
+                (click)="foodorderservice.removeToOrder(order.id)">
+                  <i class="cancel-button-ico">&nbsp;</i>
+                </button>
+                <span>{{ order.price }}원</span>
+              </div>
+              <div class="col-md-6">
+                <button class="glyphicon glyphicon-minus" aria-hidden="true"
+                  (click)="foodorderservice.minusAmount(order)">
+                </button>
+                <span>{{ order.amount }}</span>
+                <button class="glyphicon glyphicon-plus" aria-hidden="true"
+                  (click)="foodorderservice.addAmount(order.id)">
+                </button>
+              </div>
             </div>
           </li>
         </ul>
-        <p class="list-group-item">최소주문금액: {{ minOrderPrice }}원</p>
-        <p class="list-group-item">합계: {{ orderlistSum() }} 원</p>
+        <p class="list-group-item">최소주문금액: {{ foodorderservice.minOrderPrice }}원</p>
+        <p class="list-group-item">합계: {{ foodorderservice.orderSumCulator() }} 원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout"
-        [class.disabled]="minOrderPrice > orderSum">주문하기</a>
+        [class.disabled]="foodorderservice.minOrderPrice > foodorderservice.orderSum">주문하기</a>
     </div>
   </div>
 </div>

@@ -1,13 +1,3 @@
-/* 공용 */
-.sub-title {
-  background-color: #423b3c;
-  color: #fff;
-}
-
-h1 h2 h3 h4 h5 h6 {
-  margin: 0;
-}
-
 /* 매장 상호명 */
 .fdr-store {
   margin-top: 20px;
@@ -54,4 +44,43 @@ h1 h2 h3 h4 h5 h6 {
   margin-top: 20px;
   background-color: #f0ad4e;
   color: white;
+}
+
+.fdr-cart-subtitle {
+  background-color: #423b3c;
+  color: #fff;
+  overflow: hidden;
+}
+
+.fdr-cart-subtitle span {
+  font-size: 21px;
+}
+
+.fdr-cart-subtitle button {
+  float: right;
+}
+
+/* .input-group-btn .ico-loc{
+  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat 0 0;
+  background-size: 113px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px !important;
+  border:none;
+} */
+
+.cancel-button{
+  padding:0;
+  background: #fff;
+  border: none;
+}
+
+.cancel-button-ico{
+  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat -33px -2px;
+  background-size: 104px;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px !important;
+  border:none;
+  padding:8px 12px;
 }

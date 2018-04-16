@@ -45,6 +45,10 @@ export class FoodorderService {
     this.orderlist = this.orderlist.filter(order => order.id !== id);
   }
 
+  removeAllOrder() {
+    this.orderlist = [];
+  }
+
   orderSumCulator() {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
