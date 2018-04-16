@@ -10,6 +10,8 @@ import { ToastService } from './services/toast.service';
 import { TokenGuard } from './guards/token.guard';
 
 import { ToastPipe } from './pipes/toast.pipe';
+import { PreloaderService } from './services/preloader.service';
+
 
 @NgModule({
   providers: [
@@ -17,7 +19,8 @@ import { ToastPipe } from './pipes/toast.pipe';
     LoginService,
     SocialLoginService,
     ToastService,
-    TokenGuard
+    TokenGuard,
+    PreloaderService
   ],
   declarations: [ToastPipe],
   exports: [ToastPipe]

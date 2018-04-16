@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { NavmenuComponent } from './navmenu/navmenu.component';
 import { ToastComponent } from './toast/toast.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ToastComponent } from './toast/toast.component';
     FooterComponent,
     SearchComponent,
     NavmenuComponent,
-    ToastComponent
+    ToastComponent,
+    PreloaderComponent
   ],
   imports: [
     CommonModule, RouterModule, CoreModule, FormsModule, ReactiveFormsModule
@@ -27,7 +29,8 @@ import { ToastComponent } from './toast/toast.component';
     FooterComponent,
     SearchComponent,
     NavmenuComponent,
-    ToastComponent
+    ToastComponent,
+    PreloaderComponent
   ]
 })
 
