@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
+import { environment } from '../../../../../environments/environment';
 import { PreloaderService } from '../../../core/services/preloader.service';
 
 
@@ -11,8 +12,11 @@ import { PreloaderService } from '../../../core/services/preloader.service';
   styleUrls: ['./foodlist.component.css'],
 })
 
+
 export class FoodlistComponent implements OnInit, AfterViewInit {
-  url = 'http://localhost:3000/restaurant';
+
+  // url = 'http://localhost:3000/restaurant';
+  apiUrl = `${environment.apiUrl}`;
   foodflyDB;
   items;
 
@@ -22,8 +26,14 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   pageItemNum = 8;
   scrollMessage;
 
+
   filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
   selectedFilter = '';
+
+  dummyImg = ['https://kcf1.foodfly.co.kr/restaurants/15150/25230029659e805a00ca33.jpg',
+  'https://kcf1.foodfly.co.kr/restaurants/15150/87046131859e805a039dfb.jpg'];
+
+  loading: boolean;
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
@@ -34,18 +44,32 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
     console.log(this.route.snapshot.paramMap.get('lat'));
     console.log(this.route.snapshot.paramMap.get('lng'));
+    console.log(this.apiUrl);
+    this.getRestaurntList();
+    // this.http.get(this.url)
+    //   // 요청 결과를 프로퍼티에 할당
+    //   .subscribe(data => {
+    //     this.foodflyDB = data;
+    //     console.log('[data]', data);
+    //     this.pagination();
 
-    this.http.get(this.url)
-      // 요청 결과를 프로퍼티에 할당
-      .subscribe(data => {
-        this.foodflyDB = data;
-        console.log('[data]', data);
-        this.pagination();
+    //     this.over = new Array(this.foodflyDB.length);
+    //     this.over.fill(false);
+    //   });
+    // console.log(window);
+  }
 
-        this.over = new Array(this.foodflyDB.length);
-        this.over.fill(false);
-      });
-    console.log(window);
+  getRestaurntList() {
+    // this.loading = true;
+    this.http.get(`${this.apiUrl}/restaurants/`)
+    .subscribe( data => {
+      this.foodflyDB = data;
+      console.log('[get restaurant list]', data);
+
+      this.pagination();
+      this.over = new Array(this.foodflyDB.length);
+      this.over.fill(false);
+    });
   }
 
   ngAfterViewInit() {
@@ -76,7 +100,6 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   }
 
   pagination() {
-    //
     if (!this.items) {
       this.items = this.foodflyDB.slice(0, this.pageItemNum);
       // console.log('[items 0 ]');

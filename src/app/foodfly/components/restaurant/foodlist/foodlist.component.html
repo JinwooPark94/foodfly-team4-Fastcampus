@@ -30,20 +30,24 @@
 
 <section class="container foodlist">
   <div class="row">
-    <div *ngFor="let item of items let i=index" class="restaurant-item col-xs-6 col-md-3">     
-      <div class="item-body">           
+    <div *ngFor="let item of items let i=index" class="restaurant-item col-xs-6 col-md-3" >   
+       
+      <div class="item-body" [routerLink]="['/restaurant/foodorder', item.pk]">           
         <!-- <img src="item.images[0]"> -->
         <!-- <img src="item.images[1]"> -->
-        <div class="title-img" >
-          <img [src]="over[i] ? item.images[0] : item.images[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false" >
+        <div class="title-img" @accordion>
+          <!-- <img [src]="over[i] ? item.images[0] : item.images[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false" > -->
+           
+          <img [src]="over[i] ? dummyImg[0] : dummyImg[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false" >
         </div>        
         
         <div class="item-text">
-          <h3 class="name">{{item.name}}</h3>          
-          <p class="category">{{item.category|slice:0:3}}</p>
+          <h3 class="name">{{item.name}} {{item.pk}}</h3>          
+          <!-- <p class="category">{{item.tags|slice:0:3}}</p> -->
+          <p class="category">{{item.tags[0].name}}, {{item.tags[1].name}}, {{item.tags[2].name}}</p>
           <p class="tip">배달팁
             <span>{{item.tip}}</span>원</p>
-          <p class="min-price">최소주문 {{item.min_order_price}}원</p>
+          <p class="min-price">최소주문 {{item.minOrderPrice}}원</p>
         </div>
       </div>
       <!-- end .item-body -->
@@ -60,9 +64,9 @@
   
 </section>
 
-<button id="btn-scroll-top" type="button" class="btn btn-default" [class.hidden]="!scrollTopVisble"
+<button id="btn-scroll-top" type="button" class="btn btn-default" [class.hidden]="scrollTopVisble"
 (click)="scrollTop()">
-  <span class="glyphicon glyphicon-arrow-up"></span>
+  <span class="glyphicon glyphicon-chevron-up"></span>
 </button>
 
 
