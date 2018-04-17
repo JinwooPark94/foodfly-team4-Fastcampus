@@ -1,5 +1,11 @@
 import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';
 
+import { FoodorderService } from '../../../core/services/foodorder.service';
+
+import { FoodList } from '../../../core/interface/foodorder.interface';
+import { OrderList } from '../../../core/interface/foodorder.interface';
+import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';-
+
 import {
   trigger,
   style,
@@ -8,23 +14,12 @@ import {
 } from '@angular/animations';
 import { FoodorderService } from '../../../core/services/foodorder.service';
 
-interface FoodList {
-  id: number;
-  name: string;
-  price: number;
-  amount: number;
-}
-interface OrderList {
-  id: number;
-  name: string;
-  price: number;
-  amount: number;
-}
 
 @Component({
   selector: 'foodfly-foodorder',
   templateUrl: './foodorder.component.html',
   styleUrls: ['./foodorder.component.css'],
+  providers: [FoodorderService],
   animations: [
     trigger('accordion', [
       transition(':enter', [   // :enter is alias to 'void => *'
@@ -37,22 +32,17 @@ interface OrderList {
     ])
   ]
 })
+
 export class FoodorderComponent implements OnInit, DoCheck {
   navItems: string[] = ['메뉴', '정보', '리뷰'];
 
   selectedItem: string;
-
-  orderlist: OrderList[] = [];
-
-  orderSum: number;
 
   foodlist: FoodList[] = [
     { id: 1, name: '안동찜닭', price: 25000, amount: 1 },
     { id: 2, name: '후라이드', price: 15000, amount: 1 },
     { id: 3, name: '양념치킨', price: 16000, amount: 1 }
   ];
-
-  minOrderPrice = 30000;
 
   subMenu = false;
 
@@ -88,24 +78,19 @@ export class FoodorderComponent implements OnInit, DoCheck {
   addToOrder(orderedItem: OrderList) {
     const MatchId = this.orderlist.filter(item => item.id === orderedItem.id);
 
-    if (MatchId.length) {
-        return this.addAmount(orderedItem.id);
-      } else {
-        return this.orderlist = [...this.orderlist,
-        { id: orderedItem.id, name: orderedItem.name, price: orderedItem.price, amount: orderedItem.amount }];
-      }
+
+
+  // orderlist 배열을 확인하여 값이 바뀌면 실행
+  ngDoCheck() {
+    const changes = this.differs.find(this.foodorderService.orderlist);
+    console.log(changes);
+    if (changes) {
+      this.foodorderService.setFoodOrderStorage();
+    }
   }
 
-  addAmount(id: number) {
-    this.orderlist = this.orderlist.map(order => order.id === id ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
-  }
-
-  minusAmount(id: number) {
-    this.orderlist = this.orderlist.map(order => order.id === id ? Object.assign({}, order, { amount: order.amount - 1 }) : order);
-  }
-
-  removeToOrder(id: number) {
-    this.orderlist = this.orderlist.filter(order => order.id !== id);
+  changeNavItem(navItem: string) {
+    this.selectedItem = navItem;
   }
 
   orderlistSum() {

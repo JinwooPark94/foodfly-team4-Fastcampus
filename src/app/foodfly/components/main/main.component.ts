@@ -6,6 +6,8 @@ import {
   SwiperScrollbarInterface, SwiperPaginationInterface
 } from 'ngx-swiper-wrapper';
 
+import { PreloaderService } from '../../core/services/preloader.service';
+
 @Component({
   selector: 'foodfly-main',
   templateUrl: './main.component.html',
@@ -46,7 +48,7 @@ export class MainComponent implements OnInit {
 
   items;
 
-  constructor() {
+  constructor( public preloader: PreloaderService ) {
     this.items = [
       {
         name: '스노우폭스 뱅뱅점',
@@ -100,6 +102,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.preloader.isShow);
+    this.preloader.show();
+    console.log(this.preloader.isShow);
+
     this.autoSlidesPerView();
   }
 

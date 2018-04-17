@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'foodfly-root',
   template: `
+    <foodfly-preloader></foodfly-preloader>
     <foodfly-header></foodfly-header>
     <foodfly-navmenu></foodfly-navmenu>
     <foodfly-toast></foodfly-toast>
