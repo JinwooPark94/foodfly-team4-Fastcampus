@@ -7,12 +7,11 @@ import { LoginService } from './services/login.service';
 import { SocialLoginService } from './services/social-login.service';
 import { ToastService } from './services/toast.service';
 import { FoodorderService } from './services/foodorder.service';
+import { PreloaderService } from './services/preloader.service';
 
 import { TokenGuard } from './guards/token.guard';
 
 import { ToastPipe } from './pipes/toast.pipe';
-import { PreloaderService } from './services/preloader.service';
-
 
 @NgModule({
   providers: [
