@@ -71,9 +71,9 @@ export class FoodorderService {
     console.log(this.orderlist);
   }
 
-  cartData;
-
-  constructor() { }
+  addAmount(id: number) {
+    this.orderlist = this.orderlist.map(order => order.id === id ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
+  }
 
   minusAmount(order: OrderList) {
     if (order.amount <= 1) {
@@ -83,21 +83,13 @@ export class FoodorderService {
             Object.assign({}, orderedItem, { amount: orderedItem.amount - 1 }) : orderedItem);
       }
   }
-  // 장바구니 list에 메뉴가 들어가 있는지 확인 후 개수 리턴
-  getSessionData() {
-    this.cartData = JSON.parse(sessionStorage.getItem('sessionStorage-cart'));
 
-    if (!this.cartData) { return 0; }
-    return this.cartData.orderList.length;
+  removeToOrder(id: number) {
+    this.orderlist = this.orderlist.filter(order => order.id !== id);
   }
 
   removeAllOrder() {
     this.orderlist = [];
-    
-  // sessionStorage에 있는 메뉴가 있을 시 값 리턴
-  getOrderlistData() {
-    if (!this.cartData.orderList) { return 0; }
-    return this.cartData.orderList;
   }
 
 
