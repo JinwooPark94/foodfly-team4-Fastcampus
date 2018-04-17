@@ -10,7 +10,7 @@
         </span>
         <form (ngSubmit)="findFoodList()" class="form-search">
           <label for="search-input">
-            <input type="search" class="form-control" id="search-input" placeholder="주소를 입력해주세요." [formControl]="inputText" (focus)="clickStatus=true">
+            <input type="search" class="form-control" id="search-input" placeholder="주소를 입력해주세요." [formControl]="inputText" (focus)="clickStatus=true" >
           </label>
           <ul class="dropdown-menu search-list" tabindex="-1" *ngIf="clickStatus">
             <li class="none-search">
@@ -29,10 +29,10 @@
             </li>
           </ul>
           <span class="input-group-btn" >
-            <button class="cancel-button btn btn-default" (click)="cleanInputValue()">
+            <a class="cancel-button btn btn-default" (click)="cleanInputValue()">
               <i class="cancel-button-ico">&nbsp;</i>
-            </button>
-            <button class="btn btn-default btn-search" type="button">검색</button>
+            </a>
+            <button class="btn btn-default btn-search" type="submit">검색</button>
           </span>
         </form>
       </div>
