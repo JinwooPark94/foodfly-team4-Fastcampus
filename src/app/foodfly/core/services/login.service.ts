@@ -24,10 +24,9 @@ export class LoginService {
     private socialAuth: SocialLoginService) {}
 
   signin(credential: User): Observable<Token> {
-    return this.http.post<Token>(`${this.URL}/user/login/`, credential)
+    return this.http.post<Token>(`${this.URL}/members/auth-token/`, credential)
       .do(res => {
         this.setToken(res.token);
-        console.dir(res);
       })
       .shareReplay();
   }
@@ -37,7 +36,6 @@ export class LoginService {
       .switchMap(credential => this.http.post<Token>(`${this.URL}/user/facebook-login/`, credential))
       .do(res => {
         this.setToken(res.token);
-        console.dir(res);
       })
       .shareReplay();
   }

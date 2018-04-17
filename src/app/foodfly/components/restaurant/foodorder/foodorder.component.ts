@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';
+
 import { FoodorderService } from '../../../core/services/foodorder.service';
-import { FoodList} from '../../../core/interface/foodorder.interface';
+
+import { FoodList } from '../../../core/interface/foodorder.interface';
+import { OrderList } from '../../../core/interface/foodorder.interface';
 
 import {
   trigger,
@@ -27,10 +31,8 @@ import {
     ])
   ]
 })
-export class FoodorderComponent implements OnInit {
 
-  constructor(public foodorderservice: FoodorderService) {}
-
+export class FoodorderComponent implements OnInit, DoCheck {
   navItems: string[] = ['메뉴', '정보', '리뷰'];
 
   selectedItem: string;
@@ -45,13 +47,26 @@ export class FoodorderComponent implements OnInit {
 
   sideMenu = false;
 
+  constructor(private differs: IterableDiffers, public foodorderService: FoodorderService) {}
 
   ngOnInit() {
     this.selectedItem = this.navItems[0];
   }
 
+
+
+  // orderlist 배열을 확인하여 값이 바뀌면 실행
+  ngDoCheck() {
+    const changes = this.differs.find(this.foodorderService.orderlist);
+    console.log(changes);
+    if (changes) {
+      this.foodorderService.setFoodOrderStorage();
+    }
+  }
+
   changeNavItem(navItem: string) {
     this.selectedItem = navItem;
   }
+
 }
 

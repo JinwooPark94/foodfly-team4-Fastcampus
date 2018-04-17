@@ -39,7 +39,7 @@
         <ul class="list-unstyled">
           <li *ngFor="let food of foodlist">
             <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal"
-              (click)="foodorderservice.checkOrderList(food)">
+              (click)="this.foodorderService.checkOrderList(food)">
               <div>
                 <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
                 <p class="fdr-menu-name">{{ food.name }}</p>
@@ -142,38 +142,38 @@
         <div class="list-group-item fdr-cart-subtitle">
           <span>주문표</span>
           <button
-            (click)="foodorderservice.removeAllOrder()">
+            (click)="this.foodorderService.removeAllOrder()">
             <img src="../../../../../assets/images/foodorder/delete-button.png" alt="remove">
           </button>
         </div>
         <ul class="list-group-item list-unstyled">
-          <li *ngFor="let order of foodorderservice.orderlist">
+          <li *ngFor="let order of this.foodorderService.orderlist">
             <div class="row">
               <p class="col-md-12">{{ order.name }}</p>
               <div class="col-md-6">
                 <button class="cancel-button btn btn-default fdr-cart-rmv" aria-hidden="true"
-                (click)="foodorderservice.removeToOrder(order.id)">
+                (click)="this.foodorderService.removeToOrder(order.id)">
                   <i class="cancel-button-ico">&nbsp;</i>
                 </button>
                 <span>{{ order.price }}원</span>
               </div>
               <div class="col-md-6">
                 <button class="glyphicon glyphicon-minus" aria-hidden="true"
-                  (click)="foodorderservice.minusAmount(order)">
+                  (click)="this.foodorderService.minusAmount(order)">
                 </button>
                 <span>{{ order.amount }}</span>
                 <button class="glyphicon glyphicon-plus" aria-hidden="true"
-                  (click)="foodorderservice.addAmount(order.id)">
+                  (click)="this.foodorderService.addAmount(order.id)">
                 </button>
               </div>
             </div>
           </li>
         </ul>
-        <p class="list-group-item">최소주문금액: {{ foodorderservice.minOrderPrice }}원</p>
-        <p class="list-group-item">합계: {{ foodorderservice.orderSumCulator() }} 원</p>
+        <p class="list-group-item">최소주문금액: {{ this.foodorderService.minOrderPrice }}원</p>
+        <p class="list-group-item">합계: {{ this.foodorderService.orderSumCulator() }} 원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout"
-        [class.disabled]="foodorderservice.minOrderPrice > foodorderservice.orderSum">주문하기</a>
+        [class.disabled]="this.foodorderService.minOrderPrice > this.foodorderService.orderSum">주문하기</a>
     </div>
   </div>
 </div>

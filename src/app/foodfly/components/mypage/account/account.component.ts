@@ -8,6 +8,10 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { environment } from '../../../../../environments/environment';
+import { LoginService } from '../../../core';
 
 @Component({
   selector: 'foodfly-account',
@@ -35,13 +39,27 @@ import {
   ]
 })
 export class AccountComponent implements OnInit {
+  apiUrl = `${environment.apiUrl}`;
 
   message: string;
   usermodifyform: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  userData;
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
 
   ngOnInit() {
+
+    // 사용자 정보 가져오기
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.loginService.getToken()}`);
+
+    this.http.get(`${this.apiUrl}/members/profile/`, { headers } )
+      .subscribe(data => {
+        console.log(data);
+        this.userData = data;
+      });
+
+    console.log(this.userData);
     this.usermodifyform = this.fb.group({
       passwordGroup: this.fb.group({
         userpassword: ['', [

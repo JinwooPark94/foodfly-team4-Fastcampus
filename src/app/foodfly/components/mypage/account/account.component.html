@@ -5,7 +5,7 @@
       <fieldset>
         <div class="form-group">
           <label for="emailInput">
-            <input disabled="true" type="text" name="useremail" class="form-control form-size" id="emailInput" value="email@example.com" placeholder="email@example.com">
+            <input disabled="true" type="text" name="useremail" class="form-control form-size" id="emailInput" value="{{ userData.email }}">
           </label>
         </div>
         <div formGroupName="passwordGroup">
@@ -49,7 +49,7 @@
         </div>
         <div class="form-group">
           <label for="nameInput">
-            <input type="text" disabled=true name="username" class="form-control form-size" id="nameInput" placeholder="홍길동">
+            <input type="text" disabled=true name="username" class="form-control form-size" id="nameInput" value="{{ userData.name }}">
           </label>
         </div>
         <div class="form-group">

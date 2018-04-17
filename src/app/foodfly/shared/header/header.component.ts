@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from '../../core/services/login.service';
 import { ToastService } from '../../core/services/toast.service';
+import { FoodorderService } from '../../core/services/foodorder.service';
 
 @Component({
   selector: 'foodfly-header',
@@ -13,7 +14,10 @@ import { ToastService } from '../../core/services/toast.service';
 export class HeaderComponent implements OnInit {
   userid: string;
 
-  constructor(private auth: LoginService, private toastService: ToastService, private router: Router ) { }
+  constructor(private auth: LoginService,
+              private toastService: ToastService,
+              private foodorderService: FoodorderService,
+              private router: Router ) { }
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
