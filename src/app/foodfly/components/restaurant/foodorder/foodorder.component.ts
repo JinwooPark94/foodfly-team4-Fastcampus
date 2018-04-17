@@ -47,13 +47,11 @@ export class FoodorderComponent implements OnInit, DoCheck {
 
   sideMenu = false;
 
-  constructor(private differs: IterableDiffers, public foodorderService: FoodorderService) {}
+  constructor(private differs: IterableDiffers, private foodorderService: FoodorderService) {}
 
   ngOnInit() {
     this.selectedItem = this.navItems[0];
   }
-
-
 
   // orderlist 배열을 확인하여 값이 바뀌면 실행
   ngDoCheck() {

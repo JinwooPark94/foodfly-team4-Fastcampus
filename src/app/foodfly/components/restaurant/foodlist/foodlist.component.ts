@@ -1,6 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+
+import { PreloaderService } from '../../../core/services/preloader.service';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./foodlist.component.css'],
 })
 
-export class FoodlistComponent implements OnInit {
+export class FoodlistComponent implements OnInit, AfterViewInit {
   url = 'http://localhost:3000/restaurant';
   foodflyDB;
   items;
@@ -17,17 +19,19 @@ export class FoodlistComponent implements OnInit {
   over: boolean[];
   scrollTopVisble: boolean;
 
-  pageItemNum = 3;
+  pageItemNum = 8;
   scrollMessage;
 
   filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
   selectedFilter = '';
 
-  constructor(public http: HttpClient, private route: ActivatedRoute) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
   }
 
   ngOnInit() {
+    this.preloader.show();
+
     console.log(this.route.snapshot.paramMap.get('lat'));
     console.log(this.route.snapshot.paramMap.get('lng'));
 
@@ -43,6 +47,11 @@ export class FoodlistComponent implements OnInit {
       });
     console.log(window);
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => this.preloader.hide(), 200);
+  }
+
 
   scrollTop() {
     window.scrollTo({
@@ -70,7 +79,7 @@ export class FoodlistComponent implements OnInit {
     //
     if (!this.items) {
       this.items = this.foodflyDB.slice(0, this.pageItemNum);
-      console.log('[items 0 ]');
+      // console.log('[items 0 ]');
       return;
     }
 
