@@ -1,10 +1,10 @@
-
 import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';
 
 import { FoodorderService } from '../../../core/services/foodorder.service';
 
 import { FoodList } from '../../../core/interface/foodorder.interface';
 import { OrderList } from '../../../core/interface/foodorder.interface';
+import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';-
 
 import {
   trigger,
@@ -12,6 +12,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { FoodorderService } from '../../../core/services/foodorder.service';
 
 
 @Component({
@@ -47,11 +48,35 @@ export class FoodorderComponent implements OnInit, DoCheck {
 
   sideMenu = false;
 
-  constructor(private differs: IterableDiffers, public foodorderService: FoodorderService) {}
+  constructor(private differs: IterableDiffers, private foodorderService: FoodorderService) {
+
+    // 장바구니에 데이터가 있으면 주문표에 값 넣기
+    if (this.foodorderService.getSessionData()) {
+      this.orderlist = this.foodorderService.getOrderlistData();
+    }
+  }
 
   ngOnInit() {
     this.selectedItem = this.navItems[0];
   }
+
+  // orderlist 배열을 확인하여 값이 바뀌면 실행
+  ngDoCheck() {
+    const changes = this.differs.find(this.orderlist);
+    if (changes) {
+      this.setFoodOrderStorage();
+    }
+  }
+
+  changeNavItem(navItem: string) {
+    this.selectedItem = navItem;
+  }
+
+  checkOrderId(order: OrderList) {
+  }
+
+  addToOrder(orderedItem: OrderList) {
+    const MatchId = this.orderlist.filter(item => item.id === orderedItem.id);
 
 
 
@@ -68,5 +93,24 @@ export class FoodorderComponent implements OnInit, DoCheck {
     this.selectedItem = navItem;
   }
 
+  orderlistSum() {
+    const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
+
+    if (this.orderlist.length) {
+      return this.orderSum = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue);
+    } else {
+      return this.orderSum = 0;
+    }
+  }
+
+  // 주문표 안에 값이 들어가면 자동으로 session안에 장바구니 데이터 저장
+  setFoodOrderStorage() {
+    const foodOrderList = {
+      restaurantPn: '아리랑' ,
+      orderList: [...this.orderlist],
+      orderSum: this.orderlistSum()
+    };
+    sessionStorage.setItem('sessionStorage-cart', JSON.stringify(foodOrderList));
+  }
 }
 
