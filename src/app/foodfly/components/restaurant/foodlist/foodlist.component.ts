@@ -27,7 +27,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   scrollMessage;
 
 
-  filter = ['거리순', '인기순', '배달팁 순', '최소 주문 금액 순'];
+  filters;
   selectedFilter = '';
 
   dummyImg = ['https://kcf1.foodfly.co.kr/restaurants/15150/25230029659e805a00ca33.jpg',
@@ -35,15 +35,35 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
   loading: boolean;
 
+  lat: number;
+  lng: number;
+  category: string;
+  currentFilter: string;
+
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
+
+    this.category = 'all';
+    this.lat = 0;
+    this.lng = 0;
+
+    this.filters = [
+      { url: '거리순', slug: '거리순' },
+      { url: '인기순', slug: '인기순' },
+      { url: '배달팁순', slug: '배달팁 순' },
+      { url: '최소주문금액순', slug: '최소 주문 금액 순 순' },
+  ];
+
+    route.params.subscribe(params => { this.category = params['category']; });
+    route.params.subscribe(params => { this.currentFilter = params['filter']; });
   }
 
   ngOnInit() {
     this.preloader.show();
+    // console.log('lat', this.route.snapshot.paramMap.get('lat'));
+    // console.log('lng', this.route.snapshot.paramMap.get('lng'));
+    // console.log('category', this.route.snapshot.paramMap.get('category'));
 
-    console.log(this.route.snapshot.paramMap.get('lat'));
-    console.log(this.route.snapshot.paramMap.get('lng'));
     console.log(this.apiUrl);
     this.getRestaurntList();
     // this.http.get(this.url)
