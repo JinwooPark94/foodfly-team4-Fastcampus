@@ -60,27 +60,60 @@
   float: right;
 }
 
-/* .input-group-btn .ico-loc{
-  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat 0 0;
-  background-size: 113px;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px !important;
-  border:none;
-} */
+.fdr-cart-count {
+  text-align: right;
+}
 
-.cancel-button{
+/* 모든 주문표 목록 제거 */
+.trash-button {
   padding:0;
-  background: #fff;
+  background: #423b3c;
   border: none;
 }
 
-.cancel-button-ico{
-  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat -33px -2px;
-  background-size: 104px;
+.trash-button-ico {
+  background: #423b3c url('../../../../../assets/images/common/sprite-icon.png') no-repeat -164px 3px;
+  background-size: 192px;
   width: 12px;
   height: 12px;
   border-radius: 4px !important;
   border:none;
-  padding:8px 12px;
+  padding:5px 10px;
+}
+
+/* 주문표 메뉴리스트 수정 */
+
+.remove-button, .minus-button, .plus-button {
+  padding:0;
+  background: #fff;
+  border: none;
+}
+.remove-button-ico {
+  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat -29px -2px;
+  background-size: 192px;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px !important;
+  border:none;
+  padding:5px 10px;
+}
+
+.minus-button-ico {
+  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat -116px -2px;
+  background-size: 192px;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px !important;
+  border:none;
+  padding:5px 10px;
+}
+
+.plus-button-ico {
+  background: #fff url('../../../../../assets/images/common/sprite-icon.png') no-repeat -93px -2px;
+  background-size: 192px;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px !important;
+  border:none;
+  padding:5px 10px;
 }

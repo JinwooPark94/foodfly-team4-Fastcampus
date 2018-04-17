@@ -141,9 +141,9 @@
       <div href="#" class="list-group">
         <div class="list-group-item fdr-cart-subtitle">
           <span>주문표</span>
-          <button
+          <button class="trash-button btn btn-default fdr-cart-rmv" aria-hidden="true"
             (click)="this.foodorderService.removeAllOrder()">
-            <img src="../../../../../assets/images/foodorder/delete-button.png" alt="remove">
+            <i class="trash-button-ico">&nbsp;</i>
           </button>
         </div>
         <ul class="list-group-item list-unstyled">
@@ -151,19 +151,21 @@
             <div class="row">
               <p class="col-md-12">{{ order.name }}</p>
               <div class="col-md-6">
-                <button class="cancel-button btn btn-default fdr-cart-rmv" aria-hidden="true"
+                <button class="remove-button btn btn-default fdr-cart-rmv" aria-hidden="true"
                 (click)="this.foodorderService.removeToOrder(order.id)">
-                  <i class="cancel-button-ico">&nbsp;</i>
+                  <i class="remove-button-ico">&nbsp;</i>
                 </button>
                 <span>{{ order.price }}원</span>
               </div>
-              <div class="col-md-6">
-                <button class="glyphicon glyphicon-minus" aria-hidden="true"
-                  (click)="this.foodorderService.minusAmount(order)">
+              <div class="col-md-6 fdr-cart-count">
+                <button class="minus-button btn btn-default fdr-cart-rmv" aria-hidden="true"
+                   (click)="this.foodorderService.minusAmount(order)">
+                  <i class="minus-button-ico">&nbsp;</i>
                 </button>
                 <span>{{ order.amount }}</span>
-                <button class="glyphicon glyphicon-plus" aria-hidden="true"
+                <button class="plus-button btn btn-default fdr-cart-rmv" aria-hidden="true"
                   (click)="this.foodorderService.addAmount(order.id)">
+                  <i class="plus-button-ico">&nbsp;</i>
                 </button>
               </div>
             </div>
