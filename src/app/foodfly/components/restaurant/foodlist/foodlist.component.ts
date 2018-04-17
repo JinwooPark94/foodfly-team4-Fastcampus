@@ -14,6 +14,7 @@ import { PreloaderService } from '../../../core/services/preloader.service';
 
 
 export class FoodlistComponent implements OnInit, AfterViewInit {
+
   // url = 'http://localhost:3000/restaurant';
   apiUrl = `${environment.apiUrl}`;
   foodflyDB;
