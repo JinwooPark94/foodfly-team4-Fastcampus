@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class NavmenuComponent implements OnInit {
   searchToggleStatus;
 
+  categories;
+
   constructor() {
     this.searchToggleStatus = false;
+    this.categories = ['전체', '한식', '일식', '카페', '양식', '퓨전', '분식', '햄버거', '치킨', '중식', '피자'];
   }
 
   ngOnInit() {

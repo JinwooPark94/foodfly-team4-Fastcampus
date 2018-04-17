@@ -1,42 +1,12 @@
 <div class="navi-wrap">
   <div class="container">
     <nav class="navi-nav">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav">        
         <li>
           <a (click)="searchToggle()" class="btn btn-default search-button" role="button" ><span class="glyphicon glyphicon-search"></span></a>
         </li>
-        <li>
-          <a>전체</a>
-        </li>
-        <li>
-          <a>한식</a>
-        </li>
-        <li>
-          <a>일식</a>
-        </li>
-        <li>
-          <a>카페</a>
-        </li>
-        <li>
-          <a>양식</a>
-        </li>
-        <li>
-          <a>퓨전</a>
-        </li>
-        <li>
-          <a>분식</a>
-        </li>
-        <li>
-          <a>햄버거</a>
-        </li>
-        <li>
-          <a>치킨</a>
-        </li>
-        <li>
-          <a>중식</a>
-        </li>
-        <li>
-          <a>피자</a>
+        <li *ngFor="let category of categories">
+          <a [routerLink]="['restaurant/foodlist/', category]">{{category}}</a>
         </li>
         <li class="search" [class.hidden]="!searchToggleStatus">
           <!-- <form action="." onsubmit="return false" class="ng-pristine ng-valid">
