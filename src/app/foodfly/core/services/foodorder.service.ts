@@ -17,7 +17,6 @@ export class FoodorderService {
     if (this.getSessionData()) {
       this.orderlist = this.getOrderlistData();
     }
-    console.log('123');
   }
 
   // 장바구니 list에 메뉴가 들어가 있는지 확인 후 개수 리턴

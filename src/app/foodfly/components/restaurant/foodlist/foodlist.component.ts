@@ -1,8 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import { environment } from '../../../../../environments/environment';
+import { PreloaderService } from '../../../core/services/preloader.service';
 
 
 @Component({
@@ -11,19 +12,17 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./foodlist.component.css'],
 })
 
-export class FoodlistComponent implements OnInit {
+
+export class FoodlistComponent implements OnInit, AfterViewInit {
   // url = 'http://localhost:3000/restaurant';
-
   apiUrl = `${environment.apiUrl}`;
-
-
   foodflyDB;
   items;
 
   over: boolean[];
   scrollTopVisble: boolean;
 
-  pageItemNum = 6;
+  pageItemNum = 8;
   scrollMessage;
 
 
@@ -35,11 +34,13 @@ export class FoodlistComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(public http: HttpClient, private route: ActivatedRoute) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
   }
 
   ngOnInit() {
+    this.preloader.show();
+
     console.log(this.route.snapshot.paramMap.get('lat'));
     console.log(this.route.snapshot.paramMap.get('lng'));
     console.log(this.apiUrl);
@@ -70,6 +71,11 @@ export class FoodlistComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => this.preloader.hide(), 200);
+  }
+
+
   scrollTop() {
     window.scrollTo({
       top: 0,
@@ -95,7 +101,7 @@ export class FoodlistComponent implements OnInit {
   pagination() {
     if (!this.items) {
       this.items = this.foodflyDB.slice(0, this.pageItemNum);
-      console.log('[items 0 ]');
+      // console.log('[items 0 ]');
       return;
     }
 

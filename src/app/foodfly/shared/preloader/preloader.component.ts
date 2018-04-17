@@ -4,14 +4,9 @@ import { PreloaderService } from '../../core/services/preloader.service';
 @Component({
   selector: 'foodfly-preloader',
   templateUrl: './preloader.component.html',
-  styleUrls: ['./preloader.component.css'],
-  providers: [PreloaderService]
+  styleUrls: ['./preloader.component.css']
 })
-export class PreloaderComponent implements OnInit {
+export class PreloaderComponent {
 
-  constructor(public preloader: PreloaderService) { }
-
-  ngOnInit() {
-  }
-
+  constructor(private preloader: PreloaderService) {}
 }
