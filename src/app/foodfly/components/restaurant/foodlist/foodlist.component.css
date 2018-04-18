@@ -1,3 +1,19 @@
+:host >>> .main-wrap {
+  min-height: 180px !important;
+  height: auto;
+}
+
+:host >>> .main-search {
+  padding:25px 0 !important;
+}
+
+:host >>> .head-text, :host >>> .middle-text{
+  display:none;
+}
+
+:host >>> .sub-text {
+  margin-top: 0 !important;
+}
 
 .container {
   margin-top: 20px;
@@ -9,7 +25,7 @@
 }
 
 .restaurant-item {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
 }
 
 
@@ -31,17 +47,17 @@
 
 .item-body .title-img {
   width: 100%;
-  position: relative; 
-  padding-top: 130%; /* 1:1 ratio */ 
+  position: relative;
+  padding-top: 130%; /* 1:1 ratio */
   overflow: hidden;
   /* outline: teal dotted 2px; */
 }
 
 .item-body .title-img img {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
   /* max-width: 100%;  */
   width: 100%;
