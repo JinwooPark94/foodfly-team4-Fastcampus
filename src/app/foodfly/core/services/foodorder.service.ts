@@ -8,8 +8,6 @@ export class FoodorderService {
 
   orderSum: number;
 
-  minOrderPrice = 30000;
-
   cartData;
 
   constructor() {
@@ -44,6 +42,8 @@ export class FoodorderService {
     sessionStorage.setItem('sessionStorage-cart', JSON.stringify(foodOrderList));
   }
 
+
+  // 메뉴 합계
   orderSumCulator() {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
@@ -53,11 +53,13 @@ export class FoodorderService {
       return this.orderSum = 0;
     }
   }
-  checkOrderList(orderedItem: OrderList) {
-    const MatchId = this.orderlist.find(item => item.id === orderedItem.id);
 
-      if (MatchId) {
-          return this.addAmount(orderedItem.id);
+  // 주문표에 메뉴추가 (메뉴가 있다면 수량 + 1)
+  checkOrderList(orderedItem: OrderList) {
+    const MatchPk = this.orderlist.find(item => item.pk === orderedItem.pk);
+
+      if (MatchPk) {
+          return this.addAmount(orderedItem.pk);
         } else {
         return this.addOrder(orderedItem);
       }
@@ -65,31 +67,30 @@ export class FoodorderService {
 
   addOrder(orderedItem: OrderList) {
     this.orderlist = [...this.orderlist,
-      { id: orderedItem.id, name: orderedItem.name, price: orderedItem.price, amount: orderedItem.amount }];
+      { pk: orderedItem.pk, name: orderedItem.name, price: orderedItem.price, amount: 1 }];
 
     console.log(this.orderlist);
   }
 
-  addAmount(id: number) {
-    this.orderlist = this.orderlist.map(order => order.id === id ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
+  addAmount(pk: number) {
+    this.orderlist = this.orderlist.map(order => order.pk === pk ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
   }
 
   minusAmount(order: OrderList) {
     if (order.amount <= 1) {
         return;
       } else {
-        this.orderlist = this.orderlist.map(orderedItem => orderedItem.id === order.id ?
+        this.orderlist = this.orderlist.map(orderedItem => orderedItem.pk === order.pk ?
             Object.assign({}, orderedItem, { amount: orderedItem.amount - 1 }) : orderedItem);
       }
   }
 
-  removeToOrder(id: number) {
-    this.orderlist = this.orderlist.filter(order => order.id !== id);
+  removeToOrder(pk: number) {
+    this.orderlist = this.orderlist.filter(order => order.pk !== pk);
   }
 
   removeAllOrder() {
     this.orderlist = [];
   }
-
 
 }

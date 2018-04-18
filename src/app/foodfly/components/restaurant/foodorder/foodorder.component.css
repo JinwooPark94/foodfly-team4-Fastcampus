@@ -20,6 +20,11 @@
   margin-top: 20px;
 }
 
+/* nav */
+.fdr-menu, .fdr-info, .fdr-review  {
+  margin-top: 20px;
+}
+
 /* 메뉴 리스트 */
 .fdr-menu-img {
   float: right;
@@ -27,13 +32,15 @@
   height: 70px;
 }
 
-.fdr-menu-name, .fdr-menu-price {
+.fdr-menu-name, .fdr-menu-price, .fdr-menu-info {
   text-align: left;
+  overflow: hidden;
 }
 
-.fdr-menu {
-  border-bottom: 1px solid #e7e7e7
-}
+.fdr-menu-info {
+  white-space: normal;
+  font-size: 0.9em;
+  }
 
 /* 정보 탭 */
 .fdr-info ul li {
