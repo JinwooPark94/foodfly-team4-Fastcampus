@@ -1,24 +1,24 @@
-<div class="container">
-  lat:{{lat}} lng:{{lng}} category: {{category}} filter: {{filter}}
-</div>
 
+<div class="container">
+  <pre>
+    위도:0 경도:0  카테고리:[{{currentCategory}}] 필터: {{currentFilter}}
+  </pre>
+</div>
 
 <section class="container foodlist-nav">
   <div class="row">
     <div class="col-md-12 nav-body">
       <ul class="nav nav-pills">
         <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter.url">
-          <a [routerLink]="['/restaurant/foodlist', category, filter.url]">{{filter.slug}}</a>
+          <a (click)="selectFilter(filter.url)">{{filter.slug}}</a>
         </li>
         <!-- <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter">
           <a [routerLink]="['/restaurant/foodlist', category, filter]">{{filter}}</a>
         </li> -->
       </ul>
-      <p class="nav navbar-right restaurant-num">
-        현재
-        <span>0</span>개의 음식점을 찾았습니다.
-      </p>
-
+      <!-- <p class="nav navbar-right restaurant-num"> -->
+        <!-- 현재<span> {{itemsNum}}</span>개의 음식점을 찾았습니다. -->
+      <!-- </p> -->
     </div>
 
   </div>
