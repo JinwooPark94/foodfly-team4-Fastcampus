@@ -10,10 +10,13 @@
         <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter.url">
           <a [routerLink]="['/restaurant/foodlist', category, filter.url]">{{filter.slug}}</a>
         </li>
+        <!-- <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter">
+          <a [routerLink]="['/restaurant/foodlist', category, filter]">{{filter}}</a>
+        </li> -->
       </ul>
       <p class="nav navbar-right restaurant-num">
         현재
-        <span [innerHTML]="items.length">0</span>개의 음식점을 찾았습니다.
+        <span>0</span>개의 음식점을 찾았습니다.
       </p>
 
     </div>
@@ -36,18 +39,19 @@
       <div class="item-body" [routerLink]="['/restaurant/foodorder', item.pk]">
         <!-- <img src="item.images[0]"> -->
         <!-- <img src="item.images[1]"> -->
-        <div class="title-img" @accordion>
+        <div class="title-img" >
           <!-- <img [src]="over[i] ? item.images[0] : item.images[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false" > -->
 
           <img [src]="over[i] ? dummyImg[0] : dummyImg[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false">
         </div>
 
         <div class="item-text">
-          <h3 class="name">{{item.name}} {{item.pk}}</h3>
+          <h3 class="name">{{item.name}}</h3>
+          
           <!-- <p class="category">{{item.tags|slice:0:3}}</p> -->
-          <p class="category">{{item.tags[0].name}}, {{item.tags[1].name}}, {{item.tags[2].name}}</p>
+          <p class="category">{{item.tags[0]}}, {{item.tags[1]}}</p>
           <p class="tip">배달팁
-            <span>{{item.tip}}</span>원</p>
+            <span>{{item.deliveryPrice}}</span>원</p>
           <p class="min-price">최소주문 {{item.minOrderPrice}}원</p>
         </div>
       </div>
@@ -65,7 +69,7 @@
 
 </section>
 
-<button id="btn-scroll-top" type="button" class="btn btn-default" [class.hidden]="scrollTopVisble" (click)="scrollTop()">
+<button id="btn-scroll-top" type="button" class="btn btn-default" [class.hidden]="!scrollTopVisble" (click)="scrollTop()">
   <span class="glyphicon glyphicon-chevron-up"></span>
 </button>
 
