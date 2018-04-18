@@ -17,7 +17,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
 
   apiUrl = `${environment.apiUrl}/restaurants/`;
-  currenUrl;
+  currentUrl;
   foodflyDB;
   count;
   nextPage;
@@ -73,7 +73,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
     console.log(this.apiUrl);
 
     this.preloader.show();
-    this.currenUrl = this.apiUrl;
+    this.currentUrl = this.apiUrl;
     if (!this.currentCategory) { this.currentCategory = '전체'; }
     this.getRestaurntList();
     this.consoleLog();
@@ -83,20 +83,24 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
     this.preloader.show();
 
     if (this.currentCategory in this.categories === true) {
-      this.currenUrl = `${this.apiUrl}?categories=${this.categories[this.currentCategory]}`;
+      this.currentUrl = `${this.apiUrl}?categories=${this.categories[this.currentCategory]}`;
     } else if (this.currentCategory === '전체') {
-      this.currenUrl = this.apiUrl;
+      this.currentUrl = this.apiUrl;
     } else {
-      this.currenUrl = `${this.apiUrl}?search=${this.currentCategory}`;
+      this.currentUrl = `${this.apiUrl}?search=${this.currentCategory}`;
     }
 
     if (filter) {
-      this.currenUrl = `${this.currenUrl}?ordering=${filter}`;
+      if (this.currentUrl === this.apiUrl) {
+        this.currentUrl = `${this.currentUrl}?ordering=${filter}`;
+      } else {
+        this.currentUrl = `${this.currentUrl}&ordering=${filter}`;
+      }
     }
 
-    console.log('[api url]', this.currenUrl);
+    console.log('[api url]', this.currentUrl);
 
-    this.http.get(this.currenUrl)
+    this.http.get(this.currentUrl)
     .subscribe( data => {
       this.foodflyDB = data['results'];
       this.count = data['count'];
@@ -151,11 +155,14 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   consoleLog() {
     console.log('[<<<< console star');
     console.log('[API URL]', this.apiUrl);
-    console.log('[current URL]', this.currenUrl);
-    console.log('[카테고리]', this.currentCategory);
-    console.log('[필터]', this.currentFilter);
-    console.log('[GET 레스토랑 리스트]', this.items);
-    console.log('[console end >>>>]');
+    console.log('[current URL]', this.currentUrl);
+
+    console.log(
+      '[카테고리]: ', this.currentCategory,
+      '  [필터]: ', this.currentFilter,
+      '  [GET 레스토랑 리스트]:', this.items,
+      '  [console end >>>>]: '
+    );
   }
 
 }
