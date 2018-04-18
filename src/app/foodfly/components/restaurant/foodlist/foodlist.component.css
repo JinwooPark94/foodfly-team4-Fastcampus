@@ -1,4 +1,5 @@
 
+
 .container {
   margin-top: 20px;
 }
@@ -29,6 +30,7 @@
 
 .restaurant-item {
   margin-bottom: 20px;  
+  transition: all .6s;
 }
 
 
@@ -73,6 +75,7 @@
   opacity: 0;
   filter: alpha(opacity=40); /* For IE8 and earlier */
 }
+
 
 .item-text {
   margin: 0 10px;
