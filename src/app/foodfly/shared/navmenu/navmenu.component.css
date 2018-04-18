@@ -21,6 +21,11 @@
   font-weight:bold;
 }
 
+.navi-nav > ul > li > a:active, .navi-nav > ul > li > a:focus {
+  background:transparent;
+  color:#25c1f1;
+}
+
 .navi-nav > ul > li > a:hover {
   color:#25c1f1;
 }

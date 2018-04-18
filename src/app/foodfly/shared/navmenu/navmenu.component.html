@@ -1,12 +1,12 @@
 <div class="navi-wrap">
   <div class="container">
     <nav class="navi-nav">
-      <ul class="nav navbar-nav">        
+      <ul class="nav navbar-nav">
         <li>
           <a (click)="searchToggle()" class="btn btn-default search-button" role="button" ><span class="glyphicon glyphicon-search"></span></a>
         </li>
         <li *ngFor="let category of categories">
-          <a [routerLink]="['restaurant/foodlist/', category]"            
+          <a [routerLink]="['/restaurant/foodlist/', category]"
             [class.active]="currentCategory===category"
           >{{category}}</a>
         </li>

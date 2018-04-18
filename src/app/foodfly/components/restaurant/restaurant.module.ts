@@ -10,6 +10,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentcompletedComponent } from './paymentcompleted/paymentcompleted.component';
 import { RestaurantManagementComponent } from './restaurant.management.component';
 
+import { ShareModule } from '../../shared/share.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RestaurantRoutingModule
+    RestaurantRoutingModule,
+    ShareModule
   ],
   exports: [
     RestaurantManagementComponent,

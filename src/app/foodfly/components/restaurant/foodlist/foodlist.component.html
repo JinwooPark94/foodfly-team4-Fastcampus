@@ -1,4 +1,5 @@
-
+<foodfly-navmenu></foodfly-navmenu>
+<foodfly-search></foodfly-search>
 <section class="container foodlist-nav">
   <div class="row">
     <div class="col-md-12 nav-body">
@@ -25,8 +26,8 @@
         </div>
 
         <div class="item-text">
-          <h3 class="name">{{item.name|slice:0:12}}</h3>          
-          
+          <h3 class="name">{{item.name|slice:0:12}}</h3>
+
           <p class="category">
             <!-- <span  *ngFor="let i of item.tags | slice:0:3"></span> -->
              {{item.tags[0]?.name}}{{item.tags[1]?", ":""}}
@@ -66,7 +67,7 @@
       <div class="thumbnail">
 
         <img [src]="over[i] ? item.images[0] : item.images[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false">
-  
+
         <div class="caption">
           <h3>{{item.name}}</h3>
           <p class="category">{{item.category|slice:0:3}}</p>
