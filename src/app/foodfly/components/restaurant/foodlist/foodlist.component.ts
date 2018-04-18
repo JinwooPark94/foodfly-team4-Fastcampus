@@ -15,14 +15,20 @@ import { PreloaderService } from '../../../core/services/preloader.service';
 
 export class FoodlistComponent implements OnInit, AfterViewInit {
 
-  // url = 'http://localhost:3000/restaurant';
-  apiUrl = `${environment.apiUrl}`;
+
+  apiUrl = `${environment.apiUrl}/restaurants/`;
+  currenUrl;
   foodflyDB;
+  count;
+  nextPage;
+  previousPage;
+
+  categories;
+
   items;
+  itemsNum;
 
   over: boolean[];
-  scrollTopVisble: boolean;
-
   pageItemNum = 8;
   scrollMessage;
 
@@ -37,57 +43,88 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
   lat: number;
   lng: number;
-  category: string;
+  currentCategory: string;
+  scrollTopVisble: boolean;
+
   currentFilter = '';
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
 
-    this.category = 'all';
     this.lat = 0;
     this.lng = 0;
 
+    this.categories = {'한식': 2, '일식': 3, '카페': 4 , '양식': 5, '퓨전': 6, '분식': 7, '햄버거': 8, '치킨': 9, '중식': 10, '피자': 11};
+
     this.filters = [
-      { url: '거리순', slug: '거리순' },
-      { url: '인기순', slug: '인기순' },
-      { url: '배달팁순', slug: '배달팁 순' },
-      { url: '최소주문금액순', slug: '최소 주문 금액 순 순' },
+      { url: 'avg_delivery_time', slug: '거리순' },
+      { url: 'delivery_price', slug: '배달팁 순' },
+      { url: 'min_order_price', slug: '최소 주문 금액 순' },
     ];
 
-
-    route.params.subscribe(params => { this.category = params['category']; });
+    route.params.subscribe(params => {
+      this.currentCategory = params['category'];
+      this.getRestaurntList();
+    });
     route.params.subscribe(params => { this.currentFilter = params['filter']; });
   }
 
   ngOnInit() {
-    // console.log('lat', this.route.snapshot.paramMap.get('lat'));
-    // console.log('lng', this.route.snapshot.paramMap.get('lng'));
-    // console.log('category', this.route.snapshot.paramMap.get('category'));
-
     console.log(this.apiUrl);
+
+    this.preloader.show();
+    this.currenUrl = this.apiUrl;
+    if (!this.currentCategory) { this.currentCategory = '전체'; }
     this.getRestaurntList();
+    this.consoleLog();
   }
 
-  getRestaurntList() {
-    // this.loading = true;
-    this.http.get(`${this.apiUrl}/restaurants/`)
+  getRestaurntList(filter = null) {
+    this.preloader.show();
+
+    if (this.currentCategory in this.categories === true) {
+      this.currenUrl = `${this.apiUrl}?categories=${this.categories[this.currentCategory]}`;
+    } else if (this.currentCategory === '전체') {
+      this.currenUrl = this.apiUrl;
+    } else {
+      this.currenUrl = `${this.apiUrl}?search=${this.currentCategory}`;
+    }
+
+    if (filter) {
+      this.currenUrl = `${this.currenUrl}?ordering=${filter}`;
+    }
+
+    console.log('[api url]', this.currenUrl);
+
+    this.http.get(this.currenUrl)
     .subscribe( data => {
       this.foodflyDB = data['results'];
-      console.log('[get restaurant list]', data);
+      this.count = data['count'];
+      this.nextPage = data['nextPage'];
+      this.previousPage = data['previousPage'];
 
-      // this.pagination();
       this.items = this.foodflyDB;
+      this.itemsNum = this.items.length;
       console.log('[rastaurnat list]', this.foodflyDB);
 
       this.over = new Array(this.foodflyDB.length);
       this.over.fill(false);
+
+      setTimeout(() => this.preloader.hide(), 200);
+
+      this.consoleLog();
     });
+  }
+
+  selectFilter(select) {
+    console.log('select', select);
+    this.currentFilter = select;
+    this.getRestaurntList(select);
   }
 
   ngAfterViewInit() {
     // setTimeout(() => this.preloader.hide(), 200);
   }
-
 
   scrollTop() {
     window.scrollTo({
@@ -107,41 +144,18 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       }
 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-      this.pagination();
+      // this.pagination();
     }
   }
 
-  pagination() {
-    if (!this.items) {
-      this.items = this.foodflyDB.slice(0, this.pageItemNum);
-      // console.log('[items 0 ]');
-      return;
-    }
-
-    const arr = this.foodflyDB.slice(this.items.length, this.items.length + this.pageItemNum);
-    // const restItem = this.foodflyDB.length - this.items.length;
-
-    console.log(
-      'db imte', this.foodflyDB.length,
-      '현재 item', this.items,
-      'slice', this.items.length + this.pageItemNum,
-      // 'rest item', restItem
-    );
-
-    // if (restItem < this.pageItemNum && restItem > 1) {
-    //   console.log('더있음');
-    // }
-
-    if (this.foodflyDB.length === this.items.length) {
-      this.scrollMessage = '마지막 페이지 입니다.';
-      return;
-    }
-
-    this.items = [...this.items, ...arr];
+  consoleLog() {
+    console.log('[<<<< console star');
+    console.log('[API URL]', this.apiUrl);
+    console.log('[current URL]', this.currenUrl);
+    console.log('[카테고리]', this.currentCategory);
+    console.log('[필터]', this.currentFilter);
+    console.log('[GET 레스토랑 리스트]', this.items);
+    console.log('[console end >>>>]');
   }
 
-
-  selectFilter(e) {
-    console.log('click', e);
-  }
 }

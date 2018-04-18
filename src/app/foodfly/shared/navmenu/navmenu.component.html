@@ -6,7 +6,9 @@
           <a (click)="searchToggle()" class="btn btn-default search-button" role="button" ><span class="glyphicon glyphicon-search"></span></a>
         </li>
         <li *ngFor="let category of categories">
-          <a [routerLink]="['restaurant/foodlist/', category]">{{category}}</a>
+          <a [routerLink]="['restaurant/foodlist/', category]"            
+            [class.active]="currentCategory===category"
+          >{{category}}</a>
         </li>
         <li class="search" [class.hidden]="!searchToggleStatus">
           <!-- <form action="." onsubmit="return false" class="ng-pristine ng-valid">
