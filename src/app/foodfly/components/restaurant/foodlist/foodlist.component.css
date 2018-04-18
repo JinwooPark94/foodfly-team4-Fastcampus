@@ -120,8 +120,9 @@
 }
 
 .restaurant-num span {
-  font-weight: 500;
-  color: #2c687f;
+  /* font-weight: 500; */
+  color: #eeeeee;
+  background: #25C6F5;
 }
 
 #btn-scroll-top {
