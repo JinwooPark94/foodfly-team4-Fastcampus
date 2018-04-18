@@ -182,7 +182,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         // 좌표 값 가지고 Address 바꾸고 Session에 정보 저장
         this.getAddressData(lat, lng);
 
-        this.router.navigate([`restaurant/foodlist/`]);
+        this.router.navigate([`restaurant/foodlist/전체`]);
       },
       // 에러
       () => {
@@ -193,16 +193,25 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  editInputValue(addressValue, addressData) {
-    if (addressValue.nodeName === 'STRONG') {
-      this.inputText.setValue(addressValue.textContent);
-      this.setSessionGeoAddress(addressValue.textContent, this.geoCurrentData.lat, this.geoCurrentData.lng);
-      this.router.navigate([`restaurant/foodlist`]);
-    } else {
-      this.inputText.setValue(addressValue.children[0].textContent);
-      this.setSessionGeoAddress(addressValue.children[0].textContent, this.geoCurrentData.lat, this.geoCurrentData.lng);
-      this.router.navigate([`restaurant/foodlist`]);
+  editInputValue(addressValue) {
+    let inputText: string;
+    switch (addressValue.nodeName) {
+      case 'STRONG' :
+        inputText = addressValue.parentNode.children[2].textContent;
+        break;
+      case 'P' :
+        inputText = addressValue.textContent;
+        break;
+      case 'A':
+        inputText = addressValue.children[0].children[2].textContent;
+        break;
+      default :
+        console.dir(addressValue);
+        inputText = addressValue.children[2].textContent;
     }
+    this.inputText.setValue(inputText);
+    this.setSessionGeoAddress(inputText, this.geoCurrentData.lat, this.geoCurrentData.lng);
+    this.router.navigate([`restaurant/foodlist/전체`]);
   }
 
   findFoodList() {
@@ -212,7 +221,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.inputText.setValue(this.listAddress[0].jibunAddr);
     this.setSessionGeoAddress(this.inputText.value, this.geoCurrentData.lat, this.geoCurrentData.lng);
-    this.router.navigate([`restaurant/foodlist`]);
+    this.router.navigate([`restaurant/foodlist/전체`]);
   }
 
   setSessionGeoAddress(address: string, lat: number, lag: number) {
