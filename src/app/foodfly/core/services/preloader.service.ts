@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 export class PreloaderService {
   isShow = false;
 
+  constructor() { }
+
   show() {
-    console.log('[SHOW]');
     this.isShow = true;
   }
 
   hide() {
-    console.log('[HIDE]');
     this.isShow = false;
   }
 }

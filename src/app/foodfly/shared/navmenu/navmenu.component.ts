@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'foodfly-navmenu',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavmenuComponent implements OnInit {
   searchToggleStatus;
+  categories;
+  currentCategory;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.searchToggleStatus = false;
+    this.categories = ['전체', '한식', '일식', '카페', '양식', '퓨전', '분식', '햄버거', '치킨', '중식', '피자'];
   }
 
   ngOnInit() {
+    this.currentCategory = '전체';
+    console.log('[navmenu-category]', this.route.snapshot.paramMap.get('category'));
+    console.log('[navmenu-currentCategory]', this.currentCategory);
   }
 
   searchToggle() {

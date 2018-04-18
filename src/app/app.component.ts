@@ -5,11 +5,10 @@ import { Component } from '@angular/core';
   template: `
     <foodfly-preloader></foodfly-preloader>
     <foodfly-header></foodfly-header>
-    <foodfly-navmenu></foodfly-navmenu>
     <foodfly-toast></foodfly-toast>
     <router-outlet></router-outlet>
     <foodfly-footer></foodfly-footer>
   `
 })
 
-export class AppComponent {}
+export class AppComponent { }

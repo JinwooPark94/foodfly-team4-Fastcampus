@@ -1,5 +1,5 @@
 // observable-event-http.component
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,6 +19,11 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
+interface ListAddress {
+  roadAddrPart1: string;
+  jibunAddr: string;
+}
+
 @Component({
   selector: 'foodfly-search',
   templateUrl: './search.component.html',
@@ -31,10 +36,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   inputText: FormControl = new FormControl('');
 
   // 검색 결과에 맞는 주소 데이터 저장
-  listAddress: Object;
+  listAddress;
 
   // geo 현재 주소 데이터
   geoCurrentData;
+
+  // 세션 데이터
+  sessionSearchInfo;
 
   // 도로명 주소 url, api id 가져오기
   roadApiUrl = `${environment.roadApiUrl}`;
@@ -49,9 +57,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.inputText.valueChanges
       // 딜레이 타임
-      .debounceTime(500)
+      .debounceTime(0)
       .switchMap(InputValue => this.getInputData(InputValue))
       .subscribe(AddressData => { this.listAddress = AddressData; });
+
+    // 세션 확인해서 값이 있으면 inputText에 저장
+    this.sessionSearchInfo = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
+    if (this.sessionSearchInfo) {
+      this.inputText.setValue(this.sessionSearchInfo.address);
+      this.geoCurrentData = { lag : this.sessionSearchInfo.lag,
+                              lat : this.sessionSearchInfo.lat };
+    }
   }
 
   ngOnDestroy() {
@@ -105,7 +121,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   // 검색한 결과에 맞는 주소 저장
   setGeoData(AddressGetData) {
-    console.log(AddressGetData);
+
+    if (!AddressGetData) { return []; }
+
     // 검색한 주소 결과 저장
     let setData = [];
 
@@ -136,15 +154,13 @@ export class SearchComponent implements OnInit, OnDestroy {
         const dataAddress = data.results[0].formatted_address;
 
         // 결과 주소 값에 앞에 '대한민국'으로 시작하는 것을 빼줌
-        return this.inputText.setValue(dataAddress.substring(5, dataAddress.length));
+        this.inputText.setValue(dataAddress.substring(5, dataAddress.length));
+        return this.setSessionGeoAddress(this.inputText.value, lat, lng);
       });
   }
 
   // 현재 주소 값 가져오기
   getCurrentGeo() {
-    // scope this 받기
-    const that = this;
-
     // geo 옵션 설정
     const geoOptions = {
       enableHighAccuracy: true,
@@ -157,60 +173,60 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+    navigator.geolocation.getCurrentPosition(
+      // 성공
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
 
-    // 좌표 정보 얻기 성공
-    function geoSuccess(position) {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
+        // 좌표 값 가지고 Address 바꾸고 Session에 정보 저장
+        this.getAddressData(lat, lng);
 
-      // 좌표 값 가지고 Address 바꾸기
-      that.getAddressData(lat, lng);
-
-      // 현재 좌표를 가지고 페이지 이동
-      // that.router.navigate([`restaurant/foodlist/${lat}/${lng}`]);
-
-      // 임시
-      // 진행되는 과정을 보여주기 위해 setTimeout 함수 사용
-      setTimeout(() => {
-        that.router.navigate([`restaurant/foodlist/${lat}/${lng}`]);
-      }, 2000);
-    }
-
-    // 좌표 정보 얻기 실패
-    function geoError() {
-      that.toastService.messageAdd('위치를 찾을 수 없습니다.', 'warning');
-    }
+        this.router.navigate([`restaurant/foodlist/전체`]);
+      },
+      // 에러
+      () => {
+        this.toastService.messageAdd('위치를 찾을 수 없습니다.', 'warning');
+      },
+      // 옵션
+      geoOptions
+    );
   }
 
-  editInputValue(addressValue, addressData) {
-    if (addressValue.nodeName === 'STRONG') {
-      this.inputText.setValue(addressValue.textContent);
-
-      // this.router.navigate([`restaurant/foodlist/${this.geoCurrentData.lat}/${this.geoCurrentData.lng}`]);
-
-      // 임시
-      // 진행되는 과정을 보여주기 위해 setTimeout 함수 사용
-      setTimeout(() => {
-        this.router.navigate([`restaurant/foodlist/${this.geoCurrentData.lat}/${this.geoCurrentData.lng}`]);
-      }, 2000);
-
-    } else {
-      this.inputText.setValue(addressValue.children[0].textContent);
-
-      // this.router.navigate([`restaurant/foodlist/${this.geoCurrentData.lat}/${this.geoCurrentData.lng}`]);
-
-      // 임시
-      // 진행되는 과정을 보여주기 위해 setTimeout 함수 사용
-      setTimeout(() => {
-        this.router.navigate([`restaurant/foodlist/${this.geoCurrentData.lat}/${this.geoCurrentData.lng}`]);
-      }, 2000);
+  editInputValue(addressValue) {
+    let inputText: string;
+    switch (addressValue.nodeName) {
+      case 'STRONG' :
+        inputText = addressValue.parentNode.children[2].textContent;
+        break;
+      case 'P' :
+        inputText = addressValue.textContent;
+        break;
+      case 'A':
+        inputText = addressValue.children[0].children[2].textContent;
+        break;
+      default :
+        console.dir(addressValue);
+        inputText = addressValue.children[2].textContent;
     }
-    this.clickStatus = false;
+    this.inputText.setValue(inputText);
+    this.setSessionGeoAddress(inputText, this.geoCurrentData.lat, this.geoCurrentData.lng);
+    this.router.navigate([`restaurant/foodlist/전체`]);
   }
 
   findFoodList() {
-    console.log('들어왔다');
+    if (!this.listAddress) {
+      this.toastService.messageAdd('검색 결과가 없습니다.', 'warning');
+      return ;
+    }
+    this.inputText.setValue(this.listAddress[0].jibunAddr);
+    this.setSessionGeoAddress(this.inputText.value, this.geoCurrentData.lat, this.geoCurrentData.lng);
+    this.router.navigate([`restaurant/foodlist/전체`]);
+  }
+
+  setSessionGeoAddress(address: string, lat: number, lag: number) {
+    const searchData = { address, lat, lag };
+    sessionStorage.setItem('sessionStorage-searchInfo', JSON.stringify(searchData));
   }
 
   cleanInputValue() {
