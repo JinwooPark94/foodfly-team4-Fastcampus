@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path: 'restaurant', children: [
       { path: '', redirectTo: '/restaurant/foodlist', pathMatch: 'full' },
-      { path: 'foodorder', component: FoodorderComponent },
+      // { path: 'foodorder', component: FoodorderComponent },
+      { path: 'foodorder/:pk', component: FoodorderComponent },
       { path: 'foodlist', component: FoodlistComponent },
       { path: 'foodlist/:lat/:lng', component: FoodlistComponent },
       { path: 'checkout', component: CheckoutComponent },

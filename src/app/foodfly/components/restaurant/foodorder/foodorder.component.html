@@ -2,22 +2,23 @@
   <!-- 매장 상호명 -->
   <div class="list-group fdr-store">
     <h2 class="list-group-item sub-title">
-      명품찜&탕
+      {{ restaurantDB.name }}
     </h2>
     <!-- 매장 소개 -->
     <div class="list-group-item">
       <div class="row">
-        <img class="col-md-2" alt="fdr-img" src="../../../../../assets/images/foodorder/chicken-store.jpg">
+        <img class="col-md-2" alt="fdr-img" src="{{ restaurantDB.imgInfo }}">
         <ul class="list-unstyled col-md-10">
           <li>
+            <!-- <strong>★</strong>
             <strong>★</strong>
             <strong>★</strong>
             <strong>★</strong>
             <strong>★</strong>
-            <strong>★</strong>
-            <strong>0.0</strong>
-            <p>최소주문금액: 20,000원</p>
-            <p>결제 신용카드 , 현금</p>
+            <strong>0.0</strong> -->
+            <p>최소주문금액: {{ restaurantDB.minOrderPrice }}원</p>
+            <p>배달비용: {{ restaurantDB.deliveryPrice }}원</p>
+            <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
       </div>
     </div>
@@ -27,61 +28,40 @@
       <!-- 리스트 탭 -->
       <nav>
         <ul class="nav nav-tabs nav-justified">
-          <li *ngFor="let navItem of navItems" role="presentation"
-            [class.active]="navItem === selectedItem"
-            (click)="changeNavItem(navItem)">
+          <li *ngFor="let navItem of navItems" role="presentation" [class.active]="navItem === selectedItem" (click)="changeNavItem(navItem)">
             <a>{{ navItem }}</a>
           </li>
         </ul>
       </nav>
       <!-- **** 메뉴 리스트 **** -->
-      <div class="fdr-menu" [hidden]="selectedItem !== navItems[0]">
-        <ul class="list-unstyled">
-          <li *ngFor="let food of foodlist">
-            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal"
-              (click)="this.foodorderService.checkOrderList(food)">
+      <div class="fdr-menu col-md-12" [hidden]="selectedItem !== navItems[0]">
+
+        <!-- <ul class="list-unstyled" *ngFor="let food of menuCategories">
+          <li *ngFor="let menu of menuCategories">
+            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal" (click)="this.foodorderService.checkOrderList(food)">
               <div>
-                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img" >
-                <p class="fdr-menu-name">{{ food.name }}</p>
-                <p class="fdr-menu-price">{{ food.price }}원</p>
+                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img">
+                <p class="fdr-menu-name">{{ menu.name | json}}</p>
+                <p class="fdr-menu-price">{{ menu.menus | json }}원</p>
               </div>
             </button>
           </li>
-        </ul>
-        <div class="panel panel-default">
-          <button class="btn btn-block"
-            (click)="subMenu = !subMenu">
-              추가 메뉴
-              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+        </ul> -->
+
+        <div class="panel panel-default" *ngFor="let category of menuCategories">
+          <button class="btn btn-block">
+            {{ category.name }}
+            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
           </button>
-          <ul class="list-group list-unstyled" @accordion *ngIf="subMenu">
-            <li class="list-group-item">
-              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
-                <p class="fdr-menu-name">후라이드</p>
-                <p class="fdr-menu-price">20,000원</p>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <!-- 사이드 메뉴 -->
-        <div class="panel panel-default" >
-          <button class="btn btn-block"
-            (click)="sideMenu = !sideMenu">
-              사이드 메뉴
-              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-          </button>
-          <ul class="list-group list-unstyled" @accordion *ngIf="sideMenu">
-            <li class="list-group-item">
-              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
-                <p class="fdr-menu-name">사이다</p>
-                <p class="fdr-menu-price">2,000원</p>
-              </button>
-            </li>
-            <li class="list-group-item">
-              <button class="btn btn-block" data-toggle="modal" data-target="#myModal">
-                <p class="fdr-menu-name">콜라</p>
-                <p class="fdr-menu-price">1,900원</p>
-              </button>
+          <ul class="list-group list-unstyled" @accordion>
+            <li class="list-group-item" *ngFor="let menu of category.menus">
+              <button class="btn btn-block"
+                 (click)="this.foodorderService.checkOrderList(menu)">
+                <img *ngIf="menu.img" src="{{ menu.img }}" alt="menu.img" class="fdr-menu-img" >
+                <p class="fdr-menu-name">{{ menu.name }}</p>
+                <p class="fdr-menu-price">{{ menu.price }}원</p>
+                <p class="fdr-menu-info">{{ menu.info }}</p>
+            </button>
             </li>
           </ul>
         </div>
@@ -90,26 +70,16 @@
       <div class="fdr-info col-md-12" [hidden]="selectedItem !== navItems[1]">
         <ul class="list-unstyled">
           <li>
-            <h2>업체정보</h2>
-            <p>영업시간: 10:00 ~ 21:00</p>
-            <p>부가정보: 세스코멤버스 사업장</p>
+            <h2>매장 소개</h2>
+            <p>{{ restaurantDB.restaurantInfo }}</p>
           </li>
           <li>
-            <h2>결제정보</h2>
-            <p>최소주문금액: 15,000원</p>
-            <p>결제수단: 신용카드, 현금</p>
+            <h2>주소</h2>
+            <p>{{ restaurantDB.address }}</p>
           </li>
-          <li>
-            <h2>사업자정보</h2>
-            <p>상호명: 명품찜&탕</p>
-            <p>부가정보: 세스코멤버스 사업장</p>
-          </li>
-          <li>
+          <li *ngIf="restaurantDB.originInfo">
             <h2>원산지 정보</h2>
-            <p>돼지 - 국내산</p>
-            <p>닭 - 국내산</p>
-            <p>김치 - 국내산</p>
-            <p>치즈 - 국내산</p>
+            <p>{{ restaurantDB.originInfo }}</p>
           </li>
         </ul>
       </div>
@@ -141,8 +111,7 @@
       <div href="#" class="list-group">
         <div class="list-group-item fdr-cart-subtitle">
           <span>주문표</span>
-          <button class="trash-button btn btn-default fdr-cart-rmv" aria-hidden="true"
-            (click)="this.foodorderService.removeAllOrder()">
+          <button class="trash-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.removeAllOrder()">
             <i class="trash-button-ico">&nbsp;</i>
           </button>
         </div>
@@ -151,31 +120,27 @@
             <div class="row">
               <p class="col-md-12">{{ order.name }}</p>
               <div class="col-md-6">
-                <button class="remove-button btn btn-default fdr-cart-rmv" aria-hidden="true"
-                (click)="this.foodorderService.removeToOrder(order.id)">
+                <button class="remove-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.removeToOrder(order.pk)">
                   <i class="remove-button-ico">&nbsp;</i>
                 </button>
                 <span>{{ order.price }}원</span>
               </div>
               <div class="col-md-6 fdr-cart-count">
-                <button class="minus-button btn btn-default fdr-cart-rmv" aria-hidden="true"
-                   (click)="this.foodorderService.minusAmount(order)">
+                <button class="minus-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.minusAmount(order)">
                   <i class="minus-button-ico">&nbsp;</i>
                 </button>
                 <span>{{ order.amount }}</span>
-                <button class="plus-button btn btn-default fdr-cart-rmv" aria-hidden="true"
-                  (click)="this.foodorderService.addAmount(order.id)">
+                <button class="plus-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.addAmount(order.pk)">
                   <i class="plus-button-ico">&nbsp;</i>
                 </button>
               </div>
             </div>
           </li>
         </ul>
-        <p class="list-group-item">최소주문금액: {{ this.foodorderService.minOrderPrice }}원</p>
+        <p class="list-group-item">최소주문금액: {{ restaurantDB.minOrderPrice }}원</p>
         <p class="list-group-item">합계: {{ this.foodorderService.orderSumCulator() }} 원</p>
       </div>
-      <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout"
-        [class.disabled]="this.foodorderService.minOrderPrice > this.foodorderService.orderSum">주문하기</a>
+      <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout" [class.disabled]=" restaurantDB.minOrderPrice > this.foodorderService.orderSum">주문하기</a>
     </div>
   </div>
 </div>

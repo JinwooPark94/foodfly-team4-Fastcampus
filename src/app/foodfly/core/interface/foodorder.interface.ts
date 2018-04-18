@@ -1,12 +1,5 @@
-export interface FoodList {
-  id: number;
-  name: string;
-  price: number;
-  amount: number;
-}
-
 export interface OrderList {
-  id: number;
+  pk: number;
   name: string;
   price: number;
   amount: number;
