@@ -51,13 +51,9 @@
 
 
 .item-body {
-  /* border: 1px solid silver;    */
-  /* border: 1px solid #ededf0; */
-  /* border-bottom: 1px solid #dcdce0; */
   border: 1px solid gray;
   min-height: 360px;
   transition: all 0.3s;
-
 }
 
 .item-body:hover {
@@ -74,24 +70,11 @@
 }
 
 .item-body .title-img img {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0;  
-  position: relative;
-  padding-top: 130%; /* 1:1 ratio */
-  overflow: hidden;
-  /* outline: teal dotted 2px; */
-}
-
-.item-body .title-img img {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  /* max-width: 100%;  */
   width: 100%;
   height: auto;  
 }
