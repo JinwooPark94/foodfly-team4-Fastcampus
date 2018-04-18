@@ -38,7 +38,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   lat: number;
   lng: number;
   category: string;
-  currentFilter: string;
+  currentFilter = '';
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
@@ -52,7 +52,8 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       { url: '인기순', slug: '인기순' },
       { url: '배달팁순', slug: '배달팁 순' },
       { url: '최소주문금액순', slug: '최소 주문 금액 순 순' },
-  ];
+    ];
+
 
     route.params.subscribe(params => { this.category = params['category']; });
     route.params.subscribe(params => { this.currentFilter = params['filter']; });
@@ -66,27 +67,19 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
     console.log(this.apiUrl);
     this.getRestaurntList();
-    // this.http.get(this.url)
-    //   // 요청 결과를 프로퍼티에 할당
-    //   .subscribe(data => {
-    //     this.foodflyDB = data;
-    //     console.log('[data]', data);
-    //     this.pagination();
-
-    //     this.over = new Array(this.foodflyDB.length);
-    //     this.over.fill(false);
-    //   });
-    // console.log(window);
   }
 
   getRestaurntList() {
     // this.loading = true;
     this.http.get(`${this.apiUrl}/restaurants/`)
     .subscribe( data => {
-      this.foodflyDB = data;
+      this.foodflyDB = data['results'];
       console.log('[get restaurant list]', data);
 
-      this.pagination();
+      // this.pagination();
+      this.items = this.foodflyDB;
+      console.log('[rastaurnat list]', this.foodflyDB);
+
       this.over = new Array(this.foodflyDB.length);
       this.over.fill(false);
     });
