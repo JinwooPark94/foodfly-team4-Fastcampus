@@ -1,10 +1,4 @@
 
-<div class="container">
-  <pre>
-    위도:0 경도:0  카테고리:[{{currentCategory}}] 필터: {{currentFilter}}
-  </pre>
-</div>
-
 <section class="container foodlist-nav">
   <div class="row">
     <div class="col-md-12 nav-body">
@@ -12,13 +6,8 @@
         <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter.url">
           <a (click)="selectFilter(filter.url)">{{filter.slug}}</a>
         </li>
-        <!-- <li *ngFor="let filter of filters" role="presentation" [class.active]="currentFilter===filter">
-          <a [routerLink]="['/restaurant/foodlist', category, filter]">{{filter}}</a>
-        </li> -->
       </ul>
-      <!-- <p class="nav navbar-right restaurant-num"> -->
-        <!-- 현재<span> {{itemsNum}}</span>개의 음식점을 찾았습니다. -->
-      <!-- </p> -->
+     
     </div>
 
   </div>
@@ -42,14 +31,18 @@
         <div class="title-img" >
           <!-- <img [src]="over[i] ? item.images[0] : item.images[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false" > -->
 
-          <img [src]="over[i] ? dummyImg[0] : dummyImg[1]" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false">
+          <img [src]="over[i] ? item.imgCover : item.imgCoverHover" alt="..." (mouseover)="over[i] = true" (mouseout)="over[i] = false">
         </div>
 
         <div class="item-text">
-          <h3 class="name">{{item.name}}</h3>
+          <h3 class="name">{{item.name|slice:0:12}}</h3>          
           
-          <!-- <p class="category">{{item.tags|slice:0:3}}</p> -->
-          <p class="category">{{item.tags[0]}}, {{item.tags[1]}}</p>
+          <p class="category">
+            <!-- <span  *ngFor="let i of item.tags | slice:0:3"></span> -->
+             {{item.tags[0]?.name}}{{item.tags[1]?", ":""}}
+             {{item.tags[1]?.name}}{{item.tags[2]?", ":""}}
+             {{item.tags[2]?.name}}
+          </p>
           <p class="tip">배달팁
             <span>{{item.deliveryPrice}}</span>원</p>
           <p class="min-price">최소주문 {{item.minOrderPrice}}원</p>
