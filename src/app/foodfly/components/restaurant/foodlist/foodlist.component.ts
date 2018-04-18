@@ -46,7 +46,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   currentCategory: string;
   scrollTopVisble: boolean;
 
-  currentFilter = '';
+  currentFilter;
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
@@ -63,10 +63,21 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
     ];
 
     route.params.subscribe(params => {
-      this.currentCategory = params['category'];
+      if (params['category']) {
+        this.currentCategory = params['category'];
+      } else {
+        this.currentCategory = '전체';
+      }
+
       this.getRestaurntList();
     });
-    route.params.subscribe(params => { this.currentFilter = params['filter']; });
+    route.params.subscribe(params => {
+      if (params['filter']) {
+        this.currentFilter = params['filter'];
+      } else {
+        this.currentFilter = 'avg_delivery_time';
+      }
+    });
   }
 
   ngOnInit() {
@@ -74,7 +85,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
     this.preloader.show();
     this.currentUrl = this.apiUrl;
-    if (!this.currentCategory) { this.currentCategory = '전체'; }
+    
     this.getRestaurntList();
     this.consoleLog();
   }
