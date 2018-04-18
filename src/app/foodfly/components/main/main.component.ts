@@ -19,7 +19,6 @@ export class MainComponent implements OnInit {
   show = true;
   disabled = false;
 
-
   config: SwiperConfigInterface = {
     direction: 'horizontal',
     // slidesPerView: 1,
@@ -102,10 +101,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.preloader.isShow);
-    this.preloader.show();
-    console.log(this.preloader.isShow);
-
     this.autoSlidesPerView();
   }
 

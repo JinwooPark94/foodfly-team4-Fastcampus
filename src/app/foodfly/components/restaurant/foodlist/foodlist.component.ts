@@ -60,7 +60,6 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.preloader.show();
     // console.log('lat', this.route.snapshot.paramMap.get('lat'));
     // console.log('lng', this.route.snapshot.paramMap.get('lng'));
     // console.log('category', this.route.snapshot.paramMap.get('category'));
@@ -86,7 +85,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.preloader.hide(), 200);
+    // setTimeout(() => this.preloader.hide(), 200);
   }
 
 
