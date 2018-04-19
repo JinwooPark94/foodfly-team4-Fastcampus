@@ -39,7 +39,12 @@
   color: deeppink;
   max-width: 300px;
   top: 60px;
-  left:31px
+  left:-1000px;
+  transition: 200ms;
+}
+
+.visible {
+  left:31px;
 }
 
 .search > form > div > input {
