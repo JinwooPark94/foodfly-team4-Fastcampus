@@ -143,6 +143,12 @@
   font-size:13px;
 }
 
+.alert {
+  border: 2px dashed  #eeeeee;  
+  background: white;
+  color: #25C6F5;
+}
+
 #btn-scroll-top {
   width: 5rem;
   height: 5rem;
