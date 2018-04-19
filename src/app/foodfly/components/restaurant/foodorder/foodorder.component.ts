@@ -1,12 +1,11 @@
 
 import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { FoodorderService } from '../../../core/services/foodorder.service';
 
 import { OrderList } from '../../../core/interface/foodorder.interface';
-
-import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../../../environments/environment';
 
@@ -45,12 +44,13 @@ export class FoodorderComponent implements OnInit, DoCheck {
   navItems: string[] = ['메뉴', '정보', '리뷰'];
   selectedItem: string;
 
+  toggleMenu = false;
+
   constructor(private differs: IterableDiffers, private foodorderService: FoodorderService,
     private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit() {
     const pk = this.route.snapshot.paramMap.get('pk');
-    // console.log(this.apiUrl);
 
     this.getRestaurant(pk);
     // this.http.get(this.url)
@@ -88,10 +88,7 @@ export class FoodorderComponent implements OnInit, DoCheck {
     });
   }
 
-
   changeNavItem(navItem: string) {
     this.selectedItem = navItem;
   }
-
 }
-
