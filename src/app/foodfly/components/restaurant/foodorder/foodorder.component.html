@@ -19,7 +19,7 @@
             <strong>★</strong>
             <strong>0.0</strong> -->
             <p>최소주문금액: {{ restaurantDB.minOrderPrice }}원</p>
-            <p>배달비용: {{ restaurantDB.deliveryPrice }}원</p>
+            <p>배달팁: {{ restaurantDB.deliveryPrice }}원</p>
             <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
       </div>
@@ -51,19 +51,25 @@
         </ul> -->
 
         <div class="panel panel-default" *ngFor="let category of menuCategories">
-          <button class="btn btn-block">
-            {{ category.name }}
-            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-          </button>
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{ category.name }}
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            </h3>
+          </div>
           <ul class="list-group list-unstyled" @accordion>
-            <li class="list-group-item" *ngFor="let menu of category.menus">
-              <button class="btn btn-block"
-                 (click)="this.foodorderService.checkOrderList(menu)">
-                <img *ngIf="menu.img" src="{{ menu.img }}" alt="menu.img" class="fdr-menu-img" >
-                <p class="fdr-menu-name">{{ menu.name }}</p>
-                <p class="fdr-menu-price">{{ menu.price }}원</p>
-                <p class="fdr-menu-info">{{ menu.info }}</p>
-            </button>
+            <li class="list-group-item" *ngFor="let menu of category.menus"
+              (click)="this.foodorderService.checkOrderList(menu)">
+              <div class="row">
+                <div class="col-md-9">
+                  <p class="fdr-menu-name">{{ menu.name }}</p>
+                  <p class="fdr-menu-price">{{ menu.price }}원</p>
+                  <p class="fdr-menu-info">{{ menu.info }}</p>
+                </div>
+                <div class="col-md-3">
+                  <img *ngIf="menu.img" src="{{ menu.img }}" alt="menu.img" class="fdr-menu-img" >
+                </div>
+              </div>
             </li>
           </ul>
         </div>
