@@ -17,36 +17,25 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
 
   apiUrl = `${environment.apiUrl}/restaurants/`;
-  currentUrl;
   foodflyDB;
   count;
   nextPage;
   previousPage;
-
   categories;
 
   items;
-  itemsNum;
-
-  over: boolean[];
-  pageItemNum = 8;
-  scrollMessage;
-
-
   filters;
-  selectedFilter = '';
-
-  dummyImg = ['https://kcf1.foodfly.co.kr/restaurants/15150/25230029659e805a00ca33.jpg',
-  'https://kcf1.foodfly.co.kr/restaurants/15150/87046131859e805a039dfb.jpg'];
-
-  loading: boolean;
 
   lat: number;
   lng: number;
+
+  currentUrl;
   currentCategory: string;
+  currentPage = 1;
+  currentFilter;
+
   scrollTopVisble: boolean;
 
-  currentFilter;
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
@@ -68,9 +57,10 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       } else {
         this.currentCategory = '전체';
       }
-
+      this.currentPage = 1;
       this.getRestaurntList();
     });
+
     route.params.subscribe(params => {
       if (params['filter']) {
         this.currentFilter = params['filter'];
@@ -82,33 +72,21 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     console.log(this.apiUrl);
-
     this.preloader.show();
-    this.currentUrl = this.apiUrl;
-    
     this.getRestaurntList();
-    this.consoleLog();
   }
 
-  getRestaurntList(filter = null) {
+  getRestaurntList() {
     this.preloader.show();
 
-    if (this.currentCategory in this.categories === true) {
-      this.currentUrl = `${this.apiUrl}?categories=${this.categories[this.currentCategory]}`;
-    } else if (this.currentCategory === '전체') {
-      this.currentUrl = this.apiUrl;
+    if (this.currentCategory === '전체') {
+      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}`;
+    } else if (this.currentCategory in this.categories === true) {
+      this.currentUrl = `
+      ${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&categories=${this.categories[this.currentCategory]}`;
     } else {
-      this.currentUrl = `${this.apiUrl}?search=${this.currentCategory}`;
+      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&search=${this.currentCategory}`;
     }
-
-    if (filter) {
-      if (this.currentUrl === this.apiUrl) {
-        this.currentUrl = `${this.currentUrl}?ordering=${filter}`;
-      } else {
-        this.currentUrl = `${this.currentUrl}&ordering=${filter}`;
-      }
-    }
-
     console.log('[api url]', this.currentUrl);
 
     this.http.get(this.currentUrl)
@@ -118,23 +96,21 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       this.nextPage = data['nextPage'];
       this.previousPage = data['previousPage'];
 
-      this.items = this.foodflyDB;
-      this.itemsNum = this.items.length;
-      console.log('[rastaurnat list]', this.foodflyDB);
-
-      this.over = new Array(this.foodflyDB.length);
-      this.over.fill(false);
-
+      if (this.currentPage > 1) {
+        this.items = [...this.items, ...this.foodflyDB];
+      } else {
+        this.items = this.foodflyDB;
+      }
       setTimeout(() => this.preloader.hide(), 200);
-
-      this.consoleLog();
+      console.log('[rastaurnat list]', this.foodflyDB);
+      this.log();
     });
   }
 
   selectFilter(select) {
     console.log('select', select);
     this.currentFilter = select;
-    this.getRestaurntList(select);
+    this.getRestaurntList();
   }
 
   ngAfterViewInit() {
@@ -158,18 +134,26 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
         this.scrollTopVisble = false;
       }
 
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-      // this.pagination();
+    const isLastHeight = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50;
+    console.log('isLastHeight', isLastHeight);
+    console.log('this.nextPage', this.nextPage);
+    console.log('isLastHeight nextPage', (isLastHeight && this.nextPage));
+
+    if (isLastHeight && this.nextPage) {
+      this.currentPage = this.nextPage;
+      console.log('더했음');
+      this.getRestaurntList();
     }
   }
 
-  consoleLog() {
+  log() {
     console.log('[<<<< console star');
     console.log('[API URL]', this.apiUrl);
     console.log('[current URL]', this.currentUrl);
 
     console.log(
       '[카테고리]: ', this.currentCategory,
+      '[nextpage]: ', this.nextPage,
       '  [필터]: ', this.currentFilter,
       '  [GET 레스토랑 리스트]:', this.items,
       '  [console end >>>>]: '
