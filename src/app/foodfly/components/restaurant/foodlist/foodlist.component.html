@@ -5,7 +5,7 @@
     <div class="col-md-12 nav-body">
       <ul class="nav nav-pills">
         <li *ngFor="let filter of filters" role="presentation">
-          <a (click)="selectFilter(filter.url)" 
+          <a (click)="selectFilter(filter.url)"
            [class.active]="currentFilter===filter.url">{{filter.slug}}</a>
         </li>
       </ul>
@@ -34,9 +34,9 @@
              {{item.tags[1]?.name}}{{item.tags[2]?", ":""}}
              {{item.tags[2]?.name|slice:0:5}}
           </p>
-          <p class="tip">배달팁
+          <p class="tip">배달팁 :
             <span>{{item.deliveryPrice}}</span>원</p>
-          <p class="min-price">최소주문 {{item.minOrderPrice}}원</p>
+          <p class="min-price">최소주문 : {{item.minOrderPrice}}원</p>
         </div>
       </div>
       <!-- end .item-body -->

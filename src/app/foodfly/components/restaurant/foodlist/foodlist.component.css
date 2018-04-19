@@ -29,44 +29,47 @@
   -o-transition: all .2s;
   -webkit-transition: all .2s;
   transition: all .2s;
-  
+
 }
 
 .nav-pills a:hover{
   /* border-radius: .6rem; */
   background: #25C6F5;
-  color: #eeeeee
+  color: #fff
 }
 
 
 .nav-pills a.active{
   background: #25C6F5;
-  color: #eeeeee;
+  color: #fff;
 }
 
 .restaurant-item {
   transition: all .6s;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 
 .item-body {
-  border: 1px solid gray;
+  border: 1px solid #e0e0e0;
   min-height: 360px;
   transition: all 0.3s;
+  border-radius: 5px;
 }
 
 .item-body:hover {
-  border: 1px solid #25C6F5;
-  box-shadow: 1px 1px 10px silver;
-
+  border-color:#25C6F5;
 }
 
 .item-body .title-img {
   width: 100%;
-  position: relative; 
-  padding-top: 130%; /* 1:1 ratio */ 
-  overflow: hidden;  
+  position: relative;
+  padding-top: 130%; /* 1:1 ratio */
+  overflow: hidden;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .item-body .title-img img {
@@ -76,14 +79,14 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  height: auto;  
+  height: auto;
 }
 
 .item-body .title-img img.cover{
-  transition: all 0.3s linear;  
+  transition: all 0.3s linear;
 }
 
-.item-body .title-img img.cover:hover {
+.item-body:hover .title-img img.cover {
   opacity: 0;
   filter: alpha(opacity=40); /* For IE8 and earlier */
 }
@@ -95,7 +98,7 @@
 }
 
 .item-text p {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .item-text p.category{
@@ -108,21 +111,36 @@
 }
 
 .item-text .name {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #25C6F5;
-  margin: 8px 0;
+  margin: 12px 0 3px 0;
   /* text-shadow: 1px 1px 0px steelblue; */
+}
+
+.item-text .tip, .item-text .min-price {
+  font-size:13px;
+}
+
+.item-text .tip {
+  margin-bottom: 3px;
+}
+
+.item-text .min-price {
+  margin-bottom: 12px;
 }
 
 .restaurant-num {
   float: right;
-  margin-top: 12px;
+  font-size:14px;
+  line-height: 40px;
 }
 
 .restaurant-num span {
   /* font-weight: 500; */
-  color: #eeeeee;
+  color: #fff;
   background: #25C6F5;
+  margin-top:-3px;
+  font-size:13px;
 }
 
 #btn-scroll-top {
@@ -139,5 +157,5 @@
   right: 15px;
 
   box-shadow: 1px 1px 10px silver;
-  
+
 }
