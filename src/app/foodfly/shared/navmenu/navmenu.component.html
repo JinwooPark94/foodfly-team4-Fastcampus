@@ -3,31 +3,24 @@
     <nav class="navi-nav">
       <ul class="nav navbar-nav">
         <li>
-          <a (click)="searchToggle()" class="btn btn-default search-button" role="button" ><span class="glyphicon glyphicon-search"></span></a>
+          <button class="btn btn-default search-button" role="button"
+           (click)="searchToggle()"
+           
+          ><span class="glyphicon glyphicon-search"></span></button>
         </li>
         <li *ngFor="let category of categories">
           <a [routerLink]="['/restaurant/foodlist/', category]"
             [class.active]="currentCategory===category"
           >{{category}}</a>
         </li>
-        <li class="search" [class.hidden]="!searchToggleStatus">
-          <!-- <form action="." onsubmit="return false" class="ng-pristine ng-valid">
-            <div class="input-group">
-              <input type="search" name="category_keyword" class="form-control ng-pristine ng-valid ng-touched" placeholder="음식점이나 메뉴를 검색해보세요."
-                ng-model="category_keyword.v" ng-change="show_search_cancel_button()">
-              <span class="input-group-btn">
-                <button class="btn-search-category-cancel btn btn-default ng-hide" type="button" ng-show="is_show_cancel_button" ng-click="clear_search_keyword($event)"></button>
-                <button class="btn btn-default ico-search" type="button" id="category_search_button" ng-click="search_restaurant()">&nbsp;</button>
-              </span>
-            </div>
-          </form> -->
-
+        <li class="search" [class.visible]="searchVisible">
           <form action="." onsubmit="return false" >
             <div class="input-group">
-              <input type="search" name="category_keyword" class="form-control" placeholder="음식점이나 메뉴를 검색해보세요." #searchInput>
+              <input type="search" name="category_keyword" class="form-control" placeholder="음식점이나 메뉴를 검색해보세요."
+               #searchInput>
               <span class="input-group-btn">
                 <button class="btn btn-default " type="button" id="category_search_button"
-                (click)=search(searchInput.value)><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                (click)=onSearch(searchInput.value)><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </span>
             </div>
           </form>
@@ -37,6 +30,7 @@
   </div>
 
 </div>
+
 
 
 
