@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { OrderList } from '../../core/interface/foodorder.interface';
+import { OrderList, Menus } from '../../core/interface/foodorder.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class FoodorderService {
 
-  orderlist: OrderList[] = [];
+  orderlist: Menus[] = [];
 
-  orderSum: number;
+  orderInfo: OrderList;
+
+  account: number;
 
   cartData;
 
-  constructor() {
+  restaurantPk: number;
+
+  constructor(private route: ActivatedRoute) {
+    // url에 레스토랑 고유번호 저장
+    this.restaurantPk = Number.parseInt(this.route.snapshot.paramMap.get('pk'));
+
     // 장바구니에 데이터가 있으면 주문표에 값 넣기
     if (this.getSessionData()) {
       this.orderlist = this.getOrderlistData();
@@ -22,22 +30,26 @@ export class FoodorderService {
     this.cartData = JSON.parse(sessionStorage.getItem('sessionStorage-cart'));
 
     if (!this.cartData) { return 0; }
-    return this.cartData.orderList.length;
+    this.orderInfo = this.cartData;
+    return this.cartData.menus.length;
   }
 
   // sessionStorage에 있는 메뉴가 있을 시 값 리턴
   getOrderlistData() {
-    if (!this.cartData.orderList) { return 0; }
-    return this.cartData.orderList;
+    if (!this.cartData.menus) { return []; }
+    if (this.restaurantPk !== this.orderInfo.restaurantPk) { return []; }
+    return this.cartData.menus;
   }
 
   // 주문표 안에 값이 들어가면 자동으로 session안에 장바구니 데이터 저장
-  setFoodOrderStorage() {
-    console.log(this.orderlist);
+  setFoodOrderStorage(restaurantName: string) {
+    if (this.restaurantPk !== this.orderInfo.restaurantPk) { return ; }
+
     const foodOrderList = {
-      restaurantPn: '아리랑',
-      orderList: [...this.orderlist],
-      orderSum: this.orderSum
+      restaurantName,
+      restaurantPk: this.restaurantPk,
+      menus: [...this.orderlist],
+      account: this.account
     };
     sessionStorage.setItem('sessionStorage-cart', JSON.stringify(foodOrderList));
   }
@@ -48,14 +60,14 @@ export class FoodorderService {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
     if (this.orderlist.length) {
-      return this.orderSum = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue);
+      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue);
     } else {
-      return this.orderSum = 0;
+      return this.account = 0;
     }
   }
 
   // 주문표에 메뉴추가 (메뉴가 있다면 수량 + 1)
-  checkOrderList(orderedItem: OrderList) {
+  checkOrderList(orderedItem: Menus) {
     const MatchPk = this.orderlist.find(item => item.pk === orderedItem.pk);
 
       if (MatchPk) {
@@ -65,18 +77,21 @@ export class FoodorderService {
       }
   }
 
-  addOrder(orderedItem: OrderList) {
+  addOrder(orderedItem: Menus) {
+    if (this.restaurantPk !== this.orderInfo.restaurantPk) {
+      if (confirm('장바구니 데이터를 초기화 하시겠습니까?')) {
+        this.orderInfo.restaurantPk = this.restaurantPk;
+      } else { return; }
+    }
     this.orderlist = [...this.orderlist,
       { pk: orderedItem.pk, name: orderedItem.name, price: orderedItem.price, amount: 1 }];
-
-    console.log(this.orderlist);
   }
 
   addAmount(pk: number) {
     this.orderlist = this.orderlist.map(order => order.pk === pk ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
   }
 
-  minusAmount(order: OrderList) {
+  minusAmount(order: Menus) {
     if (order.amount <= 1) {
         return;
       } else {
@@ -92,5 +107,6 @@ export class FoodorderService {
   removeAllOrder() {
     this.orderlist = [];
   }
+
 
 }

@@ -1,8 +1,9 @@
 
-import { Component, OnInit, IterableDiffers, DoCheck } from '@angular/core';
+import { Component, OnInit, IterableDiffers, DoCheck, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+import { PreloaderService } from '../../../core/services/preloader.service';
 import { FoodorderService } from '../../../core/services/foodorder.service';
 
 import { OrderList } from '../../../core/interface/foodorder.interface';
@@ -15,6 +16,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
+
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -35,7 +38,7 @@ import {
   ]
 })
 
-export class FoodorderComponent implements OnInit, DoCheck {
+export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
 
   apiUrl = `${environment.apiUrl}`;
   restaurantDB: any = [];
@@ -46,45 +49,51 @@ export class FoodorderComponent implements OnInit, DoCheck {
 
   toggleMenu = false;
 
-  constructor(private differs: IterableDiffers, private foodorderService: FoodorderService,
-    private http: HttpClient, private route: ActivatedRoute) {}
+  routerSubscriber: Subscription;
+
+  pk: number;
+
+  constructor(private differs: IterableDiffers,
+              private foodorderService: FoodorderService,
+              private preloadService: PreloaderService,
+              private http: HttpClient,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const pk = this.route.snapshot.paramMap.get('pk');
-
-    this.getRestaurant(pk);
-    // this.http.get(this.url)
-    //   // 요청 결과를 프로퍼티에 할당
-    //   .subscribe(data => {
-    //     this.foodflyDB = data;
-    //     console.log('[data]', data);
-    //     this.pagination();
-
-    //     this.over = new Array(this.foodflyDB.length);
-    //     this.over.fill(false);
-    //   });
-    // console.log(window);
-
+    // route 감지
+    this.routerSubscriber = this.route.paramMap
+    .subscribe(
+      params => {
+        this.pk = Number.parseInt(params.get('pk'));
+        this.getRestaurant(this.pk);
+      });
 
     this.selectedItem = this.navItems[0];
+  }
+
+  ngOnDestroy() {
+    this.routerSubscriber.unsubscribe();
   }
 
   // orderlist 배열을 확인하여 값이 바뀌면 실행
   ngDoCheck() {
     const changes = this.differs.find(this.foodorderService.orderlist);
-    // console.log(changes);
+    console.log(changes);
     if (changes) {
-      this.foodorderService.setFoodOrderStorage();
+      // this.restaurantDB.name : 레스토랑 이름
+      // session에 데이터 저장
+      this.foodorderService.setFoodOrderStorage(this.restaurantDB.name);
     }
   }
 
   getRestaurant(pk) {
-    // this.loading = true;
+    this.preloadService.show();
     this.http.get(`${this.apiUrl}/restaurants/${pk}`)
     .subscribe( data => {
       this.restaurantDB = data;
       this.menuCategories = data['menuCategories'];
       console.log('[get restaurant]', data['menuCategories'][0]['menus']);
+      this.preloadService.hide();
     });
   }
 

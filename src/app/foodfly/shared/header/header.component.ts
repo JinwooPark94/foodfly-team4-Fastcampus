@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private auth: LoginService,
               private toastService: ToastService,
-              private foodorderService: FoodorderService,
+              public foodorderService: FoodorderService,
               private router: Router ) { }
 
   ngOnInit() {
