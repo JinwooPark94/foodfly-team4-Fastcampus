@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { PreloaderService } from '../../../core/services/preloader.service';
 import { FoodorderService } from '../../../core/services/foodorder.service';
 
-import { OrderList } from '../../../core/interface/foodorder.interface';
+import { OrderAllList } from '../../../core/interface/foodorder.interface';
 
 import { environment } from '../../../../../environments/environment';
 
@@ -51,8 +51,6 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
 
   routerSubscriber: Subscription;
 
-  pk: number;
-
   constructor(private differs: IterableDiffers,
               private foodorderService: FoodorderService,
               private preloadService: PreloaderService,
@@ -64,10 +62,11 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
     this.routerSubscriber = this.route.paramMap
     .subscribe(
       params => {
-        this.pk = Number.parseInt(params.get('pk'));
-        this.getRestaurant(this.pk);
+        console.log(Number.parseInt(params.get('pk')));
+        this.foodorderService.restaurantPk = Number.parseInt(params.get('pk'));
+        this.foodorderService.orderlist = this.foodorderService.getOrderlistData();
+        this.getRestaurant(this.foodorderService.restaurantPk);
       });
-
     this.selectedItem = this.navItems[0];
   }
 
@@ -78,7 +77,6 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
   // orderlist 배열을 확인하여 값이 바뀌면 실행
   ngDoCheck() {
     const changes = this.differs.find(this.foodorderService.orderlist);
-    console.log(changes);
     if (changes) {
       // this.restaurantDB.name : 레스토랑 이름
       // session에 데이터 저장
