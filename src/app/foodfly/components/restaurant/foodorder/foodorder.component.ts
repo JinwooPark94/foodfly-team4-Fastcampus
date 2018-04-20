@@ -38,6 +38,13 @@ import { Subscription } from 'rxjs/Subscription';
   ]
 })
 
+
+// var fadeAnimation = animation([
+//   style({ opacity: '{{ start }}' }),
+//   animate('{{ time }}',
+//     style({ opacity: '{{ end }}' }))
+// ], { params: { time: '1000ms', start: 0, end: 1 } });
+
 export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
 
   apiUrl = `${environment.apiUrl}`;
@@ -108,5 +115,4 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
   changeNavItem(navItem: string) {
     this.selectedItem = navItem;
   }
-
 }
