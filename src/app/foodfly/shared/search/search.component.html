@@ -17,7 +17,8 @@
               <a tabindex="-1" (click)="getCurrentGeo()">현재 위치로 설정</a>
             </li>
             <li *ngIf="!listAddress" class="none-search">
-              <a tabindex="-1">검색 결과가 없습니다.</a>
+              <a tabindex="-1" *ngIf="!inputText.value">검색어를 입력해주세요.</a>
+              <a tabindex="-1" *ngIf="inputText.value">"{{ inputText.value }}" 에 대한 검색 결과가 없습니다.</a>
             </li>
             <li *ngFor="let Address of listAddress" class="address-List">
               <a tabindex="-1" (click)="editInputValue($event.target, Address)">

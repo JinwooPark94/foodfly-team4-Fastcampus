@@ -29,7 +29,7 @@
             <a (click)="signout()" *ngIf="this.auth.isAuthenticated()" foodflyMessageBox>로그아웃</a>
           </li>
           <li *ngIf="(this.foodorderService.getSessionData())">
-            <button type="button" class="btn btn-warning order-table" routerLink="/restaurant/foodorder/{{this.foodorderService.orderInfo.restaurantPk}}">주문표({{ this.foodorderService.getSessionData() }})</button>
+            <button type="button" class="btn btn-default order-table" routerLink="/restaurant/foodorder/{{this.foodorderService.orderInfo.restaurantPk}}">주문표({{ this.foodorderService.getSessionData() }})</button>
           </li>
         </ul>
       </div>
