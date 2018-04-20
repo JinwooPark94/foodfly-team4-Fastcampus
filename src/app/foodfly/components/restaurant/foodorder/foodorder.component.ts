@@ -43,11 +43,10 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
   apiUrl = `${environment.apiUrl}`;
   restaurantDB: any = [];
   menuCategories: any = [];
+  toggle: boolean[];
 
   navItems: string[] = ['메뉴', '정보', '리뷰'];
   selectedItem: string;
-
-  toggleMenu = false;
 
   routerSubscriber: Subscription;
 
@@ -67,22 +66,22 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
         this.foodorderService.orderlist = this.foodorderService.getOrderlistData();
         this.getRestaurant(this.foodorderService.restaurantPk);
       });
-    this.selectedItem = this.navItems[0];
-  }
-
-  ngOnDestroy() {
-    this.routerSubscriber.unsubscribe();
-  }
-
-  // orderlist 배열을 확인하여 값이 바뀌면 실행
-  ngDoCheck() {
-    const changes = this.differs.find(this.foodorderService.orderlist);
-    if (changes) {
-      // this.restaurantDB.name : 레스토랑 이름
-      // session에 데이터 저장
-      this.foodorderService.setFoodOrderStorage(this.restaurantDB.name);
+      this.selectedItem = this.navItems[0];
     }
-  }
+
+    ngOnDestroy() {
+      this.routerSubscriber.unsubscribe();
+    }
+
+    // orderlist 배열을 확인하여 값이 바뀌면 실행
+    ngDoCheck() {
+      const changes = this.differs.find(this.foodorderService.orderlist);
+      if (changes) {
+        // this.restaurantDB.name : 레스토랑 이름
+        // session에 데이터 저장
+        this.foodorderService.setFoodOrderStorage(this.restaurantDB.name);
+      }
+    }
 
   getRestaurant(pk) {
     this.preloadService.show();
@@ -100,10 +99,14 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
       this.menuCategories = data['menuCategories'];
       console.log('[get restaurant]', data['menuCategories'][0]['menus']);
       this.preloadService.hide();
+        this.toggle = new Array(this.menuCategories.length);
+        this.toggle.fill(true);
+        this.toggle[0] = false;
     });
   }
 
   changeNavItem(navItem: string) {
     this.selectedItem = navItem;
   }
+
 }

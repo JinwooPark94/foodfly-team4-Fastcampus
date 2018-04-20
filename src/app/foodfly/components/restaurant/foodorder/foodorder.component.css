@@ -36,6 +36,11 @@
   font-size: 0.9em;
   }
 
+.category-visible {
+  height: 0;
+  overflow: hidden;
+}
+
 /* 정보 탭 */
 .fdr-info ul li {
   border-bottom: 2px solid #e7e7e7;
