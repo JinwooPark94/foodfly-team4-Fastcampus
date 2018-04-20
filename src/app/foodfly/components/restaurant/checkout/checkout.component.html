@@ -1,8 +1,8 @@
 <div class="container">
- 
+
 
   <div class="row">
-    <form class="form-horizontal" 
+    <form class="form-horizontal"
     [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" novalidate>
 
       <div class="col-md-8 checkout">
@@ -16,15 +16,15 @@
             <!-- 배송정보 -->
             <div class="panel panel-default">
               <div class="panel-heading">배송정보</div>
-              <div class="panel-body ">        
+              <div class="panel-body ">
 
                 <!-- 주소 -->
                 <div class="form-group">
-                  <label for="address" class="col-sm-2 control-label" >주소</label>
+                  <label for="address" class="col-sm-2 control-label">주소</label>
                   <div class="col-md-10">
                   <input type="text" name="address" class="form-control"
                    autocomplete='address-line1'
-                  formControlName="address1">
+                  formControlName="address1" value="{{ searchInfo.address }}">
                   <input type="text" name="address" class="form-control"
                    placeholder="(필수)상세주소를 입력해주세요."
                    autocomplete='address-line2'
@@ -33,7 +33,7 @@
                     상세주소를 입력하세요!
                   </em>
                   </div>
-                </div>        
+                </div>
 
                 <!-- 핸드폰 -->
                 <div class="form-group">
@@ -55,13 +55,13 @@
                 <div class="checkbox form-group col-sm-12">
                   <label class="center-block">
                     <input type="checkbox" formControlName="agree1"> SMS 수신 동의합니다
-                  </label>                
+                  </label>
                   <label class="center-block">
                     <input type="checkbox" formControlName="agree2"> Foodfly 이용약관에 동의합니다
-                  </label>                
+                  </label>
                   <label class="center-block">
                     <input type="checkbox" formControlName="agree3"> 개인정보 처리방침 동의합니다
-                  </label>                
+                  </label>
                   <label class="center-block">
                     <input type="checkbox" formControlName="agree4"> 개인정보 제3자 제공에 동의합니다
                   </label>
@@ -84,10 +84,10 @@
             <div class="panel panel-default">
               <div class="panel-heading"> 결제수단 선택</div>
               <div class=" panel-body ">
-                <div class="radio">                  
+                <div class="radio">
                   <label class="col-sm-6">
                     <input type="radio" name="payment" formControlName="payment" value="card"> 카드 결제
-                  </label>                
+                  </label>
                   <label class="col-sm-6">
                     <input type="radio" name="payment" formControlName="payment" value="cash"> 현금 결제
                   </label>
@@ -95,7 +95,7 @@
               </div>
             </div>
 
-          </div>     
+          </div>
           <!-- end panel body      -->
         </div>
         <!-- end panel-main -->
@@ -114,7 +114,7 @@
            <table>
              <thead>
                <th colspan="2">{{cart.restaurantName}}</th>
-               
+
              </thead>
             <tfoot>
               <tr>
@@ -126,12 +126,12 @@
                <tr *ngFor="let menu of cart.menus">
                  <td>{{menu.name}} x {{menu.amount}}개</td>
                  <td>{{menu.price}} 원</td>
-               </tr>                             
+               </tr>
              </tbody>
            </table>
           </div>
         </div>
-        <button type="submit" 
+        <button type="submit"
         class="btn btn-primary btn-lg btn-block"
         [disabled]="checkoutForm.invalid">결제하기</button>
 

@@ -62,8 +62,6 @@
           </div>
           <ul class="list-group list-unstyled" [class.category-visible]="toggle[idx]">
             <li class="list-group-item" *ngFor="let menu of category.menus"
-          <ul class="list-group list-unstyled" @accordion>
-            <li class="list-group-item fdr-category-li" *ngFor="let menu of category.menus"
               (click)="this.foodorderService.checkOrderList(menu)">
               <div class="row">
                 <div class="col-md-9 fdr-menu-list">
