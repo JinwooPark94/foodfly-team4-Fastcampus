@@ -9,8 +9,8 @@
     <!-- 매장 소개 -->
     <div class="list-group-item">
       <div class="row">
-        <img class="col-md-2" alt="fdr-img" src="{{ restaurantDB.imgInfo }}">
-        <ul class="list-unstyled col-md-10">
+        <img class="col-md-3" alt="fdr-img" src="{{ restaurantDB.imgInfo }}">
+        <ul class="list-unstyled col-md-9">
           <li>
             <!-- <strong>★</strong>
             <strong>★</strong>
@@ -18,9 +18,12 @@
             <strong>★</strong>
             <strong>★</strong>
             <strong>0.0</strong> -->
-            <p>최소주문금액: {{ restaurantDB.minOrderPrice }}원</p>
-            <p>배달팁: {{ restaurantDB.deliveryPrice }}원</p>
-            <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
+            <p>분류 : </p>
+            <p>주소 : </p>
+            <p>주문유형 : </p>
+            <p>최소주문금액 : {{ restaurantDB.minOrderPrice }}원</p>
+            <p>배달팁 : {{ restaurantDB.deliveryPrice }}원</p>
+            <p>배달시간 : {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
       </div>
     </div>
@@ -58,16 +61,16 @@
             </h3>
           </div>
           <ul class="list-group list-unstyled" @accordion>
-            <li class="list-group-item" *ngFor="let menu of category.menus"
+            <li class="list-group-item fdr-category-li" *ngFor="let menu of category.menus"
               (click)="this.foodorderService.checkOrderList(menu)">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-9 fdr-menu-list">
                   <p class="fdr-menu-name">{{ menu.name }}</p>
                   <p class="fdr-menu-price">{{ menu.price }}원</p>
                   <p class="fdr-menu-info">{{ menu.info }}</p>
                 </div>
-                <div class="col-md-3">
-                  <img *ngIf="menu.img" src="{{ menu.img }}" alt="menu.img" class="fdr-menu-img" >
+                <div class="col-md-3 fdr-menu-img">
+                  <img *ngIf="menu.img" src="{{ menu.img }}" alt="menu.img">
                 </div>
               </div>
             </li>
@@ -123,21 +126,23 @@
             <i class="trash-button-ico">&nbsp;</i>
           </button>
         </div>
-        <ul class="list-group-item list-unstyled">
-          <li *ngFor="let order of this.foodorderService.orderlist">
+
+        <ul class="list-group-item list-unstyled list-orderlist">
+          <p *ngIf="!this.foodorderService.orderlist.length" class="fdr-none-menu">주문표에 담긴 메뉴가 없습니다.</p>
+          <li *ngFor="let order of this.foodorderService.orderlist" class="list-order-li">
             <div class="row">
-              <p class="col-md-12">{{ order.name }}</p>
+              <p class="col-md-12 fdr-order-name">{{ order.name }}</p>
               <div class="col-md-6">
                 <button class="remove-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.removeToOrder(order.pk)">
                   <i class="remove-button-ico">&nbsp;</i>
                 </button>
-                <span>{{ order.price }}원</span>
+                <span class="fdr-order-price">{{ order.price }}원</span>
               </div>
               <div class="col-md-6 fdr-cart-count">
                 <button class="minus-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.minusAmount(order)">
                   <i class="minus-button-ico">&nbsp;</i>
                 </button>
-                <span>{{ order.amount }}</span>
+                <span class="fdr-order-amount">{{ order.amount }}</span>
                 <button class="plus-button btn btn-default fdr-cart-rmv" aria-hidden="true" (click)="this.foodorderService.addAmount(order.pk)">
                   <i class="plus-button-ico">&nbsp;</i>
                 </button>
@@ -145,8 +150,8 @@
             </div>
           </li>
         </ul>
-        <p class="list-group-item">최소주문금액: {{ restaurantDB.minOrderPrice }}원</p>
-        <p class="list-group-item">합계: {{ this.foodorderService.orderSumCulator() }} 원</p>
+        <p class="list-group-item">최소주문금액 : {{ restaurantDB.minOrderPrice }}원</p>
+        <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator() }}원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout" [class.disabled]=" restaurantDB.minOrderPrice > this.foodorderService.orderSum">주문하기</a>
     </div>

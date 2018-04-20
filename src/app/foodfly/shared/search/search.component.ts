@@ -155,7 +155,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         // 결과 주소 값에 앞에 '대한민국'으로 시작하는 것을 빼줌
         this.inputText.setValue(dataAddress.substring(5, dataAddress.length));
-        return this.setSessionGeoAddress(this.inputText.value, lat, lng);
+        this.setSessionGeoAddress(this.inputText.value, lat, lng);
+        return this.router.navigate([`restaurant/foodlist/전체`]);
       });
   }
 
@@ -181,8 +182,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         // 좌표 값 가지고 Address 바꾸고 Session에 정보 저장
         this.getAddressData(lat, lng);
-
-        this.router.navigate([`restaurant/foodlist/전체`]);
       },
       // 에러
       () => {
@@ -206,7 +205,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         inputText = addressValue.children[0].children[2].textContent;
         break;
       default :
-        console.dir(addressValue);
         inputText = addressValue.children[2].textContent;
     }
     this.inputText.setValue(inputText);

@@ -88,7 +88,15 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
     this.preloadService.show();
     this.http.get(`${this.apiUrl}/restaurants/${pk}`)
     .subscribe( data => {
+      console.log(data);
       this.restaurantDB = data;
+
+      // "[메뉴 이름]" => "메뉴 이름" 으로 string 변환
+      data['menuCategories'] = data['menuCategories'].map(menutitle => {
+        menutitle.name = menutitle.name.substring(1, menutitle.name.length - 1);
+        return menutitle;
+      });
+
       this.menuCategories = data['menuCategories'];
       console.log('[get restaurant]', data['menuCategories'][0]['menus']);
       this.preloadService.hide();
