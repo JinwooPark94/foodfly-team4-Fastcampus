@@ -113,32 +113,20 @@
           <div class="panel-body">
            <table>
              <thead>
-               <th colspan="2">스몰하노이-은행점</th>
+               <th colspan="2">{{cart.restaurantName}}</th>
                
              </thead>
             <tfoot>
               <tr>
                 <td>총 결제 금액</td>
-                <td>39,000원</td>
+                <td>{{cart.account}}원</td>
               </tr>
             </tfoot>
              <tbody>
-               <tr>
-                 <td>치즈돈까스 x 1개</td>
-                 <td>8,000원</td>
-               </tr>
-               <tr>
-                 <td>새우볶음밥 x 1개</td>
-                 <td>7,000원</td>
-               </tr>
-               <tr>
-                 <td>감자튀김 x 2개</td>
-                 <td>13,000원</td>
-               </tr>               
-               <tr>
-                 <td>케이준샐러드 x 1개</td>
-                 <td>11,000원</td>
-               </tr>               
+               <tr *ngFor="let menu of cart.menus">
+                 <td>{{menu.name}} x {{menu.amount}}개</td>
+                 <td>{{menu.price}} 원</td>
+               </tr>                             
              </tbody>
            </table>
           </div>
