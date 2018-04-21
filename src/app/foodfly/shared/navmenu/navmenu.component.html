@@ -1,4 +1,4 @@
-<div class="navi-wrap">
+<div class="navi-wrap" (tab)="focus()">
   <div class="container">
     <nav class="navi-nav">
       <ul class="nav navbar-nav">
@@ -13,14 +13,20 @@
             [class.active]="currentCategory===category"
           >{{category}}</a>
         </li>
-        <li class="search" [class.visible]="searchVisible">
+        <li class="search" [class.visible]="isSearchVisible">
           <form action="." onsubmit="return false" >
             <div class="input-group">
-              <input type="search" name="category_keyword" class="form-control" placeholder="음식점이나 메뉴를 검색해보세요."
-               #searchInput>
+              <input type="search" name="category_keyword" class="form-control" placeholder="음식점이나 메뉴를 검색해보세요."   
+              (focus)="isInputFocus=true"
+              (blur)="inputBlur()"
+              #searchInput>
               <span class="input-group-btn">
-                <button class="btn btn-default " type="button" id="category_search_button"
-                (click)=onSearch(searchInput.value)><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                <button class="btn btn-default " type="submit"
+                (focus)="isButtonFocus=true"
+                (blur)="buttonBlur()"
+                (click)="onSearch(searchInput.value)"
+                 #searchButton>
+                <span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </span>
             </div>
           </form>

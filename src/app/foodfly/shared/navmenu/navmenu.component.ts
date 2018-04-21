@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,38 +8,75 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class NavmenuComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('searchInput') inputEl: ElementRef;
+  @ViewChild('searchInput') searchInputEl: ElementRef;
+  @ViewChild('searchButton') searchButtonEl: ElementRef;
 
-  searchVisible;
   categories;
   currentCategory;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.searchVisible = false;
+  isSearchVisible;
+  isInputBlur;
+  isInputFocus;
+  isButtonBlur;
+  isButtonFocus;
+
+  constructor(private route: ActivatedRoute, private router: Router, public elRef: ElementRef, private renderer: Renderer) {
+    this.isSearchVisible = false;
     this.categories = ['전체', '한식', '일식', '카페', '양식', '퓨전', '분식', '햄버거', '치킨', '중식', '피자'];
   }
 
   ngOnInit() {
     this.currentCategory = '전체';
-    console.log('[navmenu-category]', this.route.snapshot.paramMap.get('category'));
-    console.log('[navmenu-currentCategory]', this.currentCategory);
+    this.doReset();
   }
 
   searchToggle() {
-    this.searchVisible = this.searchVisible ? false : true;
-    console.log('[searchVisible]', this.searchVisible);
+    this.isSearchVisible = this.isSearchVisible ? false : true;
+    console.log('[searchVisible]', this.isSearchVisible);
 
-    if (this.searchVisible) {
-      this.inputEl.nativeElement.focus();
+    if (this.isSearchVisible) {
+      this.searchInputEl.nativeElement.focus();
     }
-    console.log(this.inputEl);
   }
 
-
-  onSearch(value) {
-    console.log('go search=>', value);
-    this.router.navigate([`restaurant/foodlist/${value}`]);
+  inputBlur() {
+    this.isInputFocus = false;
+    this.isInputBlur = true;
+    setTimeout(() => {
+      if (!this.isButtonFocus) {
+        this.doReset();
+      }
+    }, 100);
   }
+
+  buttonBlur() {
+    this.isButtonFocus = false;
+    this.isButtonBlur = true;
+    setTimeout(() => {
+      if (!this.isInputFocus) {
+        this.doReset();
+      }
+    }, 100);
+  }
+
+  doReset() {
+    this.isSearchVisible = false;
+    this.isInputBlur = false;
+    this.isInputFocus = false;
+    this.isButtonBlur = false;
+    this.isButtonFocus = false;
+    console.log('doReset()');
+  }
+
+  onSearch(keyword) {
+    if (!keyword) {
+      this.searchInputEl.nativeElement.focus();
+      return;
+    }
+    console.log('go search=>', keyword);
+    this.router.navigate([`restaurant/foodlist/${keyword}`]);
+  }
+
 
   ngAfterViewInit() {
     // this.inputEl.nativeElement.focus();

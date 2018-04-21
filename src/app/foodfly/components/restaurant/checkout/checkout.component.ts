@@ -73,10 +73,10 @@ export class CheckoutComponent implements OnInit {
       // cellphone: ['', [Validators.required, Validators.pattern('[0-9]{1,20}')]],
       cellphone: [this.userCellphone, [Validators.required, Validators.pattern('[0-9]{1,20}')]],
       orderRequest: [''],
-      agree1: ['', Validators.required],
-      agree2: ['', Validators.required],
-      agree3: ['', Validators.required],
-      agree4: ['', Validators.required],
+      agree1: [true, Validators.required],
+      agree2: [true, Validators.required],
+      agree3: [true, Validators.required],
+      agree4: [true, Validators.required],
       payment: ['card'],
     });
   }
