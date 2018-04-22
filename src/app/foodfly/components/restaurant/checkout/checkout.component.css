@@ -19,25 +19,20 @@ input[name= "address"]:first-of-type {
   text-indent: 1rem;
 }
 
-
-.panel-main {
-  /* background: yellow; */
- /* border: 0; */
+.error-message{
+  font-style: normal;
+  font-size: 12px;
+  color: #dd514c;
 }
 
 .panel-main > .panel-body {
   padding: 0;
   margin: 0;
-   
+
 }
 
 .panel-main  .panel {
-  /* background: turquoise; */
   margin: 0
-}
-
-.panel-main  .panel:last-of-type {
-  /* margin: 0; */
 }
 
 
@@ -46,9 +41,8 @@ input[name= "address"]:first-of-type {
 }
 
 table {
-  /* outline: 1px solid salmon; */
-  width: 100%;  
-  text-indent: 1rem  
+  width: 100%;
+  text-indent: 1rem
 }
 
 th {
@@ -60,21 +54,21 @@ td {
   background: #FFF8EB;
   padding : .5rem 1rem;
   font-size: 1.3rem;
-  
+
 }
 
-tfoot td {  
+tfoot td {
   border-top: 1px solid gray;
-  color: firebrick;  
+  color: firebrick;
   padding: 1rem;
   font-size: 1.5rem;
-  
+
 }
 
 td:first-of-type{
   /* background: yellow; */
   text-align: left;
-  
+
 }
 
 td:last-of-type{
@@ -86,4 +80,107 @@ td:last-of-type{
 
 .bg-color {
   background: #AF5E00;
+}
+
+.chk-title {
+  background-color:#423b3c;
+  padding:13px 15px;
+  color:#fff;
+}
+
+.chk-address-wrap, .chk-request-wrap, .chk-payment-wrap{
+  border:0;
+}
+
+.chk-address-wrap > .panel-heading, .chk-request-wrap > .panel-heading, .chk-payment-wrap > .panel-heading{
+  border-top: 1px solid #e0e0e0;
+}
+
+.checkbox {
+  padding-left:126px;
+}
+
+.i-checks {
+  width: 100%;
+  padding-left: 20px;
+  font-weight: normal;
+  user-select: none;
+  cursor: pointer;
+  padding-bottom:5px;
+  font-size:13px;
+}
+
+.i-checks > input[type=checkbox], .i-checks > input[type=radio] {
+  display: none;
+}
+
+.i-checks > i {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-top: -2px;
+  margin-right: 10px;
+  margin-left: -20px;
+  background-color: #fff;
+  border: 1px solid #cfdadd;
+  vertical-align: middle;
+}
+
+.i-checks > i:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  transition: all .1s;
+}
+
+.i-checks input:checked + i:before{
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #23b7e5;
+}
+
+.radio > .i-checks input:checked + i:before{
+  border-radius: 15px;
+}
+
+.radio > .i-checks{
+  width:50%;
+  padding:10px 15px;
+  outline:none;
+  border:1px solid #e0e0e0;
+}
+
+.radio > label:first-child {
+  border-right:0px;
+}
+
+.radio > .i-checks > i{
+  margin-left: -10px;
+  border-radius: 15px;
+}
+
+.panel-main {
+  border:0;
+}
+
+.checkout > .panel-main > .panel-body {
+  border: 1px solid #e0e0e0;
+}
+
+.order-list > .panel > .panel-heading {
+  background-color:#423b3c;
+  color:#fff;
+  padding:13px 15px;
+}
+
+.chk-btn {
+  background-color: #b0dc2d;
+  color:white;
 }

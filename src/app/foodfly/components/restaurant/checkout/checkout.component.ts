@@ -6,18 +6,34 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { environment } from '../../../../../environments/environment';
 import { LoginService } from '../../../core';
+import {
+  trigger,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'foodfly-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
+  animations: [
+    trigger('accordion', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ height: 0 }),
+        animate(500, style({ height: '*' }))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(500, style({ height: 0 }))
+      ])
+    ])
+  ]
 })
 
 export class CheckoutComponent implements OnInit {
   apiUrl = `${environment.apiUrl}`;
   userData;
   checkoutForm: FormGroup;
-  testAddress = '서울특별시 강남구 신사동';
 
   cart;
   searchInfo;
@@ -28,7 +44,7 @@ export class CheckoutComponent implements OnInit {
 
 
   constructor(
-    private http: HttpClient, private route: ActivatedRoute, private router: Router, 
+    private http: HttpClient, private route: ActivatedRoute, private router: Router,
     private loginService: LoginService, private fb: FormBuilder) {
     // user
    }
