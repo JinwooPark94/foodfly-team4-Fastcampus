@@ -24,6 +24,7 @@ export class PaymentcompletedComponent implements OnInit {
 
   sessionClear() {
     sessionStorage.removeItem('sessionStorage-cart');
+    sessionStorage.removeItem('sessionStorage-orderPost');
     console.log('cart 세션 클리어');
   }
 
