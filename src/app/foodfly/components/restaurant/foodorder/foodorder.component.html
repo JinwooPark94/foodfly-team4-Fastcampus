@@ -27,7 +27,7 @@
             <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
         <div class="col-md-3">
-          <agm-map [latitude]="restaurantDB.latitude" [longitude]="restaurantDB.longitude" [minZoom]="16">
+          <agm-map [latitude]="restaurantDB.latitude" [longitude]="restaurantDB.longitude" [zoom]="16">
             <agm-marker [latitude]="restaurantDB.latitude" [longitude]="restaurantDB.longitude"></agm-marker>
           </agm-map>
         </div>

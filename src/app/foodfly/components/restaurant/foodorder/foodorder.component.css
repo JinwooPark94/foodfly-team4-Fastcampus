@@ -206,8 +206,13 @@
   padding: 8px 15px;
 }
 
+.list-unstyled {
+  padding-left: 10px;
+  margin-bottom: 0px;
+}
+
 .fdr-menu-list > p{
-  margin-bottom: 5px;
+  line-height: 19px;
 }
 
 .fdr-category-li {
