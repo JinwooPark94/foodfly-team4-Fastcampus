@@ -1,0 +1,5 @@
+<aside class="toastr-box">
+  <div class="toastr {{toastr.style}}" role="alert" @rightInOut *ngFor="let toastr of toastrService.toastrArr | toastrPipe " (click)="toastrService.messageRemove(toastr.id)" >
+    {{ toastr.message }}
+  </div>
+</aside>

@@ -9,7 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { NavmenuComponent } from './navmenu/navmenu.component';
-import { ToastComponent } from './toast/toast.component';
+import { ToastrComponent } from './toastr/toastr.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { PreloaderComponent } from './preloader/preloader.component';
     FooterComponent,
     SearchComponent,
     NavmenuComponent,
-    ToastComponent,
+    ToastrComponent,
     PreloaderComponent
   ],
   imports: [
@@ -29,7 +29,7 @@ import { PreloaderComponent } from './preloader/preloader.component';
     FooterComponent,
     SearchComponent,
     NavmenuComponent,
-    ToastComponent,
+    ToastrComponent,
     PreloaderComponent
   ]
 })

@@ -22,12 +22,14 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   nextPage;
   previousPage;
   categories;
+  sessionGeoData;
 
   items;
   filters;
 
   lat: number;
   lng: number;
+  distance = 1000;
 
   currentUrl;
   currentCategory: string;
@@ -40,8 +42,13 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
 
-    this.lat = 0;
-    this.lng = 0;
+    this.sessionGeoData = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
+
+    console.log(this.sessionGeoData);
+    this.lat = this.sessionGeoData.lat;
+    this.lng = this.sessionGeoData.lng;
+
+    console.log(this.lat, this.lng);
 
     this.categories = {'한식': 2, '일식': 3, '카페': 4 , '양식': 5, '퓨전': 6, '분식': 7, '햄버거': 8, '치킨': 9, '중식': 10, '피자': 11};
 
@@ -71,7 +78,6 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log(this.apiUrl);
     this.preloader.show();
     this.getRestaurntList();
   }
@@ -80,12 +86,12 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
     this.preloader.show();
 
     if (this.currentCategory === '전체') {
-      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}`;
+      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&lat=${this.lat}&lng=${this.lng}&distance=${this.distance}`;
     } else if (this.currentCategory in this.categories === true) {
       this.currentUrl = `
-      ${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&categories=${this.categories[this.currentCategory]}`;
+      ${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&categories=${this.categories[this.currentCategory]}&lat=${this.lat}&lng=${this.lng}&&distance=${this.distance}`;
     } else {
-      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&search=${this.currentCategory}`;
+      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&search=${this.currentCategory}&lat=${this.lat}&lng=${this.lng}&&distance=${this.distance}`;
     }
     console.log('[api url]', this.currentUrl);
 

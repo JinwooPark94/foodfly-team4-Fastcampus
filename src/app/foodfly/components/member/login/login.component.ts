@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LoginService, SocialLoginService, ToastService } from './../../../core';
+import { LoginService, SocialLoginService, ToastrService } from './../../../core';
 
 @Component({
   selector: 'foodfly-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private auth: LoginService,
     private socialAuth: SocialLoginService,
-    private toastService: ToastService
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['main']);
-          this.toastService.messageAdd('로그인 되었습니다.', 'success');
+          this.toastrService.messageAdd('로그인 되었습니다.', 'success');
         },
         ({ error }) => {
           this.message = error.message;
-          this.toastService.messageAdd('아이디와 비밀번호를 다시 확인해주세요.', 'warning');
+          this.toastrService.messageAdd('아이디와 비밀번호를 다시 확인해주세요.', 'warning');
         });
   }
 
@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['main']);
-          this.toastService.messageAdd('로그인 되었습니다.', 'success');
+          this.toastrService.messageAdd('로그인 되었습니다.', 'success');
         },
         ({ error }) => {
           this.message = error.message;
-          this.toastService.messageAdd('페이스북 로그인에 문제가 발생하였습니다.', 'warning');
+          this.toastrService.messageAdd('페이스북 로그인에 문제가 발생하였습니다.', 'warning');
         });
   }
 

@@ -1,11 +1,11 @@
-.toast-box {
+.toastr-box {
   position: fixed;
   right:20px;
   transition: right 0.3s;
   z-index:2;
 }
 
-.toast{
+.toastr{
   position: relative;
   width:300px;
   padding:25px 15px 25px 50px;
@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 
-.toast:hover{
+.toastr:hover{
   opacity:1;
 }
 

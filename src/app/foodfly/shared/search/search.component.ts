@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ToastService } from '../../core/services/toast.service';
+import { ToastrService } from '../../core/services/toastr.service';
 
 import { environment } from '../../../../environments/environment';
 
@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   googleApiUrl = `${environment.googleApiUrl}`;
   googleMapAppId = `${environment.googleMapAppId}`;
 
-  constructor(public http: HttpClient, private router: Router, private toastService: ToastService) {}
+  constructor(public http: HttpClient, private router: Router, private toastrService: ToastrService) {}
 
   ngOnInit() {
     this.subscription = this.inputText.valueChanges
@@ -65,7 +65,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.sessionSearchInfo = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
     if (this.sessionSearchInfo) {
       this.inputText.setValue(this.sessionSearchInfo.address);
-      this.geoCurrentData = { lag : this.sessionSearchInfo.lag,
+      this.geoCurrentData = { lng : this.sessionSearchInfo.lng,
                               lat : this.sessionSearchInfo.lat };
     }
   }
@@ -170,7 +170,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     // 브라우저 navigator.geolocation을 지원 확인
     if (!navigator.geolocation) {
-      this.toastService.messageAdd('사용자의 브라우저는 지오로케이션을 지원하지 않습니다.', 'warning');
+      this.toastrService.messageAdd('사용자의 브라우저는 지오로케이션을 지원하지 않습니다.', 'warning');
       return;
     }
 
@@ -185,7 +185,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       },
       // 에러
       () => {
-        this.toastService.messageAdd('위치를 찾을 수 없습니다.', 'warning');
+        this.toastrService.messageAdd('위치를 찾을 수 없습니다.', 'warning');
       },
       // 옵션
       geoOptions
@@ -214,7 +214,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   findFoodList() {
     if (!this.listAddress) {
-      this.toastService.messageAdd('검색 결과가 없습니다.', 'warning');
+      this.toastrService.messageAdd('검색 결과가 없습니다.', 'warning');
       return ;
     }
     this.inputText.setValue(this.listAddress[0].jibunAddr);
@@ -222,8 +222,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.router.navigate([`restaurant/foodlist/전체`]);
   }
 
-  setSessionGeoAddress(address: string, lat: number, lag: number) {
-    const searchData = { address, lat, lag };
+  setSessionGeoAddress(address: string, lat: number, lng: number) {
+    const searchData = { address, lat, lng };
     sessionStorage.setItem('sessionStorage-searchInfo', JSON.stringify(searchData));
   }
 

@@ -233,3 +233,8 @@
 .fdr-order-amount {
   padding:0 3px;
 }
+
+/* google Map */
+agm-map {
+  height: 168px;
+}

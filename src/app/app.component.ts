@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <foodfly-preloader></foodfly-preloader>
     <foodfly-header></foodfly-header>
-    <foodfly-toast></foodfly-toast>
+    <foodfly-toastr></foodfly-toastr>
     <router-outlet></router-outlet>
     <foodfly-footer></foodfly-footer>
   `

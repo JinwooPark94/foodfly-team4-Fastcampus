@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastService } from '../../core/services/toast.service';
+import { ToastrService } from '../../core/services/toastr.service';
 import {
   trigger,
   style,
@@ -8,9 +8,9 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'foodfly-toast',
-  templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.css'],
+  selector: 'foodfly-toastr',
+  templateUrl: './toastr.component.html',
+  styleUrls: ['./toastr.component.css'],
   animations: [
     trigger('rightInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
@@ -23,8 +23,8 @@ import {
     ])
   ]
 })
-export class ToastComponent {
+export class ToastrComponent {
 
-  constructor(private toastService: ToastService) {}
+  constructor(private toastrService: ToastrService) {}
 
 }

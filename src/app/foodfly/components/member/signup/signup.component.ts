@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from
 import { Router } from '@angular/router';
 import { PasswordValidator } from '../password.validator';
 
-import { ToastService } from '../../../core/services/toast.service';
+import { ToastrService } from '../../../core/services/toastr.service';
 import {
   trigger,
   style,
@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
 
   apiUrl = `${environment.apiUrl}`;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private toastService: ToastService) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private toastrService: ToastrService) {}
 
   ngOnInit() {
     this.userform = this.fb.group({
@@ -114,7 +114,7 @@ export class SignupComponent implements OnInit {
       .post(`${this.apiUrl}/members/signup/`, userData)
       .subscribe( data => {
         this.router.navigate(['member/login']);
-        this.toastService.messageAdd('회원가입이 완료되었습니다.', 'success');
+        this.toastrService.messageAdd('회원가입이 완료되었습니다.', 'success');
       });
   }
 }

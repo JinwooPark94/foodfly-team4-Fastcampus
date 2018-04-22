@@ -11,5 +11,6 @@ export const environment = {
   tokenName: 'access_token',
   facebookAppId: '163847600981594',
   roadAddressAppId: 'U01TX0FVVEgyMDE4MDMxODIxMzA0MzEwNzczNjI=',
-  googleMapAppId: 'AIzaSyD1ufdlczvIvQCCRgOHfEgpCkINFlMIq2s'
+  googleMapAppId: 'AIzaSyD1ufdlczvIvQCCRgOHfEgpCkINFlMIq2s',
+  googleApiId: 'AIzaSyDUcToCzGjX5cIxj_JhucKtZCqb-iH_QZs'
 };

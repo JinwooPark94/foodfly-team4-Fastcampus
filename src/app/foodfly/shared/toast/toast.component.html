@@ -1,5 +1,0 @@
-<aside class="toast-box">
-  <div class="toast {{toast.style}}" role="alert" @rightInOut *ngFor="let toast of toastService.toastArr | toastPipe " (click)="toastService.messageRemove(toast.id)" >
-    {{ toast.message }}
-  </div>
-</aside>

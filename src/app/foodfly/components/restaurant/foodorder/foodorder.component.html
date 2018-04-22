@@ -10,8 +10,8 @@
     <div class="list-group-item">
       <div class="row">
         <img class="col-md-3" alt="fdr-img" src="{{ restaurantDB.imgInfo }}">
-        <ul class="list-unstyled col-md-9">
-          <li>
+        <ul class="list-unstyled col-md-6">
+          <li class="fdr-menu-list">
             <!-- <strong>★</strong>
             <strong>★</strong>
             <strong>★</strong>
@@ -19,13 +19,18 @@
             <strong>★</strong>
             <strong>0.0</strong> -->
 
-            <p>분류:{{ restaurantTags }} </p>
-            <p>주소: {{ restaurantDB.address }}</p>
+            <p>분류 : {{ restaurantTags }} </p>
+            <p>주소 : {{ restaurantDB.address }}</p>
             <p>최소주문금액 : {{ restaurantDB.minOrderPrice }}원</p>
-            <p>주문유형:{{ restaurantOrdertypes }} </p>
+            <p>주문유형 :{{ restaurantOrdertypes }} </p>
             <p>배달팁: {{ restaurantDB.deliveryPrice }}원</p>
             <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
+        <div class="col-md-3">
+          <agm-map [latitude]="restaurantDB.latitude" [longitude]="restaurantDB.longitude" [minZoom]="16">
+            <agm-marker [latitude]="restaurantDB.latitude" [longitude]="restaurantDB.longitude"></agm-marker>
+          </agm-map>
+        </div>
       </div>
     </div>
   </div>

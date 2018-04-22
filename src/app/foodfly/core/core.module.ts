@@ -5,13 +5,13 @@ import { JwtHelper } from 'angular2-jwt';
 
 import { LoginService } from './services/login.service';
 import { SocialLoginService } from './services/social-login.service';
-import { ToastService } from './services/toast.service';
+import { ToastrService } from './services/toastr.service';
 import { FoodorderService } from './services/foodorder.service';
 import { PreloaderService } from './services/preloader.service';
 
 import { TokenGuard } from './guards/token.guard';
 
-import { ToastPipe } from './pipes/toast.pipe';
+import { ToastrPipe } from './pipes/toastr.pipe';
 
 @NgModule({
   providers: [
@@ -19,11 +19,11 @@ import { ToastPipe } from './pipes/toast.pipe';
     LoginService,
     SocialLoginService,
     FoodorderService,
-    ToastService,
+    ToastrService,
     TokenGuard,
     PreloaderService
   ],
-  declarations: [ToastPipe],
-  exports: [ToastPipe]
+  declarations: [ToastrPipe],
+  exports: [ToastrPipe]
 })
 export class CoreModule { }

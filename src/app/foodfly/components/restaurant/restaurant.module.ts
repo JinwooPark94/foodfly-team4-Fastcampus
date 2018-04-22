@@ -12,7 +12,10 @@ import { RestaurantManagementComponent } from './restaurant.management.component
 
 import { ShareModule } from '../../shared/share.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../../../../environments/environment';
+
+// 구글 지도 Api 모듈
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     ReactiveFormsModule,
     RestaurantRoutingModule,
-    ShareModule
+    ShareModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleApiId
+    })
   ],
   exports: [
     RestaurantManagementComponent,
