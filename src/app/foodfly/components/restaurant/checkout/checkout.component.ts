@@ -36,7 +36,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.createForm();
     console.log(this.checkoutForm);
-    // 사용자 정보 가져오기
+
     this.cart = JSON.parse(sessionStorage.getItem('sessionStorage-cart'));
     this.searchInfo = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
     this.userAddress1 = this.searchInfo.address;
@@ -62,7 +62,7 @@ export class CheckoutComponent implements OnInit {
       });
 
   }
-
+  // 사용자 정보 가져오기
   // userData = { pk: 7, name: "박진우", phoneNumber: "010-7942-4473", email: "wlsdntus2@naver.com", imgProfile: null }
 
 
@@ -73,11 +73,11 @@ export class CheckoutComponent implements OnInit {
       // cellphone: ['', [Validators.required, Validators.pattern('[0-9]{1,20}')]],
       cellphone: [this.userCellphone, [Validators.required, Validators.pattern('[0-9]{1,20}')]],
       orderRequest: [''],
-      agree1: [true, Validators.required],
-      agree2: [true, Validators.required],
-      agree3: [true, Validators.required],
-      agree4: [true, Validators.required],
-      payment: ['card'],
+      agree2: [false, Validators.requiredTrue],
+      agree3: [false, Validators.requiredTrue],
+      agree4: [false, Validators.requiredTrue],
+      agree1: [false, Validators.requiredTrue],
+    payment: ['card'],
     });
   }
 
@@ -95,6 +95,10 @@ export class CheckoutComponent implements OnInit {
   get orderRequest() {
     return this.checkoutForm.get('orderRequest');
   }
+
+  // get aggreGroup() {
+  //   return this.checkoutForm.get('aggreGroup');
+  // }
 
   get agree1() {
     return this.checkoutForm.get('agree1');
@@ -115,7 +119,24 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
     console.log(this.checkoutForm);
-    this.checkoutForm.reset();
-    this.router.navigate([`restaurant/paymentcompleted`]);
+    // this.checkoutForm.reset();
+    if (this.checkoutForm.status === 'VALID') {
+      this.makePostToSassion();
+      this.router.navigate([`restaurant/paymentcompleted`]);
+    }
+  }
+
+  makePostToSassion() {
+    const postData = {
+      // userPk: this.userData.pk,
+      userPk: 0,
+      address1: this.checkoutForm.value.address1,
+      address2: this.checkoutForm.value.address2,
+      cellphone: this.checkoutForm.value.cellphone,
+      request: this.checkoutForm.value.request,
+      payment: this.checkoutForm.value.payment,
+      cart: this.cart
+    };
+    sessionStorage.setItem('sessionStorage-orderPost', JSON.stringify(postData));
   }
 }

@@ -54,17 +54,23 @@
                 <!-- 동의 체크박스 -->
                 <div class="checkbox form-group col-sm-12">
                   <label class="center-block">
-                    <input type="checkbox" formControlName="agree1"> SMS 수신 동의합니다
+                    <input type="checkbox" formControlName="agree1">SMS 수신 동의합니다.(필수)
                   </label>
                   <label class="center-block">
-                    <input type="checkbox" formControlName="agree2"> Foodfly 이용약관에 동의합니다
+                    <input type="checkbox" formControlName="agree2">Foodfly 이용약관에 동의합니다. (필수)
                   </label>
                   <label class="center-block">
-                    <input type="checkbox" formControlName="agree3"> 개인정보 처리방침 동의합니다
+                    <input type="checkbox" formControlName="agree3">개인정보 처리방침 동의합니다. (필수)
                   </label>
                   <label class="center-block">
-                    <input type="checkbox" formControlName="agree4"> 개인정보 제3자 제공에 동의합니다
-                  </label>                  
+                    <input type="checkbox" formControlName="agree4">개인정보 제3자 제공에 동의합니다. (필수)
+                  </label>   
+                   
+                   
+                   
+                  <em 
+                   *ngIf="agree1.errors?.required || agree2.errors?.required || agree3.errors?.required || agree4.errors?.required"
+                  class="alert">*필수 선택 사항에 동의해 주세요. </em>               
                 </div>
 
               </div>
@@ -85,10 +91,11 @@
               <div class="panel-heading"> 결제수단 선택</div>
               <div class=" panel-body ">
                 <div class="radio">
-                  <label class="col-sm-6">
-                    <input type="radio" name="payment" formControlName="payment" value="card"> 카드 결제
+                  <label class="col-sm-6" [class.payment-selected]="checkoutForm.value.payment == 'card'">
+                    <input type="radio" name="payment" formControlName="payment" value="card" >카드 결제  
+                     
                   </label>
-                  <label class="col-sm-6">
+                  <label class="col-sm-6" [class.payment-selected]="checkoutForm.value.payment == 'cash'">
                     <input type="radio" name="payment" formControlName="payment" value="cash"> 현금 결제
                   </label>
                 </div>
@@ -140,6 +147,8 @@
     </form>
   </div>
 
-  <pre>{{ checkoutForm.value | json }}</pre>
-  <pre>{{ checkoutForm.status }}</pre>
+  <!-- <pre>
+     {{checkoutForm.value | json}}
+     {{checkoutForm.status | json}}
+  </pre> -->
 </div>
