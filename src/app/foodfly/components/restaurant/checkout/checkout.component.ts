@@ -72,12 +72,12 @@ export class CheckoutComponent implements OnInit {
       address2: ['', Validators.required],
       // cellphone: ['', [Validators.required, Validators.pattern('[0-9]{1,20}')]],
       cellphone: [this.userCellphone, [Validators.required, Validators.pattern('[0-9]{1,20}')]],
-      orderRequest: [''],
-      agree1: [true, Validators.required],
-      agree2: [true, Validators.required],
-      agree3: [true, Validators.required],
-      agree4: [true, Validators.required],
-      payment: ['card'],
+      orderRequest: [''],    
+      agree2: [false, Validators.requiredTrue],
+      agree3: [false, Validators.requiredTrue],
+      agree4: [false, Validators.requiredTrue],
+      agree1: [false, Validators.requiredTrue],      
+    payment: ['card'],
     });
   }
 
@@ -95,6 +95,10 @@ export class CheckoutComponent implements OnInit {
   get orderRequest() {
     return this.checkoutForm.get('orderRequest');
   }
+
+  // get aggreGroup() {
+  //   return this.checkoutForm.get('aggreGroup');
+  // }
 
   get agree1() {
     return this.checkoutForm.get('agree1');
