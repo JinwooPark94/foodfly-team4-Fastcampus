@@ -18,12 +18,13 @@
             <strong>★</strong>
             <strong>★</strong>
             <strong>0.0</strong> -->
-            <p>분류 : </p>
-            <p>주소 : </p>
-            <p>주문유형 : </p>
+
+            <p>분류:{{ restaurantTags }} </p>
+            <p>주소: {{ restaurantDB.address }}</p>
             <p>최소주문금액 : {{ restaurantDB.minOrderPrice }}원</p>
-            <p>배달팁 : {{ restaurantDB.deliveryPrice }}원</p>
-            <p>배달시간 : {{ restaurantDB.avgDeliveryTime }}분</p>
+            <p>주문유형:{{ restaurantOrdertypes }} </p>
+            <p>배달팁: {{ restaurantDB.deliveryPrice }}원</p>
+            <p>배달시간: {{ restaurantDB.avgDeliveryTime }}분</p>
         </ul>
       </div>
     </div>
