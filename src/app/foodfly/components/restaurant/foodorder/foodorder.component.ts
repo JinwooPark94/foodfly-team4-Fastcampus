@@ -50,6 +50,8 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
   apiUrl = `${environment.apiUrl}`;
   restaurantDB: any = [];
   menuCategories: any = [];
+  restaurantTags: any = [];
+  restaurantOrdertypes: any = [];
   toggle: boolean[];
 
   navItems: string[] = ['메뉴', '정보', '리뷰'];
@@ -102,9 +104,16 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
         menutitle.name = menutitle.name.substring(1, menutitle.name.length - 1);
         return menutitle;
       });
-
       this.menuCategories = data['menuCategories'];
-      console.log('[get restaurant]', data['menuCategories'][0]['menus']);
+
+      // ["분류1", "분류2"...] => 분류1, 분류2... 으로 변환
+      data['tags'] = data['tags'].map(restaurantTags => restaurantTags.name);
+      this.restaurantTags = data['tags'];
+
+      // ["주문유형1", "주문유형2"...] => 주문유형1, 주뮨유형2... 으로 변환
+      data['orderTypes'] = data['orderTypes'].map(orderTypes => orderTypes.name);
+      this.restaurantOrdertypes = data['orderTypes'];
+
       this.preloadService.hide();
         this.toggle = new Array(this.menuCategories.length);
         this.toggle.fill(true);
