@@ -8,13 +8,13 @@
       <div class="col-md-8 checkout">
         <!-- start panel-main -->
         <div class="panel panel-default panel-main">
-          <div class="panel-heading">
+          <div class="panel-heading chk-title">
             <h3 class="panel-title">결제하기</h3>
           </div>
           <div class="panel-body">
 
             <!-- 배송정보 -->
-            <div class="panel panel-default">
+            <div class="panel panel-default chk-address-wrap">
               <div class="panel-heading">배송정보</div>
               <div class="panel-body ">
 
@@ -29,9 +29,11 @@
                    placeholder="(필수)상세주소를 입력해주세요."
                    autocomplete='address-line2'
                    formControlName="address2">
-                  <em *ngIf="address2.errors?.required && address2.touched" class="alert">
-                    상세주소를 입력하세요!
-                  </em>
+                  <div class="alert-box" @accordion *ngIf="address2.errors && (address2.dirty || address2.touched)">
+                    <em *ngIf="address2.errors?.required && address2.touched" class="error-message">
+                      상세주소를 입력하세요!
+                    </em>
+                  </div>
                   </div>
                 </div>
 
@@ -42,42 +44,46 @@
                   <input type="text" name="cellphone" class="form-control"
                    autocomplete='tel-national tel'
                    formControlName="cellphone">
-                  <em *ngIf="cellphone.errors?.required && cellphone.touched" class="alert">
-                    연락처를 입력하세요!
-                  </em>
-                  <em *ngIf="cellphone.errors?.pattern && cellphone.touched" class="alert">
-                    숫자만 가능 합니다.
-                  </em>
+                  <div class="alert-box" @accordion *ngIf="cellphone.errors && (cellphone.dirty || cellphone.touched)">
+                    <em *ngIf="cellphone.errors?.required && cellphone.touched" class="error-message">
+                      연락처를 입력해주세요.
+                    </em>
+                    <em *ngIf="cellphone.errors?.pattern && cellphone.touched" class="error-message">
+                      연락처는 숫자만 가능합니다.
+                    </em>
+                  </div>
                   </div>
                 </div>
 
                 <!-- 동의 체크박스 -->
                 <div class="checkbox form-group col-sm-12">
-                  <label class="center-block">
-                    <input type="checkbox" formControlName="agree1">SMS 수신 동의합니다.(필수)
+                  <label class="i-checks">
+                    <input type="checkbox" formControlName="agree1"><i></i>SMS 수신 동의합니다 (필수)
                   </label>
-                  <label class="center-block">
-                    <input type="checkbox" formControlName="agree2">Foodfly 이용약관에 동의합니다. (필수)
+                  <label class="i-checks">
+                    <input type="checkbox" formControlName="agree2"><i></i>Foodfly 이용약관에 동의합니다 (필수)
                   </label>
-                  <label class="center-block">
-                    <input type="checkbox" formControlName="agree3">개인정보 처리방침 동의합니다. (필수)
+                  <label class="i-checks">
+                    <input type="checkbox" formControlName="agree3"><i></i>개인정보 처리방침 동의합니다 (필수)
                   </label>
-                  <label class="center-block">
-                    <input type="checkbox" formControlName="agree4">개인정보 제3자 제공에 동의합니다. (필수)
-                  </label>   
-                   
-                   
-                   
-                  <em 
-                   *ngIf="agree1.errors?.required || agree2.errors?.required || agree3.errors?.required || agree4.errors?.required"
-                  class="alert">*필수 선택 사항에 동의해 주세요. </em>               
+                  <label class="i-checks">
+                    <input type="checkbox" formControlName="agree4"><i></i>개인정보 제3자 제공에 동의합니다 (필수)
+                  </label>
+
+                  <!-- <div class="alert-box" @accordion *ngIf="agree1.errors ||
+                                                           agree2.errors ||
+                                                           agree3.errors ||
+                                                           agree4.errors &&
+                                                           (agree4.dirty || agree4.touched)">
+                    <em *ngIf="agree1.errors?.required || agree2.errors?.required || agree3.errors?.required || agree4.errors?.required" class="error-message">*필수 선택 사항에 동의해 주세요. </em>
+                  </div> -->
                 </div>
 
               </div>
             </div>
 
             <!-- 주문시 요청사항 -->
-            <div class="panel panel-default">
+            <div class="panel panel-default chk-request-wrap">
               <div class="panel-heading">주문시 요청사항</div>
               <div class="panel-body">
                 <textarea class="form-control" rows="3" placeholder="주문시 요청 사항이 있으시면 남겨주세요. 단, 주류 등 청소년 유해물품 관련 단어는 입력하실 수 없습니다."
@@ -87,16 +93,19 @@
 
 
             <!-- 결제 수단 선택 -->
-            <div class="panel panel-default">
+            <div class="panel panel-default chk-payment-wrap">
               <div class="panel-heading"> 결제수단 선택</div>
               <div class=" panel-body ">
                 <div class="radio">
-                  <label class="col-sm-6" [class.payment-selected]="checkoutForm.value.payment == 'card'">
-                    <input type="radio" name="payment" formControlName="payment" value="card" >카드 결제  
-                     
+                  <label class="col-sm-6 i-checks" [class.payment-selected]="checkoutForm.value.payment == 'card'">
+                    <input type="radio" name="payment" formControlName="payment" value="card">
+                    <i></i>
+                    카드 결제
                   </label>
-                  <label class="col-sm-6" [class.payment-selected]="checkoutForm.value.payment == 'cash'">
-                    <input type="radio" name="payment" formControlName="payment" value="cash"> 현금 결제
+                  <label class="col-sm-6 i-checks" [class.payment-selected]="checkoutForm.value.payment == 'cash'">
+                    <input type="radio" name="payment" formControlName="payment" value="cash">
+                    <i></i>
+                    현금 결제
                   </label>
                 </div>
               </div>
@@ -139,16 +148,11 @@
           </div>
         </div>
         <button type="submit"
-        class="btn btn-primary btn-lg btn-block"
+        class="btn btn-lg btn-block chk-btn"
         [disabled]="checkoutForm.invalid">결제하기</button>
 
       </div>
       <!-- end .order -->
     </form>
   </div>
-
-  <!-- <pre>
-     {{checkoutForm.value | json}}
-     {{checkoutForm.status | json}}
-  </pre> -->
 </div>
