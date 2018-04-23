@@ -6,9 +6,13 @@ import { Component } from '@angular/core';
     <foodfly-preloader></foodfly-preloader>
     <foodfly-header></foodfly-header>
     <foodfly-toastr></foodfly-toastr>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)='onActivate()'></router-outlet>
     <foodfly-footer></foodfly-footer>
   `
 })
 
-export class AppComponent { }
+export class AppComponent {
+  onActivate() {
+    window.scrollTo(0, 0);
+  }
+}

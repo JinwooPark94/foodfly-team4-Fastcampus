@@ -42,9 +42,8 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
 
-    this.sessionGeoData = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
+    this.sessionGeoData = this.searchSessionData;
 
-    console.log(this.sessionGeoData);
     this.lat = this.sessionGeoData.lat;
     this.lng = this.sessionGeoData.lng;
 
@@ -180,6 +179,10 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       '  [GET 레스토랑 리스트]:', this.items,
       '  [console end >>>>]: '
     );
+  }
+
+  get searchSessionData() {
+    return JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
   }
 
 }

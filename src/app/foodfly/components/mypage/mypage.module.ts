@@ -10,11 +10,9 @@ import { MypageRoutingModule } from './mypage-routing.module';
 import { AccountComponent } from './account/account.component';
 import { MyorderComponent } from './myorder/myorder.component';
 import { QnaComponent } from './qna/qna.component';
-import { MypageManagementComponent } from './mypage.management.component';
 
 @NgModule({
   declarations: [
-    MypageManagementComponent,
     AccountComponent,
     QnaComponent,
     MyorderComponent
@@ -23,7 +21,6 @@ import { MypageManagementComponent } from './mypage.management.component';
     CommonModule, MypageRoutingModule, FormsModule, ReactiveFormsModule
   ],
   exports: [
-    MypageManagementComponent,
     AccountComponent,
     QnaComponent,
     MyorderComponent
