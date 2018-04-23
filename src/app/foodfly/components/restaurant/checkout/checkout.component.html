@@ -49,7 +49,7 @@
                       연락처를 입력해주세요.
                     </em>
                     <em *ngIf="cellphone.errors?.pattern && cellphone.touched" class="error-message">
-                      연락처는 숫자만 가능합니다.
+                      연락처는 숫자(11자)만 가능합니다.
                     </em>
                   </div>
                   </div>
@@ -135,13 +135,13 @@
             <tfoot>
               <tr>
                 <td>총 결제 금액</td>
-                <td>{{cart.account}}원</td>
+                <td>{{cart.account|currency:' ':true:'.0'}} 원</td>
               </tr>
             </tfoot>
              <tbody>
                <tr *ngFor="let menu of cart.menus">
                  <td>{{menu.name}} x {{menu.amount}}개</td>
-                 <td>{{menu.price}} 원</td>
+                 <td>{{menu.price|currency:' ':true:'.0'}} 원</td>
                </tr>
              </tbody>
            </table>
