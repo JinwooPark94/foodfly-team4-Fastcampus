@@ -8,7 +8,6 @@ import { FoodorderComponent } from './foodorder/foodorder.component';
 import { FoodlistComponent } from './foodlist/foodlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentcompletedComponent } from './paymentcompleted/paymentcompleted.component';
-import { RestaurantManagementComponent } from './restaurant.management.component';
 
 import { ShareModule } from '../../shared/share.module';
 
@@ -19,7 +18,6 @@ import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    RestaurantManagementComponent,
     FoodlistComponent,
     FoodorderComponent,
     CheckoutComponent,
@@ -35,7 +33,6 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
   exports: [
-    RestaurantManagementComponent,
     FoodlistComponent,
     FoodorderComponent,
     CheckoutComponent,

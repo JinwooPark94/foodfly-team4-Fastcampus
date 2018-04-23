@@ -10,6 +10,7 @@ import { FoodorderService } from './services/foodorder.service';
 import { PreloaderService } from './services/preloader.service';
 
 import { TokenGuard } from './guards/token.guard';
+import { SessionGuard } from './guards/session.guard';
 
 import { ToastrPipe } from './pipes/toastr.pipe';
 
@@ -21,6 +22,7 @@ import { ToastrPipe } from './pipes/toastr.pipe';
     FoodorderService,
     ToastrService,
     TokenGuard,
+    SessionGuard,
     PreloaderService
   ],
   declarations: [ToastrPipe],
