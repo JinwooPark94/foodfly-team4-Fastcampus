@@ -2,6 +2,7 @@
 import { Component, OnInit, IterableDiffers, DoCheck, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { DecimalPipe } from '@angular/common';
 
 import { PreloaderService } from '../../../core/services/preloader.service';
 import { FoodorderService } from '../../../core/services/foodorder.service';
@@ -38,7 +39,6 @@ import { Subscription } from 'rxjs/Subscription';
   ]
 })
 
-
 // var fadeAnimation = animation([
 //   style({ opacity: '{{ start }}' }),
 //   animate('{{ time }}',
@@ -53,6 +53,7 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
   restaurantTags: any = [];
   restaurantOrdertypes: any = [];
   toggle: boolean[];
+  deliveryprice: number;
 
   navItems: string[] = ['메뉴', '정보', '리뷰'];
   selectedItem: string;
@@ -98,6 +99,7 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
     .subscribe( data => {
       console.log(data);
       this.restaurantDB = data;
+      this.deliveryprice = data['deliveryPrice'];
 
       // "[메뉴 이름]" => "메뉴 이름" 으로 string 변환
       data['menuCategories'] = data['menuCategories'].map(menutitle => {
@@ -114,6 +116,8 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
       data['orderTypes'] = data['orderTypes'].map(orderTypes => orderTypes.name);
       this.restaurantOrdertypes = data['orderTypes'];
 
+
+      // 메뉴리스트에 토글을 위해 index로 배열을 생성해 false 값 부여
       this.preloadService.hide();
         this.toggle = new Array(this.menuCategories.length);
         this.toggle.fill(true);

@@ -26,8 +26,10 @@
 }
 
 /* 메뉴 리스트 */
+
 .fdr-menu-img > img{
   width: 100%;
+  background-position: bottom;
   display: inline-block;
 }
 
@@ -39,6 +41,7 @@
 .category-visible {
   height: 0;
   overflow: hidden;
+  transition: height 2s;
 }
 
 /* 정보 탭 */
@@ -80,9 +83,14 @@
   text-align: center;
 }
 
+
 .list-order-li {
   padding: 10px 15px;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.list-order-li:last-child {
+  border-bottom: none;
 }
 
 .fdr-cart-subtitle span {
@@ -99,19 +107,16 @@
 
 /* 모든 주문표 목록 제거 */
 .trash-button {
-  padding:0;
+  display: inline-block;
+  padding: 4px;
   background: #423b3c;
   border: none;
 }
 
 .trash-button-ico {
-  background: #423b3c url('../../../../../assets/images/common/sprite-icon.png') no-repeat -164px 3px;
+  background: #423b3c url('../../../../../assets/images/common/sprite-icon.png') no-repeat -161px 3px;
   background-size: 192px;
-  width: 12px;
-  height: 12px;
-  border-radius: 4px !important;
-  border:none;
-  padding:5px 10px;
+  padding: 9px 12px;
 }
 
 /* 주문표 메뉴리스트 수정 */
@@ -195,7 +200,7 @@
   padding: 0;
 }
 
-.glyphicon-chevron-down {
+.glyphicon-chevron-down, .glyphicon-chevron-up {
   top:2px;
   color: #25c1f1;
   padding-left: 3px;
@@ -207,7 +212,6 @@
 }
 
 .list-unstyled {
-  padding-left: 10px;
   margin-bottom: 0px;
 }
 
@@ -215,17 +219,15 @@
   line-height: 19px;
 }
 
-.fdr-category-li {
+.fdr-menu-list > li :hover {
   cursor: pointer;
+  color: #0ea6d5;
 }
 
 .list-orderlist {
   padding:0;
 }
 
-.list-order-li:last-child {
-  border:none;
-}
 
 .fdr-order-name {
   font-weight:bold;
@@ -237,6 +239,17 @@
 
 .fdr-order-amount {
   padding:0 3px;
+}
+
+.fdr-minprice {
+  border-top: none;
+}
+
+.panel-heading:hover {
+  cursor: pointer;
+  background-color: #423b3c;
+  color: #fff;
+  transition: all 0.2s
 }
 
 /* google Map */
