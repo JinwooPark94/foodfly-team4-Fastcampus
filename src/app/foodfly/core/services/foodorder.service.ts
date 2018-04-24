@@ -67,7 +67,7 @@ export class FoodorderService {
       restaurantName,
       restaurantPk: this.restaurantPk,
       menus: [...this.orderlist],
-      account: this.orderSumCulator(this.diveryprice)
+      account: this.orderSumCulator()
     };
 
     this.orderInfo = foodOrderList;
@@ -77,11 +77,11 @@ export class FoodorderService {
 
 
   // 메뉴 합계
-  orderSumCulator(diveryprice: number) {
+  orderSumCulator() {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
     if (this.orderlist.length) {
-      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue) + diveryprice;
+      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue);
     } else {
       return this.account = 0;
     }
@@ -114,7 +114,7 @@ export class FoodorderService {
 
   addAmount(pk: number) {
     this.orderlist = this.orderlist.map(order => order.pk === pk ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
-    this.toastrService.messageAdd('수량이 +1 되었습니다.', 'orderToCart');
+    this.toastrService.messageAdd('수량이 +1 추가되었습니다.', 'orderToCart');
   }
 
   minusAmount(order: Menus) {

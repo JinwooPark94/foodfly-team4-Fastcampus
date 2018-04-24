@@ -66,7 +66,7 @@
               <span class="glyphicon" [class.glyphicon-chevron-down]="toggle[idx]" [class.glyphicon-chevron-up]="!toggle[idx]" aria-hidden="true"></span>
             </h3>
           </div>
-          <ul class="list-group list-unstyled fdr-menu-list" [class.category-visible]="toggle[idx]" @accordion>
+          <ul class="list-group list-unstyled fdr-menu-list" [class.category-visible]="toggle[idx]">
             <li class="list-group-item" *ngFor="let menu of category.menus"
               (click)="this.foodorderService.checkOrderList(menu)">
               <div class="row">
@@ -157,7 +157,7 @@
           </li>
         </ul>
         <p class="list-group-item fdr-minprice">최소주문금액 : {{ restaurantDB.minOrderPrice | number:'1.0-0' }}원</p>
-        <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator(deliveryprice)| number:'1.0-0' }}원</p>
+        <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator()| number:'1.0-0' }} 원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout" [class.disabled]=" restaurantDB.minOrderPrice > this.foodorderService.orderSumCulator()">주문하기</a>
     </div>
