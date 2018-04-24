@@ -12,16 +12,16 @@
           <label for="search-input">
             <input type="search" class="form-control" id="search-input" placeholder="주소를 입력해주세요." [formControl]="inputText" (focus)="clickStatus=true" >
           </label>
-          <ul class="dropdown-menu search-list" tabindex="-1" *ngIf="clickStatus">
+          <ul class="dropdown-menu search-list" *ngIf="clickStatus">
             <li class="none-search">
-              <a tabindex="-1" (click)="getCurrentGeo()">현재 위치로 설정</a>
+              <a (click)="getCurrentGeo()">현재 위치로 설정</a>
             </li>
             <li *ngIf="!listAddress" class="none-search">
-              <a tabindex="-1" *ngIf="!inputText.value">검색어를 입력해주세요.</a>
-              <a tabindex="-1" *ngIf="inputText.value">"{{ inputText.value }}" 에 대한 검색 결과가 없습니다.</a>
+              <a *ngIf="!inputText.value">검색어를 입력해주세요.</a>
+              <a *ngIf="inputText.value">"{{ inputText.value }}" 에 대한 검색 결과가 없습니다.</a>
             </li>
             <li *ngFor="let Address of listAddress" class="address-List">
-              <a tabindex="-1" (click)="editInputValue($event.target, Address)">
+              <a (click)="editInputValue($event.target, Address)">
                 <address class="search-address">
                   <strong>{{ Address.roadAddrPart1 }}</strong><br>
                   <p>{{ Address.jibunAddr }}</p>

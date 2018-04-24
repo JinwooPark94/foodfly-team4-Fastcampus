@@ -1,38 +1,32 @@
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-6 col-md-offset-3">
-    <!-- <div class=".col-md-12" > -->
-
-      <!-- <div class="payment-bg"> -->
-
-        <h3 class="text-center">주문이 완료되었습니다</h3>
-        <img class="payment-checked" src="../../../../../assets/images/paymentcompleted/checked.png" alt="checked">
-
+<div class="container completed-wrap">
+  <div class="row completed-row">
+    <div class="col-md-6">
+        <h2 class="text-center ">주문이 완료되었습니다</h2>
+        <img (click)="sessionClear()"
+        class="payment-checked" src="../../../../../assets/images/paymentcompleted/checked.png" alt="checked">
         <div class="panel panel-default">
           <div class="panel-heading">
-           <h3 class="panel-title text-center">
-             주문내역 <button (click)="sessionClear()" class="btn">세션 클리어</button>
+           <h3 class="panel-title text-center completed-order">
+             주문내역
           </h3>
-
           </div>
-          <div class="panel-body">
-            <table>
+          <div class="panel-body completed-table">
+            <table class="col-md-12">
               <thead>
                 <th colspan="2">{{cart.restaurantName}}</th>
               </thead>
-              <tfoot>
-                <tr>
-                  <td>총 결제 금액</td>
-                  <td>{{cart.account}}원</td>
-                </tr>
-              </tfoot>
               <tbody>
                 <tr *ngFor="let menu of cart.menus">
                   <td>{{menu.name}} x {{menu.amount}}개</td>
-                  <td>{{menu.price}} 원</td>
+                  <td>{{menu.price|currency:' ':true:'.0'}} 원</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td>총 결제 금액</td>
+                  <td>{{cart.account|currency:' ':true:'.0'}} 원</td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>

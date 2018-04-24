@@ -1,3 +1,9 @@
+.completed-row {
+  display: flex;
+  margin:40px 0;
+  justify-content: center;
+}
+
 .payment-bg {
   margin: 30px;
   height: 300px;
@@ -15,6 +21,45 @@
 
 .payment-checked {
   display: block;
+  width: 80px;
   margin: 30px auto;
+}
+
+.completed-order {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.completed-table {
+  padding: 15px 0;
+}
+
+.completed-table > table > thead > th {
+  font-size:16px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.completed-table > table > tbody > tr > td {
+  padding: 5px 15px;
+}
+
+
+.completed-table > table > tbody > tr > td:last-child {
+  padding: 5px 15px 15px 15px;
+}
+
+.completed-table > table > tfoot {
+  border-top: 1px solid #e0e0e0;
+}
+
+.completed-table > table > tfoot > tr > td {
+  padding: 15px 15px 5px 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.completed-table > table > tbody > tr > td:nth-child(2), .completed-table > table > tfoot > tr > td:nth-child(2) {
+  text-align: right;
 }
 

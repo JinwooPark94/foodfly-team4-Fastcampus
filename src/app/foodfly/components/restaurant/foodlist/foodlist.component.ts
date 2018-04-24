@@ -32,8 +32,8 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   distance = 1000;
 
   currentUrl;
-  currentCategory: string;
-  currentPage = 1;
+  currentCategory;
+  currentPage;
   currentFilter;
 
   scrollTopVisble: boolean;
@@ -42,9 +42,8 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   constructor(public http: HttpClient, private route: ActivatedRoute, private preloader: PreloaderService) {
     this.scrollTopVisble = false;
 
-    this.sessionGeoData = JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
+    this.sessionGeoData = this.searchSessionData;
 
-    console.log(this.sessionGeoData);
     this.lat = this.sessionGeoData.lat;
     this.lng = this.sessionGeoData.lng;
 
@@ -58,23 +57,16 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       { url: 'min_order_price', slug: '최소 주문 금액 순' },
     ];
 
+    this.currentCategory = '전체';
+    this.currentPage = 1;
+    this.currentFilter = 'avg_delivery_time';
+
     route.params.subscribe(params => {
-      if (params['category']) {
-        this.currentCategory = params['category'];
-      } else {
-        this.currentCategory = '전체';
-      }
+      if (params['category']) {this.currentCategory = params['category']; }
       this.currentPage = 1;
       this.getRestaurntList();
     });
 
-    route.params.subscribe(params => {
-      if (params['filter']) {
-        this.currentFilter = params['filter'];
-      } else {
-        this.currentFilter = 'avg_delivery_time';
-      }
-    });
   }
 
   ngOnInit() {
@@ -84,17 +76,7 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
   getRestaurntList() {
     this.preloader.show();
-
-    if (this.currentCategory === '전체') {
-      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&lat=${this.lat}&lng=${this.lng}&distance=${this.distance}`;
-    } else if (this.currentCategory in this.categories === true) {
-      this.currentUrl = `
-      ${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&categories=${this.categories[this.currentCategory]}&lat=${this.lat}&lng=${this.lng}&&distance=${this.distance}`;
-    } else {
-      this.currentUrl = `${this.apiUrl}?page=${this.currentPage}&ordering=${this.currentFilter}&search=${this.currentCategory}&lat=${this.lat}&lng=${this.lng}&&distance=${this.distance}`;
-    }
-    console.log('[api url]', this.currentUrl);
-
+    this.currentUrl = this.makeRequestURL();
     this.http.get(this.currentUrl)
     .subscribe( data => {
       this.foodflyDB = data['results'];
@@ -113,9 +95,43 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
     });
   }
 
+  makeRequestURL() {
+    let category: string;
+    let search: string;
+
+    if (this.currentCategory === '전체') {
+      category = '';
+    } else if (this.currentCategory in this.categories === true) {
+      category = this.categories[this.currentCategory];
+    } else {
+      search = this.currentCategory;
+      category = '';
+    }
+
+    const params = [
+      { name: 'page', value: this.currentPage },
+      { name: 'ordering', value: this.currentFilter },
+      { name: 'categories', value: category },
+      { name: 'search', value: search },
+      { name: 'lat', value: this.lat},
+      { name: 'lng', value: this.lng },
+      { name: 'distance', value: this.distance }
+    ];
+
+    const requestURL = params.map((item) => {
+      if (item.value) {
+        return `&${item.name}=${item.value}`;
+      }
+    }).join('');
+
+    console.log('[api 2]', requestURL);
+    return `${ this.apiUrl }?${requestURL}`;
+  }
+
   selectFilter(select) {
     console.log('select', select);
     this.currentFilter = select;
+    this.currentPage = 1;
     this.getRestaurntList();
   }
 
@@ -141,13 +157,12 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       }
 
     const isLastHeight = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50;
-    console.log('isLastHeight', isLastHeight);
-    console.log('this.nextPage', this.nextPage);
-    console.log('isLastHeight nextPage', (isLastHeight && this.nextPage));
+    // console.log('isLastHeight', isLastHeight);
+    // console.log('this.nextPage', this.nextPage);
+    // console.log('isLastHeight nextPage', (isLastHeight && this.nextPage));
 
     if (isLastHeight && this.nextPage) {
       this.currentPage = this.nextPage;
-      console.log('더했음');
       this.getRestaurntList();
     }
   }
@@ -164,6 +179,10 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
       '  [GET 레스토랑 리스트]:', this.items,
       '  [console end >>>>]: '
     );
+  }
+
+  get searchSessionData() {
+    return JSON.parse(sessionStorage.getItem('sessionStorage-searchInfo'));
   }
 
 }

@@ -72,22 +72,18 @@ export class CheckoutComponent implements OnInit {
       .subscribe(data => {
         console.log('[user]', data);
         this.userData = data;
-        this.userCellphone = this.userData.phoneNumber.split('-').join('') + 0;
+        this.userCellphone = this.userData.phoneNumber.split('-').join('');
         console.log('phone number:', this.userCellphone);
         this.createForm();
       });
-
   }
-  // 사용자 정보 가져오기
-  // userData = { pk: 7, name: "박진우", phoneNumber: "010-7942-4473", email: "wlsdntus2@naver.com", imgProfile: null }
-
 
   createForm() {
     this.checkoutForm = this.fb.group({
       address1: [{ value: this.userAddress1, disabled: true }, Validators.required],
       address2: ['', Validators.required],
       // cellphone: ['', [Validators.required, Validators.pattern('[0-9]{1,20}')]],
-      cellphone: [this.userCellphone, [Validators.required, Validators.pattern('[0-9]{1,20}')]],
+      cellphone: [this.userCellphone, [Validators.required, Validators.pattern('[0-9]{11}')]],
       orderRequest: [''],
       agree2: [false, Validators.requiredTrue],
       agree3: [false, Validators.requiredTrue],
@@ -111,10 +107,6 @@ export class CheckoutComponent implements OnInit {
   get orderRequest() {
     return this.checkoutForm.get('orderRequest');
   }
-
-  // get aggreGroup() {
-  //   return this.checkoutForm.get('aggreGroup');
-  // }
 
   get agree1() {
     return this.checkoutForm.get('agree1');
@@ -143,15 +135,19 @@ export class CheckoutComponent implements OnInit {
   }
 
   makePostToSassion() {
+    const menus = this.cart.menus.map((item) => {
+      return { menu: item.pk, quantity: item.amount };
+    });
+
+    let cellphone = this.checkoutForm.value.cellphone;
+    cellphone = `+82 ${cellphone.slice(0, 3)}-${cellphone.slice(3, 7)}-${cellphone.slice(7)}`;
+
     const postData = {
-      // userPk: this.userData.pk,
-      userPk: 0,
+      restaurant: this.cart.restaurantPk,
+      menus: menus,
       address1: this.checkoutForm.value.address1,
       address2: this.checkoutForm.value.address2,
-      cellphone: this.checkoutForm.value.cellphone,
-      request: this.checkoutForm.value.request,
-      payment: this.checkoutForm.value.payment,
-      cart: this.cart
+      phoneNumber: cellphone
     };
     sessionStorage.setItem('sessionStorage-orderPost', JSON.stringify(postData));
   }

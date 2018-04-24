@@ -12,14 +12,12 @@ import { MemberRoutingModule } from './member-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FindmemberinfoComponent } from './findmemberinfo/findmemberinfo.component';
-import { MemberManagementComponent } from './member.management.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignupComponent,
-    FindmemberinfoComponent,
-    MemberManagementComponent
+    FindmemberinfoComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MemberRoutingModule
@@ -27,8 +25,7 @@ import { MemberManagementComponent } from './member.management.component';
   exports: [
     LoginComponent,
     SignupComponent,
-    FindmemberinfoComponent,
-    MemberManagementComponent
+    FindmemberinfoComponent
   ]
 })
 export class MemberModule { }
