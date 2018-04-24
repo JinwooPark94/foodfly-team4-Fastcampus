@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { PreloaderService } from '../../../core/services/preloader.service';
 
-
 @Component({
   selector: 'foodfly-foodlist',
   templateUrl: './foodlist.component.html',
@@ -14,7 +13,6 @@ import { PreloaderService } from '../../../core/services/preloader.service';
 
 
 export class FoodlistComponent implements OnInit, AfterViewInit {
-
 
   apiUrl = `${environment.apiUrl}/restaurants/`;
   foodflyDB;
@@ -46,8 +44,6 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
 
     this.lat = this.sessionGeoData.lat;
     this.lng = this.sessionGeoData.lng;
-
-    console.log(this.lat, this.lng);
 
     this.categories = {'한식': 2, '일식': 3, '카페': 4 , '양식': 5, '퓨전': 6, '분식': 7, '햄버거': 8, '치킨': 9, '중식': 10, '피자': 11};
 

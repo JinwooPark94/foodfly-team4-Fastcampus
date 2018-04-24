@@ -44,6 +44,13 @@
   padding: 5px 15px;
 }
 
+.completed-table > table > tbody > tr:last-child > td {
+  border-top:1px solid #e0e0e0;
+}
+
+.completed-table > table > tbody > tr:last-child > td:last-child {
+  padding: 10px 15px;
+}
 
 .completed-table > table > tbody > tr > td:last-child {
   padding: 5px 15px 15px 15px;

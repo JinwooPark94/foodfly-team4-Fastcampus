@@ -51,11 +51,11 @@ td {
 }
 
 tfoot td {
-  border-top: 1px solid gray;
-  color: firebrick;
+  border-top: 1px solid #e0e0e0;
+  color: #dd514c;
   padding: 1rem;
   font-size: 1.5rem;
-
+  font-weight:bold;
 }
 
 td:first-of-type{
@@ -178,4 +178,13 @@ input[name="address"]:first-of-type {
 .chk-btn {
   background-color: #b0dc2d;
   color:white;
+}
+
+.checkout-table > tbody > tr > td {
+  font-size:13px;
+  padding: 10px;
+}
+
+.checkout-table > tbody > tr:last-child > td {
+  border-top: 1px solid #e0e0e0
 }

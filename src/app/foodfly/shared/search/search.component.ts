@@ -31,6 +31,9 @@ interface ListAddress {
 })
 
 export class SearchComponent implements OnInit, OnDestroy {
+
+  @ViewChild('autocomplete') autocomplete;
+
   clickStatus = false;
   subscription: Subscription;
   inputText: FormControl = new FormControl('');
@@ -190,6 +193,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       // 옵션
       geoOptions
     );
+
+    this.clickStatus = false;
   }
 
   editInputValue(addressValue) {
@@ -210,6 +215,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.inputText.setValue(inputText);
     this.setSessionGeoAddress(inputText, this.geoCurrentData.lat, this.geoCurrentData.lng);
     this.router.navigate([`restaurant/foodlist/전체`]);
+    this.clickStatus = false;
   }
 
   findFoodList() {
@@ -220,6 +226,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.inputText.setValue(this.listAddress[0].jibunAddr);
     this.setSessionGeoAddress(this.inputText.value, this.geoCurrentData.lat, this.geoCurrentData.lng);
     this.router.navigate([`restaurant/foodlist/전체`]);
+    this.clickStatus = false;
   }
 
   setSessionGeoAddress(address: string, lat: number, lng: number) {
@@ -229,5 +236,17 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   cleanInputValue() {
     this.inputText.setValue('');
+  }
+
+  focusSearch(evt) {
+    console.dir(evt.target);
+  }
+
+  highlightFirstOption(event) {
+    console.log(event);
+    // if (event.key !== 'ArrowDown' || event.key !== 'ArrowUp') {
+    //   return;
+    // }
+    console.log(this.autocomplete);
   }
 }

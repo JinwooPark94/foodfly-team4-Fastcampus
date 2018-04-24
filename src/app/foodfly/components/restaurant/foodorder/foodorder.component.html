@@ -157,7 +157,7 @@
           </li>
         </ul>
         <p class="list-group-item fdr-minprice">최소주문금액 : {{ restaurantDB.minOrderPrice | number:'1.0-0' }}원</p>
-        <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator()| number:'1.0-0' }} 원</p>
+        <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator(deliveryprice)| number:'1.0-0' }}원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout" [class.disabled]=" restaurantDB.minOrderPrice > this.foodorderService.orderSumCulator()">주문하기</a>
     </div>

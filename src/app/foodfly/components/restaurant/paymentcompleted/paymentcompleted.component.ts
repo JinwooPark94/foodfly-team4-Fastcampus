@@ -21,6 +21,7 @@ export class PaymentcompletedComponent implements OnInit {
     // 위치 인포 세션 { address: "서울특별시 강남구 논현로123길 35-1", lat: 37.5108295, lag: 127.02928809999999 }
     console.log('위치 인포 세션', this.searchInfo);
 
+    this.sessionClear();
   }
 
   sessionClear() {
