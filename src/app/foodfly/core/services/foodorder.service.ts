@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OrderAllList, Menus } from '../../core/interface/foodorder.interface';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from './toastr.service';
 
 @Injectable()
 export class FoodorderService {
@@ -11,11 +12,13 @@ export class FoodorderService {
 
   account: number;
 
+  diveryprice: number;
+
   restaurantPk: number;
 
   cartSessionData: OrderAllList;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private toastrService: ToastrService) {
     // 레스토랑 초기 값 지정
     this.restaurantPk = Number.parseInt(route.snapshot.paramMap.get('pk'));
 
@@ -64,7 +67,7 @@ export class FoodorderService {
       restaurantName,
       restaurantPk: this.restaurantPk,
       menus: [...this.orderlist],
-      account: this.orderSumCulator()
+      account: this.orderSumCulator(this.diveryprice)
     };
 
     this.orderInfo = foodOrderList;
@@ -74,11 +77,11 @@ export class FoodorderService {
 
 
   // 메뉴 합계
-  orderSumCulator() {
+  orderSumCulator(diveryprice: number) {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
     if (this.orderlist.length) {
-      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue);
+      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue) + diveryprice;
     } else {
       return this.account = 0;
     }
@@ -89,7 +92,7 @@ export class FoodorderService {
     const MatchPk = this.orderlist.find(item => item.pk === orderedItem.pk);
 
       if (MatchPk) {
-          return this.addAmount(orderedItem.pk);
+        return this.addAmount(orderedItem.pk);
         } else {
         return this.addOrder(orderedItem);
       }
@@ -106,10 +109,12 @@ export class FoodorderService {
     }
     this.orderlist = [...this.orderlist,
       { pk: orderedItem.pk, name: orderedItem.name, price: orderedItem.price, amount: 1 }];
+    this.toastrService.messageAdd('메뉴가 추가되었습니다.', 'orderToCart');
   }
 
   addAmount(pk: number) {
     this.orderlist = this.orderlist.map(order => order.pk === pk ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
+    this.toastrService.messageAdd('수량이 +1 되었습니다.', 'orderToCart');
   }
 
   minusAmount(order: Menus) {
