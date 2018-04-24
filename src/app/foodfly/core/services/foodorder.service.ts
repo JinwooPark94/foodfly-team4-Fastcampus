@@ -58,7 +58,6 @@ export class FoodorderService {
   setFoodOrderStorage(restaurantName: string) {
     this.cartSessionData = JSON.parse(sessionStorage.getItem('sessionStorage-cart'));
 
-    console.dir(this.orderInfo);
     if (this.cartSessionData && this.orderInfo) {
       if (this.orderInfo.menus.length && this.restaurantPk !== this.orderInfo.restaurantPk) { return; }
     }
@@ -67,6 +66,7 @@ export class FoodorderService {
       restaurantName,
       restaurantPk: this.restaurantPk,
       menus: [...this.orderlist],
+      deliverytip: this.diveryprice,
       account: this.orderSumCulator(this.diveryprice)
     };
 
@@ -81,9 +81,9 @@ export class FoodorderService {
     const orderMidSum = this.orderlist.map(orderedItem => orderedItem.price * orderedItem.amount);
 
     if (this.orderlist.length) {
-      return this.account = orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue) + diveryprice;
+      return orderMidSum.reduce((accumulator, currentValue) => accumulator + currentValue) + diveryprice;
     } else {
-      return this.account = 0;
+      return 0;
     }
   }
 

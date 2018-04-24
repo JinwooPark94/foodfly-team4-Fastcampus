@@ -101,6 +101,8 @@ export class FoodorderComponent implements OnInit, DoCheck, OnDestroy {
       this.restaurantDB = data;
       this.deliveryprice = data['deliveryPrice'];
 
+      this.foodorderService.diveryprice = data['deliveryPrice'];
+
       // "[메뉴 이름]" => "메뉴 이름" 으로 string 변환
       data['menuCategories'] = data['menuCategories'].map(menutitle => {
         menutitle.name = menutitle.name.substring(1, menutitle.name.length - 1);

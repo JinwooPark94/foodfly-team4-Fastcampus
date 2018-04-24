@@ -127,23 +127,27 @@
             <h3 class="panel-title">주문내역</h3>
           </div>
           <div class="panel-body">
-           <table>
-             <thead>
-               <th colspan="2">{{cart.restaurantName}}</th>
+           <table class="checkout-table">
+            <thead>
+              <th colspan="2">{{cart.restaurantName}}</th>
 
-             </thead>
+            </thead>
+            <tbody>
+              <tr *ngFor="let menu of cart.menus">
+                <td>{{menu.name}} x {{menu.amount}}개</td>
+                <td>{{menu.price|currency:' ':true:'.0'}} 원</td>
+              </tr>
+              <tr>
+                <td>배달팁</td>
+                <td>{{ cart.deliverytip|currency:' ':true:'.0'}} 원</td>
+              </tr>
+            </tbody>
             <tfoot>
               <tr>
                 <td>총 결제 금액</td>
                 <td>{{cart.account|currency:' ':true:'.0'}} 원</td>
               </tr>
             </tfoot>
-             <tbody>
-               <tr *ngFor="let menu of cart.menus">
-                 <td>{{menu.name}} x {{menu.amount}}개</td>
-                 <td>{{menu.price|currency:' ':true:'.0'}} 원</td>
-               </tr>
-             </tbody>
            </table>
           </div>
         </div>
