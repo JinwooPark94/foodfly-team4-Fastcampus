@@ -7,6 +7,7 @@
   background: url('../../../../assets/images/common/main.jpg') no-repeat;
   background-size: cover;
   min-height:400px;
+  z-index:1
 }
 
 .main-search{

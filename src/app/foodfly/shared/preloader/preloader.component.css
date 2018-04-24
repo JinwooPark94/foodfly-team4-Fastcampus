@@ -8,6 +8,7 @@
   padding: 20px 15px;
   border-radius: 40px;
   background-color: #423b3c;
+  z-index:2
 }
 
 .preloader > img {
