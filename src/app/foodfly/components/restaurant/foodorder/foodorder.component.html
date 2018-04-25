@@ -12,13 +12,6 @@
         <img class="col-md-3" alt="fdr-img" src="{{ restaurantDB.imgInfo }}">
         <ul class="list-unstyled col-md-6">
           <li class="fdr-menu-list">
-            <!-- <strong>★</strong>
-            <strong>★</strong>
-            <strong>★</strong>
-            <strong>★</strong>
-            <strong>★</strong>
-            <strong>0.0</strong> -->
-
             <p>분류 : {{ restaurantTags }} </p>
             <p>주소 : {{ restaurantDB.address }}</p>
             <p>최소주문금액 : {{ restaurantDB.minOrderPrice | number:'1.0-0'}}원</p>
@@ -46,27 +39,14 @@
       </nav>
       <!-- **** 메뉴 리스트 **** -->
       <div class="fdr-menu col-md-12" [hidden]="selectedItem !== navItems[0]">
-
-        <!-- <ul class="list-unstyled" *ngFor="let food of menuCategories">
-          <li *ngFor="let menu of menuCategories">
-            <button class="btn btn-block fdr-menu" data-toggle="modal" data-target="#myModal" (click)="this.foodorderService.checkOrderList(food)">
-              <div>
-                <img class="fdr-menu-img" src="../../../../../assets/images/foodorder/chicken-store.jpg" alt="menu-img">
-                <p class="fdr-menu-name">{{ menu.name | json}}</p>
-                <p class="fdr-menu-price">{{ menu.menus | json }}원</p>
-              </div>
-            </button>
-          </li>
-        </ul> -->
-
         <div class="panel panel-default" *ngFor="let category of menuCategories; let idx = index">
-          <div class="panel-heading" (click) = "toggle[idx] = !toggle[idx] ? true : false"  @accordion>
+          <div class="panel-heading fdr-menulist" (click) = "toggle[idx] = !toggle[idx] ? true : false"  @accordion>
             <h3 class="panel-title">
               {{ category.name }}
               <span class="glyphicon" [class.glyphicon-chevron-down]="toggle[idx]" [class.glyphicon-chevron-up]="!toggle[idx]" aria-hidden="true"></span>
             </h3>
           </div>
-          <ul class="list-group list-unstyled fdr-menu-list" [class.category-visible]="toggle[idx]" @accordion>
+          <ul class="list-group list-unstyled fdr-menu-list" [class.category-visible]="toggle[idx]">
             <li class="list-group-item" *ngFor="let menu of category.menus"
               (click)="this.foodorderService.checkOrderList(menu)">
               <div class="row">
@@ -84,43 +64,133 @@
         </div>
       </div>
       <!-- **** 정보 탭 **** -->
-      <div class="fdr-info col-md-12" [hidden]="selectedItem !== navItems[1]">
-        <ul class="list-unstyled">
-          <li>
-            <h2>매장 소개</h2>
-            <p>{{ restaurantDB.restaurantInfo }}</p>
-          </li>
-          <li>
-            <h2>주소</h2>
-            <p>{{ restaurantDB.address }}</p>
-          </li>
-          <li *ngIf="restaurantDB.originInfo">
-            <h2>원산지 정보</h2>
-            <p>{{ restaurantDB.originInfo }}</p>
-          </li>
-        </ul>
+      <div class="row">
+        <div class="fdr-info col-md-12" [hidden]="selectedItem !== navItems[1]">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                매장 소개
+              </h3>
+            </div>
+            <ul class="list-group list-unstyled fdr-menu-list">
+              <li class="list-group-item">
+                 {{ restaurantDB.restaurantInfo }}
+              </li>
+            </ul>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                 주소
+              </h3>
+            </div>
+            <ul class="list-group list-unstyled fdr-menu-list">
+              <li class="list-group-item">
+                 {{ restaurantDB.address }}
+              </li>
+            </ul>
+          </div>
+          <div class="panel panel-default" *ngIf="restaurantDB.originInfo">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                원산지 정보
+              </h3>
+            </div>
+            <ul class="list-group list-unstyled fdr-menu-list">
+              <li class="list-group-item">
+                 {{ restaurantDB.originInfo }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- **** 리뷰 탭 **** -->
       <div class="fdr-review col-md-12" [hidden]="selectedItem !== navItems[2]">
         <div class="row">
-          <strong class="col-md-3 col-md-offset-3 fdr-review-total">4.2</strong>
+          <strong class="col-md-3 col-md-offset-3 fdr-review-total">4.5</strong>
           <div class="col-md-3">
-            <p>맛: ★★★★</p>
-            <p>양: ★★★★</p>
-            <p>배달: ★★★★</p>
+            <p>맛:
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+            </p>
+            <p>양:
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+            </p>
+            <p>배달:
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+            </p>
           </div>
         </div>
-        <h3>리뷰: 5개 사장님 댓글: 5개</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <p>foodf**님 8시간 전</p>
-            <p>★★★★★|맛★5 양★5 배달5</p>
-          </li>
-          <li class="list-group-item">
-            <p>foodf**님 2018년 4월 5일</p>
-            <p>★★★★★|맛★5 양★5 배달5</p>
-          </li>
-        </ul>
+        <div class="panel panel-default row fdr-review">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+               리뷰: 2개
+            </h3>
+          </div>
+          <ul class="list-group list-unstyled">
+            <li class="list-group-item">
+              <p>wls**님 8시간 전</p>
+              <span>
+                맛:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <span>
+                양:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <span>
+                배달:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <p>너무 맛있어요!</p>
+            </li>
+            <li class="list-group-item">
+              <p>dydals**님 2018년 4월 25일</p>
+              <span>
+                맛:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <span>
+                양:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <span>
+                배달:
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon glyphicon-star fdr-star" aria-hidden="true"></span>
+              </span>
+              <p>다음에 또 배달해 먹고 싶어요</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- 주문표 -->
@@ -132,7 +202,6 @@
             <i class="trash-button-ico">&nbsp;</i>
           </button>
         </div>
-
         <ul class="list-group-item list-unstyled list-orderlist">
           <p *ngIf="!this.foodorderService.orderlist.length" class="fdr-none-menu">주문표에 담긴 메뉴가 없습니다.</p>
           <li *ngFor="let order of this.foodorderService.orderlist" class="list-order-li">
@@ -157,7 +226,6 @@
           </li>
         </ul>
         <p class="list-group-item fdr-minprice">최소주문금액 : {{ restaurantDB.minOrderPrice | number:'1.0-0' }}원</p>
-        <p class="list-group-item">배달팁 : {{ deliveryprice | number:'1.0-0' }}원</p>
         <p class="list-group-item">합계 : {{ this.foodorderService.orderSumCulator(deliveryprice)| number:'1.0-0' }}원</p>
       </div>
       <a type="button" class="btn btn-lg btn-block fdr-cart-order" routerLink="/restaurant/checkout" [class.disabled]=" restaurantDB.minOrderPrice > this.foodorderService.orderSumCulator()">주문하기</a>

@@ -114,7 +114,7 @@ export class FoodorderService {
 
   addAmount(pk: number) {
     this.orderlist = this.orderlist.map(order => order.pk === pk ? Object.assign({}, order, { amount: order.amount + 1 }) : order);
-    this.toastrService.messageAdd('수량이 +1 되었습니다.', 'orderToCart');
+    this.toastrService.messageAdd('수량이 +1 추가되었습니다.', 'orderToCart');
   }
 
   minusAmount(order: Menus) {
