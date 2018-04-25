@@ -245,11 +245,18 @@
   border-top: none;
 }
 
-.panel-heading:hover {
+.fdr-menulist:hover {
   cursor: pointer;
-  background-color: #423b3c;
-  color: #fff;
-  transition: all 0.2s
+  background-color: #f2f2f2;
+  transition: all 0.3s
+}
+
+.fdr-review {
+  margin-top: 20px;
+}
+
+.fdr-star {
+  color: #b0dc2d;
 }
 
 /* google Map */
