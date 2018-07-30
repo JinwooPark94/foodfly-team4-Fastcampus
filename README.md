@@ -4,7 +4,7 @@
 > Front-end: 박진우, 박용민, 심미현
 ---
 
-<a href="https://www.youtube.com/watch?v=vOMtG2pg-gY" target="_blank">
+<a target="_blank" href="https://www.youtube.com/watch?v=vOMtG2pg-gY" >
   <img alt="Foodfly" src="./src/assets/images/Foodfly.png" width="70%">
 </a>
 
