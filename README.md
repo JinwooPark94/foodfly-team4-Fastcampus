@@ -1,4 +1,33 @@
-# Foodfly
+# 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
+
+## Foodfly
+> Front-end: 박진우, 박용민, 심미현
+---
+
+<a target="_blank" href="https://www.youtube.com/watch?v=vOMtG2pg-gY" >
+  <img alt="Foodfly" src="./src/assets/images/Foodfly.png" width="70%">
+</a>
+
+[영상보기](https://www.youtube.com/watch?v=vOMtG2pg-gY)
+
+## 시작하기
+```shell
+$ git clone https://github.com/JinwooPark94/foodfly-team4
+$ cd foodfly-team4
+$ npm install
+```
+
+## 작업내용
+배달이 안되던 맛집 음식을 주문하는 Foodfly의 핵심 기능을 Angular로 구현
+
+## 작업시간
+2018-04-02 ~ 2018-04-25
+
+## Front-end 기술스택
+JavaScript, HTML5, CSS3, Angular, Bootstrap, Github
+
+
+<!-- # Foodfly
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
@@ -24,4 +53,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md). -->
