@@ -1,10 +1,10 @@
-# food fly
+# Foodfly clone Project
 
 > 패스트캠퍼스 프론트앤드 스쿨 팀프로젝트
 > Front-end: 박진우, 박용민, 심미현
 ---
 
-![Foodfly](./assets/Foodfly.png=300px)
+![Foodfly](./assets/Foodfly.png =300px)
 [영상보기](https://www.youtube.com/watch?v=vOMtG2pg-gY)
 
 ## 시작하기
