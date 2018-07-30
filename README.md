@@ -4,7 +4,8 @@
 > Front-end: 박진우, 박용민, 심미현
 ---
 
-![Foodfly](./src/assets/images/Foodfly.png)
+<img alt="Foodfly" src="./src/assets/images/Foodfly.png" width="60%">
+
 [영상보기](https://www.youtube.com/watch?v=vOMtG2pg-gY)
 
 ## 시작하기
