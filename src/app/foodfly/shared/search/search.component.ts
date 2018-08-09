@@ -247,6 +247,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     // if (event.key !== 'ArrowDown' || event.key !== 'ArrowUp') {
     //   return;
     // }
-    console.log("what ????", this.autocomplete);
+    console.log(this.autocomplete);
   }
 }
