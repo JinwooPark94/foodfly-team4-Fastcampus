@@ -66,7 +66,6 @@ export class FoodlistComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.preloader.show();
     this.getRestaurntList();
   }
 
